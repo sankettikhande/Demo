@@ -11,11 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204100159) do
+ActiveRecord::Schema.define(version: 20141204130218) do
 
   create_table "bookings", force: true do |t|
     t.integer  "buyer_id"
     t.integer  "seller_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "freights", force: true do |t|
+    t.string   "source"
+    t.string   "destination"
+    t.integer  "cbm"
+    t.integer  "min_weight"
+    t.integer  "max_weight"
+    t.integer  "price"
+    t.date     "start_date"
+    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
