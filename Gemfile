@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'country_select', github: 'stefanpenner/country_select'
 gem 'thinking-sphinx', '~> 3.1.1'
+gem 'pundit'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
