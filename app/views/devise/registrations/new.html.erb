@@ -65,6 +65,10 @@
     <%= f.text_field :state %>
   </div>
 
+  <div><%= f.label :country %><br />
+    <%= country_select( "user", "country" ) %>
+  </div>
+
   <div><%= f.label :phone_number %><br />
     <%= f.text_field :phone_number %>
   </div>
