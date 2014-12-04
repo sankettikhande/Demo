@@ -1,0 +1,3 @@
+class BookingPolicy
+
+end
