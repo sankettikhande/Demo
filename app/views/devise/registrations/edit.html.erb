@@ -67,7 +67,13 @@
   <div><%= f.label :preferred_currency %><br />
     <%= f.text_field :preferred_currency %>
   </div>
-    
+
+  <%= image_tag(resource.avatar_url, height: 100, width: 100) if resource.avatar? %>
+
+  <div><%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>
       Currently waiting confirmation for: <%= resource.unconfirmed_email %>
