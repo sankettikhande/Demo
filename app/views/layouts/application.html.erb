@@ -6,88 +6,6 @@
 <body class="air-bg">
   <%= render :partial => "layouts/header" %>
   <%= render :partial => "layouts/side_bar" %>
-  <div class="container-fluid">
-    <div class="right-body">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="tabbed-panel home-search-tabs">
-              <ul class="nav nav-tabs panel-tabs">
-                <li class="active"><a href="#tab-p1" data-toggle="tab">Sea</a></li>
-                <li><a href="#tab-p1" data-toggle="tab">Air</a></li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane active" id="tab-p1">
-                  <div class="row">
-                    <div class="col-xs-12 search-list">
-                      <div class="search-row">
-                        <div class="row search-item">
-                          <div class="col-xs-3">
-                            <div class="form-group">
-                              <label for="frm-search">
-                                From
-                              </label>
-                              <input class="form-control" type="search" placeholder="Source" id="frm-search">
-                            </div>
-                          </div>
-                          <div class="col-xs-3">
-                            <div class="form-group">
-                              <label for="to-search">
-                                To
-                              </label>
-                              <input class="form-control" type="search" placeholder="Destination" id="to-search">
-                            </div>
-                          </div>
-                          <div class="col-xs-2">
-                            <div class="form-group">
-                              <label for="hm-date">
-                                Date
-                              </label>
-                              <div class="input-group date">
-                              <input class="form-control" type="text" placeholder="mm/dd/yyyy" id="hm-date" data-provide="datepicker">
-                              <span class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                              </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-xs-2">
-                            <div class="form-group">
-                              <label for="hm-cbm">
-                                Cbm
-                              </label>
-                              <input class="form-control" type="text" placeholder="Cbm" id="hm-cbm">
-                            </div>
-                          </div>
-                          <div class="col-xs-2">
-                            <div class="form-group">
-                              <label for="hm-weight">
-                                Kg
-                              </label>
-                              <input class="form-control" type="text" placeholder="Weight" id="hm-weight">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group text-right">
-                        <button type="button" class="btn btn-info btn-sm" id="search-more-btn"><i class="fa fa-plus"></i> Add more</button>
-                      </div>  
-
-                    </div>
-                  </div>
-                
-                  <div class="form-group text-center seperator-20">
-                    <button class="btn btn-primary" type="button" id="home-search">Search</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 <!-- modals, popups are kept out of basic structure for development ease -->
   <section class="external-content">
     <div class="modal fade clean-modal" id="login-modal" data-backdrop="true">
@@ -141,8 +59,8 @@
       </div>
     </div>
   </section>
-  <%= render partial: "layouts/footer"%>
+  
   <%= yield %>
-
+  <%= render partial: "layouts/footer"%>
 </body>
 </html>
