@@ -1,14 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BlueCompass</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <%= render :partial => "layouts/head"%>
 </head>
-<body>
+<body class="air-bg">
+  <%= render :partial => "layouts/header" %>
+  <%= render :partial => "layouts/side_bar" %>
+  <div class="container-fluid">
+    <div class="right-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="tabbed-panel home-search-tabs">
+              <ul class="nav nav-tabs panel-tabs">
+                <li class="active"><a href="#tab-p1" data-toggle="tab">Sea</a></li>
+                <li><a href="#tab-p1" data-toggle="tab">Air</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab-p1">
+                  <div class="row">
+                    <div class="col-xs-12 search-list">
+                      <div class="search-row">
+                        <div class="row search-item">
+                          <div class="col-xs-3">
+                            <div class="form-group">
+                              <label for="frm-search">
+                                From
+                              </label>
+                              <input class="form-control" type="search" placeholder="Source" id="frm-search">
+                            </div>
+                          </div>
+                          <div class="col-xs-3">
+                            <div class="form-group">
+                              <label for="to-search">
+                                To
+                              </label>
+                              <input class="form-control" type="search" placeholder="Destination" id="to-search">
+                            </div>
+                          </div>
+                          <div class="col-xs-2">
+                            <div class="form-group">
+                              <label for="hm-date">
+                                Date
+                              </label>
+                              <div class="input-group date">
+                              <input class="form-control" type="text" placeholder="mm/dd/yyyy" id="hm-date" data-provide="datepicker">
+                              <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-2">
+                            <div class="form-group">
+                              <label for="hm-cbm">
+                                Cbm
+                              </label>
+                              <input class="form-control" type="text" placeholder="Cbm" id="hm-cbm">
+                            </div>
+                          </div>
+                          <div class="col-xs-2">
+                            <div class="form-group">
+                              <label for="hm-weight">
+                                Kg
+                              </label>
+                              <input class="form-control" type="text" placeholder="Weight" id="hm-weight">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group text-right">
+                        <button type="button" class="btn btn-info btn-sm" id="search-more-btn"><i class="fa fa-plus"></i> Add more</button>
+                      </div>  
 
-<%= yield %>
+                    </div>
+                  </div>
+                
+                  <div class="form-group text-center seperator-20">
+                    <button class="btn btn-primary" type="button" id="home-search">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- modals, popups are kept out of basic structure for development ease -->
+  <section class="external-content">
+    <div class="modal fade clean-modal" id="login-modal" data-backdrop="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <button type="button" class="close round-close" data-dismiss="modal">&times;</button>
+          <div class="modal-header">
+            <h4 class="modal-title">Please Sign in</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div class="login-form form-horizontal" role="form">
+                  <p class="help-text lf-row text-center">Enter your registered email below, <br>we'll mail you password reset instructions !<br></p>
+                  <div class="form-group">
+                    <label class="col-xs-3 control-label" for="l-email">Email</label>
+                    <div class="col-xs-9">
+                      <input type="email" id="l-email" name="l-email" class="form-control" placeholder="Registered Email Address" required>
+                    </div>
+                  </div>
+                  <div class="form-group lf-row">
+                    <label class="col-xs-3 control-label" for="l-pswrd">Password</label>
+                    <div class="col-xs-9">
+                      <input type="password" id="l-pswrd" name="l-pswrd" class="form-control" placeholder="Password" required>
+                    </div>
+                  </div>
+                  <div class="form-group lf-row">
+                    <div class="col-xs-5 col-xs-offset-3">
+                      <label>
+                        <input type="checkbox"> Remember me
+                      </label>
+                    </div>
+                    <div class="col-xs-4 text-right">
+                      <a href="#" class="forgot-link" id="forgot-link">Forgot Password?</a>
+                    </div>
+                  </div>
+                  <div class="form-group text-center">
+                    <div class="col-xs-12">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <a href="#"><i class="fa fa-rocket"></i> Create an account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%= render partial: "layouts/footer"%>
+  <%= yield %>
 
 </body>
 </html>
