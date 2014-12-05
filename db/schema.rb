@@ -11,13 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204143906) do
+
+ActiveRecord::Schema.define(version: 20141205071821) do
+
+  create_table "address_books", force: true do |t|
+    t.string   "company_name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "address"
+    t.integer  "post_code"
+    t.string   "city"
+    t.string   "cargo_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "bookings", force: true do |t|
     t.integer  "buyer_id"
     t.integer  "seller_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "supplier_id"
+    t.integer  "consignees_id"
   end
 
   create_table "freights", force: true do |t|
