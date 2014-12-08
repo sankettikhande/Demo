@@ -20,7 +20,15 @@ Rails.application.routes.draw do
   end
 
   resources :home
-  resources :bookings
+  resources :bookings do 
+    collection do 
+      get :active_bookings
+      get :bookings_on_hold
+      get :draft_bookings
+      get :archived_bookings
+    end
+
+  end
   # Example resource route with options:
   #   resources :products do
   #     member do
