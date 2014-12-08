@@ -22,5 +22,20 @@ class BookingsController < ApplicationController
 
   end
 
+  def active_bookings
+    @bookings = current_user.buyer_bookings.active_bookings
+  end
+
+  def bookings_on_hold
+    @bookings = current_user.buyer_bookings.bookings_on_hold
+  end
+
+  def draft_bookings
+    @bookings = current_user.buyer_bookings.draft_bookings
+  end
+
+  def archived_bookings
+    @bookings = current_user.buyer_bookings.archived_bookings
+  end
 
 end
