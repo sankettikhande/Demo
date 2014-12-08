@@ -1,61 +1,48 @@
+# config valid only for current version of Capistrano
+lock '3.3.3'
 
-#load 'config/recipes/db'
-# load "config/recipes/delayed_job"
-# default_run_options[:shell] = '/bin/bash'
-set :repository, "git@github.com:sodel/bluecompass.git"
 set :application, 'bluecompass'
-set :deploy_to, "/data/apps/#{application}"
-set :deploy_via, :remote_cache
-set :scm, 'git'
-default_run_options[:pty] = true
+set :repo_url, 'git@github.com:sodel/bluecompass.git'
 
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
-set :scm_verbose, true
-set :use_sudo, false
-set :keep_releases, 2
-set :precompile_only_if_changed, true
-set :rails_env, "production"
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, '/data/apps/bluecompass'
 
-task :qa do
-  default_run_options[:pty] = true
-  set :branch, 'qa'
+# Default value for :scm is :git
+# set :scm, :git
 
-  # be sure to change these
-  set :user, ''
-  set :domain, 'bluecompass.sodelsolutions.com'
-  set :deploy_env, 'qa'
+# Default value for :format is :pretty
+# set :format, :pretty
 
-  # the rest should be good
-  role :db, domain, :primary => true
-  server domain, :app, :web
-end
+# Default value for :log_level is :debug
+# set :log_level, :debug
 
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+set :linked_files, fetch(:linked_files, []).push('config/database.yml')
+
+# Default value for linked_dirs is []
+# set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
 
 namespace :deploy do
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
 
-  task :copy_configs do
-    run "cp #{release_path}/config/newrelic.yml.#{deploy_env} #{release_path}/config/newrelic.yml"
-    run "cp #{release_path}/config/settings.yml.#{deploy_env} #{release_path}/config/settings.yml"
-  end
-
-  task :change_permission_for_fcgi do
-    run "chmod +x #{current_path}/public/dispatch.fcgi"
-  end
-
-  task :change_permission_for_tmp do
-    run "chmod -R 777 #{current_path}/tmp"
-  end
-
-  namespace :assets do
-    task :precompile, :roles => :web, :except => {:no_release => true} do
-      logger.info "Skipping asset pre-compilation because there were no asset changes"
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
   end
-end
 
-after "deploy:update_code", "db:symlink", "deploy:copy_configs", "deploy:migrate"
-after "deploy:update", "deploy:cleanup"
-after "deploy:create_symlink", "deploy:change_permission_for_tmp"
+end
