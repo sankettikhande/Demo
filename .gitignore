@@ -18,3 +18,4 @@ public/assets
 /log/*.log
 /tmp
 /db/schema.rb
+/.idea/*
