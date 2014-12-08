@@ -32,6 +32,10 @@ gem 'pundit'
 gem 'carrierwave'
 gem 'aasm'
 gem 'capistrano', '~> 3.3.0'
+gem 'capistrano-rvm'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'capistrano-passenger'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
