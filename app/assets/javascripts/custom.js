@@ -13,10 +13,12 @@ $(document).ready(function(){
     });
 
     $('#login-link').click( function(){
-        //jQuery.noConflict();
-        $('.login-form').removeClass('hidden');
-        $('.forgot-form').addClass('hidden');
         $('#login-modal').modal('show');
+    });
+
+    $('#login-modal').on("hidden.bs.modal", function(){
+        $('.forgot-form').addClass('hidden');
+        $('.login-form').removeClass('hidden');
     });
 
 	$('.selecter').selecter();
