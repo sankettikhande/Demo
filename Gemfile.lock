@@ -8,6 +8,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.0.5)
     actionmailer (4.1.8)
       actionpack (= 4.1.8)
       actionview (= 4.1.8)
@@ -37,6 +38,12 @@ GEM
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
     builder (3.2.2)
+    capistrano (3.3.3)
+      capistrano-stats (~> 1.0.3)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-stats (1.0.3)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -49,6 +56,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colorize (0.7.3)
     countries (0.9.3)
       currencies (~> 0.4.2)
     currencies (0.4.2)
@@ -79,6 +87,9 @@ GEM
     minitest (5.4.3)
     multi_json (1.10.1)
     mysql2 (0.3.17)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.1)
     orm_adapter (0.5.0)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
@@ -123,6 +134,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sshkit (1.5.1)
+      colorize
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     thinking-sphinx (3.1.2)
       activerecord (>= 3.1.0)
       builder (>= 2.1.2)
@@ -147,6 +162,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
+  capistrano (~> 3.3.0)
   carrierwave
   coffee-rails (~> 4.0.0)
   country_select!
