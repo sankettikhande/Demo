@@ -8,6 +8,7 @@ role :app, %w{azureuser@holachef-qa.cloudapp.net}
 role :web, %w{azureuser@holachef-qa.cloudapp.net}
 role :db,  %w{azureuser@holachef-qa.cloudapp.net}
 
+set :rails_env, 'production'
 
 # Extended Server Syntax
 # ======================
