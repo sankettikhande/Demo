@@ -34,13 +34,13 @@
 }
 
 html {min-height: 100%;position: relative;}
-.air-bg {background:url('flight-ff.jpg')no-repeat center center;background-size: cover;-webkit-background-size: cover;-moz-background-size: cover;background-attachment: fixed;}
 
 .open-l {font-family: 'open_sanslight',Helvetica,Arial,Sans-serif;}
 .open-r {font-family: 'open_sansregular',Helvetica,Arial,Sans-serif;}
 .open-b {font-family: 'open_sansbold',Helvetica,Arial,Sans-serif;font-weight: normal;}
 
-body {padding-top: 60px;font-size: 14px;margin-bottom: 150px;font-family: 'open_sansregular',Helvetica,Arial,Sans-serif;}
+body {padding-top: 50px;font-size: 14px;margin-bottom: 180px;font-family: 'open_sansregular',Helvetica,Arial,Sans-serif;background-color: #f7f7f7;}
+.air-bg {background-image:url('flight-ff.jpg');background-repeat:no-repeat;background-position:center center;background-size: cover;-webkit-background-size: cover;-moz-background-size: cover;background-attachment: fixed;}
 
 .container {width: 1170px !important;}
 
@@ -49,7 +49,7 @@ body {padding-top: 60px;font-size: 14px;margin-bottom: 150px;font-family: 'open_
 .ghost-white {color: #fff;}
 
 .no-btn {background: transparent;border:0;}
-.aside-toggle {margin-right: 10px;height: 50px;width: 60px;margin-left: -12px;background: transparent;border:0;color: #fff;border-right:1px solid #19B5FE }
+.aside-toggle {margin-right: 10px;height: 50px;width: 60px;margin-left: -12px;background: transparent;border:0;color: #fff;border-right:1px solid #19B5FE;float: left;}
 
 .move-bars {width: 30px;margin: 0 auto;padding: 0;list-style-type: none;}
 .move-bars>li {width: 100%;height: 1px;background: #19B5FE;transition:all 0.2s ease-in-out;transform:rotate(0deg);margin-left: auto;margin-right: auto}
@@ -58,24 +58,24 @@ body {padding-top: 60px;font-size: 14px;margin-bottom: 150px;font-family: 'open_
 .aside-toggle.animate .move-bars>li:nth-child(1) {transform:rotate(45deg);transform-origin: center;transition:all 0.2s ease-in-out;}
 .aside-toggle.animate .move-bars>li:nth-child(3) {transform:rotate(-45deg);transform-origin: center;transition:all 0.2s ease-in-out;}
 
-.header-nav {background: #fff;border-bottom: 1px solid #19B5FE}
+.header-nav {background: #fff;border-bottom: 1px solid #19B5FE;min-width: 1170px;}
 .header-nav .navbar-brand {color: #19B5FE;}
 .header-nav * a {color: #19B5FE}
 .header-nav .no-btn {color: #fff;font-size: 16px;}
 
-
-.aside-bar {width: 210px;height: 100%;position: fixed;left: 0;top: 0;padding-top: 60px;transition:all 0.3s ease-in-out;z-index: 100;background: #fff;border-right: 1px solid #d8f2fe}
+.header-links>li {display: inline-block;float: left;}
+.aside-bar {width: 210px;height: 100%;position: fixed;left: 0;top: 0;padding-top: 60px;transition:all 0.3s ease-in-out;z-index: 100;background: #fff;}
 
 .side-wrapper .right-body {margin-left: 0;transition:all 0.25s ease-in-out;}
 
 .side-wrapper.active .aside-bar {left: -210px;}
 
 .aside-menu a{color: #373737;}
-
+.aside-menu {box-shadow: none;}
 .aside-menu:first-child>a,.aside-menu:last-child>a{border-radius: 0}
 
 .home-search-tabs {margin: 150px 0;}
-.home-search-tabs .tab-content {background-color:#fff;background-color: rgba(255,255,255,0.7);border-radius: 4px;border:1px solid #fff	;border:1px solid rgba(255,255,255,0.7);box-shadow:0 0 4px 0px rgba(1px,1px,0,0.4);}
+.home-search-tabs .tab-content {background-color:#fff;background-color: rgba(255,255,255,0.9);border-radius: 4px;border:1px solid #fff  ;border:1px solid rgba(255,255,255,0.7);box-shadow:0 0 4px 0px rgba(1px,1px,0,0.4);}
 .panel-tabs {padding-left: 30px;background-color: transparent;}
 .panel-tabs>li>a {padding-left: 35px;padding-right: 35px;background-color: #fff;color: #19B5FE;}
 .panel-tabs>li:last-child>a {border-top-right-radius: 4px;}
@@ -86,25 +86,32 @@ body {padding-top: 60px;font-size: 14px;margin-bottom: 150px;font-family: 'open_
 .search-list .search-item:not(:first-child) label {display: none;}
 
 /************** =footer *********/
-.main-footer {min-height: 150px;position: absolute;bottom: 0;width: 100%;background-color: #19B5FE;}
-.mega-footer {background-color: #fff;height: 120px;}
-.mega-footer a {color: #19B5FE;font-size: 12px;}
-.mini-footer {color: #fff;font-size: 12px;padding-top: 7px;}
-.mini-footer p {margin-bottom: 0}
-.mini-footer a {color: #fff;font-size: 12px;}
+.main-footer {min-height: 180px;position: absolute;bottom: 0;width: 100%;background-color: #19B5FE;border-top: 1px solid #d8f2fe;}
 .main-footer li>a:hover {text-decoration: underline;}
 .main-footer h6 {color: #373737;border-bottom: 1px solid #19B5FE;padding-bottom: 6px;padding-left: 4px;}
 .main-footer ul {list-style-type: none;margin: 0;padding: 0 4px;}
 
+.mega-footer {background-color: #fff;height: 160px;}
+.mega-footer a {color: #19B5FE;font-size: 12px;}
+
+.mini-footer {color: #fff;font-size: 12px;padding:4px 0;}
+.mini-footer p {margin-bottom: 0}
+.mini-footer a {color: #fff;font-size: 12px;}
+
 .link-bar-seperator li+li:before {content: '|';color: #fff;padding-right: 12px;}
 
-/***********  =login form **************/
+/**************  =page styles *********/
+.page-title {color: #19B5FE;font-family: 'open_sanslight',Helvetica,Arial,Sans-serif;border-bottom: 1px solid #19B5FE;padding-bottom: 12px;font-size: 24px;}
 
-
+.sign-up-form {margin:30px 0 50px;}
+.sign-up-form .form-group {margin-bottom: 10px;}
+.sign-up-form .form-group label.control-label{text-align: left;}
 
 /**************  =pluggins ************/
 .datepicker {z-index: 1050 !important}
 .input-group.date .input-group-addon {cursor: pointer;}
+
+.selecter .selecter-selected {border-radius: 0;border-color: #96deff;height: 32px;color: }
 
 /*************** =bootstrap ****************/
 .clean-modal .modal-dialog {margin-top: 120px;}
@@ -113,12 +120,14 @@ body {padding-top: 60px;font-size: 14px;margin-bottom: 150px;font-family: 'open_
 .clean-modal .modal-title {font-family: 'open_sanslight',Helvetica,Arial,Sans-serif;}
 
 .clean-modal .modal-footer {border-top: 1px solid #d8f2fe;margin-right: 30px;margin-left: 30px;}
-.btn {border-radius: 0}
+.btn {border-radius: 2px;-webkit-border-radius: 2px;-moz-border-radius: 2px;}
 
-.form-control {border-color: #96deff;border-radius: 0;height: 32px;}
+.form-control {border-color: #96deff;height: 32px;border-radius: 2px;}
 .input-group-addon {border-radius: 0}
 
 label {font-weight: normal;}
+
+body.modal-open {overflow-y:visible}
 
 /***************** =CSS cases *******************/
 
@@ -131,6 +140,8 @@ label {font-weight: normal;}
 /************** =Global ****************/
 a,.blue-text {color: #19B5FE}
 
+
+.text-xs {font-size: 10px;}
 .seperator-5 {margin-top: 5px;}
 .seperator-10 {margin-top: 10px;}
 .seperator-20 {margin-top: 20px;}

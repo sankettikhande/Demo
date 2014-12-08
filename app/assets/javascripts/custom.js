@@ -11,5 +11,5 @@ $(document).ready(function(){
 	});
 	$('.datepicker,.input-group.date').datepicker();
 	$('[data-toggle="tooltip"]').tooltip();
-	$('#login-modal').modal('show')
+	$('.selecter').selecter();
 });
