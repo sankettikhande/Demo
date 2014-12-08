@@ -6,10 +6,19 @@ $(document).ready(function(){
 	$('#search-more-btn').click(function(){
 		$($('.search-list .search-row').first().html()).clone().insertAfter(".search-row");
 	});
-	$('#forgot-link').click(function(){
-		$('.login-form').toggleClass('forgot-form');
-	});
-	$('.datepicker,.input-group.date').datepicker();
-	$('[data-toggle="tooltip"]').tooltip();
+
+    $('#forgot-link').click(function(){
+        $('.login-form').addClass('hidden');
+        $('.forgot-form').removeClass('hidden');
+    });
+
+    $('#login-link').click( function(){
+        //jQuery.noConflict();
+        $('.login-form').removeClass('hidden');
+        $('.forgot-form').addClass('hidden');
+        $('#login-modal').modal('show');
+    });
+
 	$('.selecter').selecter();
+
 });

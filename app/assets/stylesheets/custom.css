@@ -129,14 +129,6 @@ label {font-weight: normal;}
 
 body.modal-open {overflow-y:visible}
 
-/***************** =CSS cases *******************/
-
-.login-form.forgot-form .lf-row {display: none;}
-.help-text.lf-row {display: none;}
-.login-form.forgot-form .help-text.lf-row {display: block;}
-
-
-
 /************** =Global ****************/
 a,.blue-text {color: #19B5FE}
 
