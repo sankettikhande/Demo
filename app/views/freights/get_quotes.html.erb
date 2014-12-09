@@ -1,0 +1,17 @@
+<h1>your frieght rates are ready</h1>
+
+<p>Complete your contact details below to have the best from 14 selected fright forwards displayed - with price guarantee </p>
+
+Your contact details will only be used to secure your price guarantee.
+
+<div>
+  <p class="notice"><%= notice %></p>
+  <%= form_for User.new, url: register_guest_user_path do |f| %>
+    <%= f.text_field :company_name %>
+    <%= f.text_field :first_name%>
+    <%= f.text_field :last_name%>
+    <%= f.email_field :email%>
+    <%= f.text_field :phone_number%>
+    <%= f.submit "SEE PRICES NOW!"%>
+  <% end %>
+</div>

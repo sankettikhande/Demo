@@ -9,9 +9,12 @@ class FreightsController < ApplicationController
         format.html
         format.js
       else
-
+        format.html { redirect_to get_quotes_freights_path(search: params[:search]) }
       end
     end
+  end
+
+  def get_quotes
   end
 
 

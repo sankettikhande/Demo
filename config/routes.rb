@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {sessions: "sessions"}
+  devise_for :users, controllers: {sessions: "sessions", registrations: "registrations"}
+
+  devise_scope :user do
+    post "registrations/register_guest_user", to: "registrations#register_guest_user", as: :register_guest_user
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -16,6 +20,7 @@ Rails.application.routes.draw do
   resources :freights do
     collection do
       get :search
+      get :get_quotes
     end
   end
 
