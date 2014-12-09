@@ -1,0 +1,5 @@
+production:
+  pid_file: /data/apps/bluecompass/shared/tmp/searchd.pid
+  indices_location: /data/apps/bluecompass/shared/db/sphinx
+  configuration_file: /data/apps/bluecompass/shared/production.sphinx.conf
+  binlog_path: /data/apps/bluecompass/shared/binlog
