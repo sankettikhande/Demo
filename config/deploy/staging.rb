@@ -4,9 +4,9 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{azureuser@holachef-qa.cloudapp.net}
-role :web, %w{azureuser@holachef-qa.cloudapp.net}
-role :db,  %w{azureuser@holachef-qa.cloudapp.net}
+role :app, %w{azureuser@bluecompass.sodelsolutions.com}
+role :web, %w{azureuser@bluecompass.sodelsolutions.com}
+role :db,  %w{azureuser@bluecompass.sodelsolutions.com}
 
 set :rails_env, 'production'
 
@@ -16,7 +16,7 @@ set :rails_env, 'production'
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'holachef-qa.cloudapp.net', user: 'azureuser', roles: %w{web app}, my_property: :my_value
+server 'bluecompass.sodelsolutions.com', user: 'azureuser', roles: %w{web app}, my_property: :my_value
 
 
 # Custom SSH Options
