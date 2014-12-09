@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :freights do
     collection do
+      post :search
       get :search
       get :get_quotes
     end
@@ -31,9 +32,12 @@ Rails.application.routes.draw do
       get :bookings_on_hold
       get :draft_bookings
       get :archived_bookings
-    end
-
+      get :get_quote
+      get :payment
+    end   
   end
+  resources :address_books 
+
   # Example resource route with options:
   #   resources :products do
   #     member do
