@@ -1,0 +1,11 @@
+<table style="width:100%">
+  <% @freight_rates.each do |freight_rate| %>
+    <tr>
+      <td><%= freight_rate.source %></td>
+      <td><%= freight_rate.destination%></td>
+      <td><%= freight_rate.min_weight%></td>
+      <td><%= freight_rate.max_weight %></td>
+      <td><%= link_to 'Book now', new_address_book_path(:booking_id => @draft_booking.id) %></td>
+    </tr>
+  <% end%>
+</table>

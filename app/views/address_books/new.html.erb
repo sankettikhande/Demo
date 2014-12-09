@@ -1,0 +1,66 @@
+<%= form_for @supplier_address, as: :supplier do |f| %>
+
+  <%= hidden_field_tag 'booking_id', @booking.id%>
+  <%= f.label :company_name %>:
+  <%= f.text_field :company_name %><br />
+
+  <%= f.label :first_name %>:
+  <%= f.text_field :first_name %><br />
+
+  <%= f.label :last_name %>:
+  <%= f.text_field :last_name %><br />
+
+  <%= f.label :email %>:
+  <%= f.text_field :email %><br />
+
+  <%= f.label :phone_number %>:
+  <%= f.text_field :phone_number %><br />
+
+  <%= f.label :address %>
+  <%= f.text_field :address %><br />
+
+  <%= f.label :post_code %>:
+  <%= f.text_field :post_code %><br />
+
+  <%= f.label :city %>:
+  <%= f.text_field :city %><br />
+
+  <%= f.label :cargo_description %>:
+  <%= f.text_field :cargo_description %><br />
+
+  <%= fields_for 'consignees', @consignees_address do |c| %>
+
+    <%= c.label :company_name %>:
+    <%= c.text_field :company_name %><br />
+
+    <%= c.label :first_name %>:
+    <%= c.text_field :first_name %><br />
+
+    <%= c.label :last_name %>:
+    <%= c.text_field :last_name %><br />
+
+    <%= c.label :email %>:
+    <%= c.text_field :email %><br />
+
+    <%= c.label :phone_number %>:
+    <%= c.text_field :phone_number %><br />
+
+    <%= c.label :address %>
+    <%= c.text_field :address %><br />
+
+    <%= c.label :post_code %>:
+    <%= c.text_field :post_code %><br />
+
+    <%= c.label :city %>:
+    <%= c.text_field :city %><br />
+
+    <%= c.label :cargo_description %>:
+    <%= c.text_field :cargo_description %><br />
+
+
+  <% end %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+
+

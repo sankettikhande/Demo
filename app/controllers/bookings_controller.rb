@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
 
   def index
+
   end
 
   def new
@@ -13,6 +14,7 @@ class BookingsController < ApplicationController
   end
 
   def create
+    
   end
 
   def destroy
@@ -38,4 +40,12 @@ class BookingsController < ApplicationController
     @bookings = current_user.buyer_bookings.archived_bookings
   end
 
+  def get_quote
+    @draft_booking = Booking.find params[:id]
+    @freight_rates = Freight.search conditions: {source: @draft_booking.source, destination: @draft_booking.destination}
+  end
+  
+  def payment
+  end
+  
 end
