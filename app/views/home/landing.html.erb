@@ -20,7 +20,7 @@
                               <label for="frm-search">
                                 From
                               </label>
-                              <%= text_field_tag "search[][source]", nil, class: "form-control", id: "frm-search", placeholder: "Source" %>
+                              <%= country_select( "user", "source", {}, { class: 'form-control selecter', placeholder: "Source", id: "frm-search", name: "search[][source]"}) %>
                             </div>
                           </div>
                           <div class="col-xs-3">
@@ -28,7 +28,7 @@
                               <label for="to-search">
                                 To
                               </label>
-                              <%= text_field_tag "search[][destination]", nil, class: "form-control", id: "to-search", placeholder: "Destination" %>
+                              <%= country_select( "user", "destination", {}, { class: 'form-control selecter', placeholder: "Source", id: "frm-search", name: "search[][destination]"}) %>
                             </div>
                           </div>
                           <div class="col-xs-2">
