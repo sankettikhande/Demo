@@ -1,0 +1,35 @@
+<div class="right-body">
+  <div class="container">
+    <% @draft_bookings.each do |booking| %>
+        <div class="col-xs-10 panel panel-default">
+          <div class="col-xs-3">
+            <% if booking.seller_id  %>
+                <%= image_tag(booking.seller.avatar_url, height: 100, width: 100) if booking.seller.avatar? %>
+            <% else %>
+                <p>To be decided</p>
+            <% end %>
+            <p>
+              <b>Last Price</b>
+              <br/>
+              NA
+            </p>
+          </div>
+          <div class="col-xs-6">
+            <p><b>Booking last modified on:</b><%= booking.updated_at.strftime("%d/%m/%Y") %></p>
+            <p><b>Service:</b></p>
+            <p><b>From:</b><%= booking.source %><span><b>Cut off:</b></span></p>
+            <p><b>To:</b><%= booking.destination %> <span><b>Delivery:</b></span></p>
+            <p><b>Cargo:</b></p>
+          </div>
+          <div class="col-xs-3">
+            <div style="margin: 10px 0px">
+              <%= link_to "RESUME BOOKING", get_quote_booking_path(booking), {class: 'btn btn-success'} %>
+            </div>
+            <div style="margin: 10px 0px">
+              <%= link_to "DELETE BOOKING", archive_booking_path(booking), {method: :delete, class: 'btn btn-danger'} %>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+  </div>
+</div>

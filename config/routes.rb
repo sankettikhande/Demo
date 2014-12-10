@@ -21,18 +21,20 @@ Rails.application.routes.draw do
     collection do
       post :search
       get :search
-      get :get_quotes
     end
   end
 
   resources :home
-  resources :bookings do 
+  resources :bookings do
+    member do
+      delete :archive
+      get :get_quote
+    end
     collection do 
       get :active_bookings
       get :bookings_on_hold
       get :draft_bookings
       get :archived_bookings
-      get :get_quote
       get :payment
     end   
   end

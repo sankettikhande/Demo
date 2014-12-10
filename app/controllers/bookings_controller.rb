@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!, only: :draft_bookings
 
   def index
 
@@ -33,7 +34,7 @@ class BookingsController < ApplicationController
   end
 
   def draft_bookings
-    @bookings = current_user.buyer_bookings.draft_bookings
+    @draft_bookings = current_user.buyer_bookings.draft_bookings
   end
 
   def archived_bookings
@@ -46,6 +47,13 @@ class BookingsController < ApplicationController
   end
   
   def payment
+  end
+
+  def archive
+    booking = Booking.find(params[:id])
+    booking.update(aasm_state: 'archived')
+
+    redirect_to draft_bookings_bookings_path
   end
   
 end
