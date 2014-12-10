@@ -43,7 +43,20 @@ class BookingsController < ApplicationController
 
   def get_quote
     @draft_booking = Booking.find params[:id]
-    @freight_rates = Freight.search conditions: {source: @draft_booking.source, destination: @draft_booking.destination}
+    @freight_rates = Freight.search(conditions: 
+                                      {
+                                        source: @draft_booking.source, 
+                                        destination: @draft_booking.destination, 
+                                        cut_off_date: @draft_booking.pick_up_date, 
+                                        freight_type: @draft_booking.freight_type 
+                                      },
+                                    with: 
+                                      {
+                                        cbm: 0..@draft_booking.cbm, 
+                                        min_weight: 0..@draft_booking.weight, 
+                                        max_weight: @draft_booking.weight..10**30
+                                      }
+                                    ) #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
   end
   
   def payment

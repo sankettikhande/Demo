@@ -1,7 +1,8 @@
 ThinkingSphinx::Index.define :freight, :with => :active_record do
   indexes source
   indexes destination
-  indexes min_weight
-  indexes max_weight
-  indexes cbm
+  indexes cut_off_date
+  indexes freight_type
+
+  has cbm, min_weight, max_weight
 end

@@ -23,4 +23,8 @@ $(document).ready(function(){
 
 	$('.selecter').selecter();
 
+    $('.date').datepicker({
+        format: 'yyyy/mm/dd'
+    });
+
 });
