@@ -22,5 +22,9 @@ class FreightsController < ApplicationController
     end
   end
 
-end
+  def import
+    Freight.imports(params[:file])
+    redirect_to root_path, notice: "Freights are imported!"
+  end
 
+end
