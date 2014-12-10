@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="right-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tabbed-panel home-search-tabs">
+            <ul class="nav nav-tabs panel-tabs">
+              <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
+              <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
+            </ul>
+            <%= button_to "New freight ", new_freight_path, :class => "button", :method => :get  %>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-p1">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th class="col-xs-2"># </th>
+                    <th class="col-xs-2">From</th>
+                    <th class="col-xs-2">To</th>
+                    <th class="col-xs-2">CBM</th>
+                    <th class="col-xs-2">Wt.From</th>
+                    <th class="col-xs-2">Wt.To</th>
+                    <th class="col-xs-4">Date From</th>
+                    <th class="col-xs-4">Date To</th>
+                    <th class="col-xs-2">Price</th>
+
+
+                    <th class="col-xs-4">Freight Type</th>
+                    <th class="col-xs-2">Cut Off Date</th>
+                    <th class="col-xs-2">Transition Days</th>
+
+
+                    <th class="col-xs-2">Action</th>
+                    <th class="col-xs-2">All</th>
+                  </tr>
+                  </thead>
+                  <%if @freights.present? %>
+                  <tbody>
+                  <% @freights.each_with_index do |freight,index| %>
+                      <tr>
+                        <td><%=index+1%></td>
+                        <td> <%=freight.source  %></td>
+                        <td> <%=freight.destination  %></td>
+                        <td> <%=freight.cbm  %></td>
+                        <td> <%=freight.min_weight %></td>
+                        <td> <%=freight.max_weight %></td>
+                        <td> <%=freight.start_date %></td>
+                        <td> <%=freight.end_date %></td>
+                        <td> <%=freight.price  %></td>
+                        <td> <%=freight.freight_type  %></td>
+                        <td> <%=freight.cut_off_date  %></td>
+                        <td> <%=freight.transition_days  %></td>
+
+                      </tr>
+                  <% end %>
+                  </tbody>
+                   <%end%>
+                </table>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

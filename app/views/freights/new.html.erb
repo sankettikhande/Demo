@@ -1,0 +1,124 @@
+<div class="container-fluid">
+  <div class="right-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tabbed-panel home-search-tabs">
+            <ul class="nav nav-tabs panel-tabs">
+              <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
+              <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-p1">
+                Add New Entry
+                <%= form_for(@freight, url: {action: "create"}) do |f| %>
+                    <% @freight.errors.full_messages.each do |msg| %>
+                       <div class="text-danger"><li><%= msg %></li></div>
+              <% end %>
+                    <%= f.hidden_field 'seller_id', :value => current_user.id %>
+                    <div class="row">
+                      <div class="col-xs-12 search-list">
+
+                        <div class="row form-group">
+                          <div class="col-md-6">
+                            <div class="col-md-3">From</div>
+                            <div class="col-md-6"><%= country_select( "freight", "source", {}, { class: 'form-control selecter'}) %></div>
+                          </div>
+                          <div class="col-xs-6">
+                            <div class="col-md-3">To</div>
+                            <div class="col-md-6"><%= country_select( "freight", "destination", {}, { class: 'form-control selecter'}) %></div>
+                          </div>
+
+                        </div>
+
+
+                        <div class="row form-group">
+                          <div class="col-md-6">
+                            <div class="col-md-3">Wt. From</div>
+                            <div class="col-md-6"> <%= f.text_field "min_weight", class: "form-control", id: "hm-weight", placeholder: "Wt. From" %></div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="col-md-3">Wt.To</div>
+                            <div class="col-md-6"> <%= f.text_field "max_weight", class: "form-control", id: "hm-weight", placeholder: "Wt-To" %></div>
+                          </div>
+                        </div>
+
+
+                          <div class="row form-group">
+                            <div class="col-xs-6">
+                              <div class="col-md-3">Date From</div>
+                              <div class="col-md-6 input-group date">
+                                <%= f.text_field "start_date", class: "form-control", id: "hm-date", placeholder: "mm/dd/yyyy", data: {provide: "datepicker"}  %>
+                                <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </span>
+                              </div>
+                            </div>
+                            <div class="col-xs-6">
+                              <div class="col-md-3">Date To</div>
+                              <div class="col-md-6 input-group date">
+                                <%= f.text_field "end_date", class: "form-control", id: "hm-date", placeholder: "mm/dd/yyyy", data: {provide: "datepicker"}  %>
+                                <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </span>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+                        <div class="row form-group">
+                          <div class="col-xs-6">
+                            <div class="col-md-3">CBM</div>
+                            <div class="col-md-6"> <%= f.text_field "cbm", class: "form-control", id: "hm-weight", placeholder: "CBM" %></div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="col-md-3">Price</div>
+                            <div class="col-md-6"> <%= f.text_field "price", class: "form-control", id: "hm-weight", placeholder: "Price" %></div>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col-xs-6">
+                            <div class="col-md-3">Delivery Days</div>
+                            <div class="col-md-6"> <%= f.text_field "transition_days", class: "form-control", id: "hm-weight", placeholder: "delivery_days" %></div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="col-md-3">Cut Off Date</div>
+                            <div class="col-md-6 input-group date">
+                              <%= f.text_field "cut_off_date", class: "form-control", id: "hm-date", placeholder: "mm/dd/yyyy", data: {provide: "datepicker"}  %>
+                              <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col-xs-6">
+                            <div class="col-md-3">freight_type</div>
+                            <div class="col-md-6"> <%= f.text_field "freight_type", class: "form-control", id: "hm-weight", placeholder: "freight_type" %></div>
+                          </div>
+                        </div>
+
+
+
+                      </div>
+
+                    </div>
+                    <div class="control-group">
+                      <%= submit_tag 'Create', :class => 'btn btn-primary' %>
+                      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), :class => 'btn btn-danger' %>
+                    </div>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
