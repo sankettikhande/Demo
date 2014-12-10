@@ -4,13 +4,14 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="tabbed-panel home-search-tabs">
-            <ul class="nav nav-tabs panel-tabs">
+            <ul class="nav nav-tabs panel-tabs freight-type">
               <li class="active"><a href="#tab-p1" data-toggle="tab">Sea</a></li>
               <li><a href="#tab-p1" data-toggle="tab">Air</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab-p1">
                 <%= form_tag search_freights_path, method: :post do%>
+                  <%= hidden_field_tag 'search[][freight_type]', 'sea', id: 'landing_tab_freight_type' %>
                   <div class="row">
                     <div class="col-xs-12 search-list">
                       <div class="search-row">
@@ -37,7 +38,7 @@
                                 Date
                               </label>
                               <div class="input-group date">
-                              <%= text_field_tag "search[][date]", session['search']['date'], class: "form-control", id: "hm-date", placeholder: "mm/dd/yyyy", data: {provide: "datepicker"}  %>
+                              <%= text_field_tag "search[][date]", session['search']['date'], class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd" %>
                               <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                               </span>
@@ -80,3 +81,11 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  $('ul.freight-type li').click(function(e){
+    freight_type = e.target.innerHTML;
+    $('#landing_tab_freight_type').val(freight_type.toLowerCase());
+  });
+</script>

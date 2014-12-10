@@ -38,7 +38,7 @@ gem 'capistrano-rails'
 gem 'capistrano-passenger'
 gem "non-stupid-digest-assets"
 gem 'sprockets-rails', :require => 'sprockets/railtie'
-
+gem 'quiet_assets', group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
