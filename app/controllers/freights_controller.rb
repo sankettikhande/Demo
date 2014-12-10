@@ -1,8 +1,6 @@
 class FreightsController < ApplicationController
 
-  layout 'application'
-
-
+  
   def index
     @freights = current_user.freights
     respond_to do |format|
@@ -69,4 +67,4 @@ class FreightsController < ApplicationController
 
 end
 
-end
+
