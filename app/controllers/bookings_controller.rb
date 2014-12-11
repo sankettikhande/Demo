@@ -38,7 +38,7 @@ class BookingsController < ApplicationController
   end
 
   def archived_bookings
-    @bookings = current_user.buyer_bookings.archived_bookings
+    @archived_bookings = current_user.buyer_bookings.archived_bookings
   end
 
   def get_quote
@@ -62,9 +62,10 @@ class BookingsController < ApplicationController
   def payment
   end
 
-  def archive
+  def destroy
     booking = Booking.find(params[:id])
-    booking.update(aasm_state: 'archived')
+    authorize  booking, :destroy?
+    booking.destroy
 
     redirect_to draft_bookings_bookings_path
   end
