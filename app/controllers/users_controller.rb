@@ -22,6 +22,16 @@ class UsersController < ApplicationController
     @consignees = address_books.consignees_address
   end
 
+  def privacy
+
+  end
+
+  def delete_user_account
+    if params[:user].present? && current_user.validate_user(params[:user][:email], params[:user][:password])
+       redirect_to root_path if current_user.update(is_active: false)
+    end    
+  end
+
  protected
 
   def user_params

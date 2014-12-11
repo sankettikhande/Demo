@@ -1,0 +1,24 @@
+<div class="hsbody-2-right">
+  <div id="delete_user_account">
+      <%= form_tag("/deleteUserAccount", method: "post") do %>
+        <h2 class="create-account-heading">Are you sure you wish to delete your account with BlueCompass</h2>
+          
+        <p class="f-size-22">This will permanently delete your account and is irreversible. All your data will be removed from BlueCompass Bookings and user information will be maintained and inactivated in our databases for audit trail purposes.</p>
+        <br>
+        <br>
+        <p>To delete your account, please verify your e-mail address below and type in your password.</p><br>
+        <br>
+        <label class="common-fields-container clearfix">
+            <span style="width:49%;" class="field-name">E-mail address of account to be deleted</span>
+            <span style="width:49%;" class="field-container"><input type="email" value="" size="28" id="delete_email" name="user[email]" required='required'></span>
+        </label> 
+      
+        <label class="common-fields-container clearfix">
+            <span style="width:49%;" class="field-name">Password</span>
+            <span style="width:49%;" class="field-container"><input type="password" size="28" id="password" name="user[password]" required='required'></span>
+        </label> 
+        <br>
+        <%= submit_tag "Delete Account"%>  
+      <% end %>
+  </div>
+</div>
