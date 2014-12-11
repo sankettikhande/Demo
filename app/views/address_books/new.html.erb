@@ -1,6 +1,8 @@
 <%= form_for @supplier_address, as: :supplier do |f| %>
 
   <%= hidden_field_tag 'booking_id', @booking.id%>
+  <%= f.hidden_field :address_type %>
+
   <%= f.label :company_name %>:
   <%= f.text_field :company_name %><br />
 
@@ -29,7 +31,7 @@
   <%= f.text_field :cargo_description %><br />
 
   <%= fields_for 'consignees', @consignees_address do |c| %>
-
+    <%= c.hidden_field :address_type %>
     <%= c.label :company_name %>:
     <%= c.text_field :company_name %><br />
 
