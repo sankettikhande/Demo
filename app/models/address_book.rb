@@ -5,8 +5,8 @@ class AddressBook < ActiveRecord::Base
 
   belongs_to :user
   has_many :supplier_bookings, class_name: "Booking", foreign_key: "supplier_id"  
-  has_many :consignees_bookings, class_name: "Booking", foreign_key: "consignees_id"
+  has_many :consignee_bookings, class_name: "Booking", foreign_key: "consignee_id"
 
   scope :supplier_address, -> { where(address_type: 'supplier')}
-  scope :consignees_address, -> { where(address_type: 'consignees')}
+  scope :consignee_address, -> { where(address_type: 'consignee')}
 end

@@ -16,10 +16,10 @@ class UsersController < ApplicationController
 
   end
 
-  def register_supplier_consignees
+  def register_supplier_consignee
     address_books = current_user.address_books
     @suppliers = address_books.supplier_address
-    @consignees = address_books.consignees_address
+    @consignees = address_books.consignee_address
   end
 
   def privacy
