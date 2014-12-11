@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rater_id: 1
+  rateable_id: 1
+  rateable_type: MyString
+  booking_id: 1
+  on_time_delivery: 
+  is_courteous: false
+  feedback: MyText
+  suggestion: MyText
+
+two:
+  rater_id: 1
+  rateable_id: 1
+  rateable_type: MyString
+  booking_id: 1
+  on_time_delivery: 
+  is_courteous: false
+  feedback: MyText
+  suggestion: MyText
