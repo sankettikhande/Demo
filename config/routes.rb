@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   resources :home
   resources :bookings do
+    resources :rates
     member do
       get :get_quote
     end

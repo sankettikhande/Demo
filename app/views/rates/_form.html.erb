@@ -1,0 +1,28 @@
+<%= form_for [@booking, @rate], {remote: true} do |f| %>
+    <h3>How did <%= @booking.seller.first_name %> do?</h3>
+    <p>
+        Was your shipment available before <%= (@booking.cut_off_date + @booking.transition_days).strftime("%d/%m/%Y") %> &nbsp;&nbsp;
+        <%= f.radio_button :on_time_delivery, true %> Yes &nbsp;&nbsp;
+        <%= f.radio_button :on_time_delivery, false %> No
+    </p>
+    <p>
+        Was the customer service prompt and courteous? &nbsp;&nbsp;
+        <%= f.radio_button :is_courteous, true %> Yes &nbsp;&nbsp;
+        <%= f.radio_button :is_courteous, false %> No
+    </p>
+
+    <p>Forwarder rating (1 to 5 stars):</p>
+    <p>Tell others about this forwarder:</p>
+    <p>(E.g. customer service experience, timeliness, value for money)</p>
+    <p>
+      <%= f.text_area :feedback%>
+      <p>Your name will not be displayed. Be clear and constructive. Character remaining: 400</p>
+    </p>
+    <p>
+      <p>Send suggestions for improvements directly to Worldtrans:</p>
+
+      <%= f.text_area :suggestion%>
+      <p>This will be sent only to <%= @booking.seller.first_name %> with your name (<%= current_user.first_name %> <%= current_user.last_name %>) displayed. Character remaining: 400</p>
+    </p>
+    <%= f.submit "SUBMIT FEEDBACK" %>
+<% end  %>
