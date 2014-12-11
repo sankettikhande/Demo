@@ -41,7 +41,11 @@ Rails.application.routes.draw do
       get :payment
     end   
   end
-  resources :address_books 
+  resources :address_books  do
+    collection do
+      delete :suppliers_consignees_destroy
+    end
+  end
 
   resources :users do 
 
@@ -51,6 +55,7 @@ Rails.application.routes.draw do
   get '/privacy', to: 'users#privacy'
   post '/deleteUserAccount', to: 'users#delete_user_account'
   get '/deleteUserAccount', to: 'users#delete_user_account' 
+  get '/register_supplier_consignee', to: 'users#register_supplier_consignee' 
   # Example resource route with options:
   #   resources :products do
   #     member do

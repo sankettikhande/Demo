@@ -1,0 +1,42 @@
+<div>
+  <div style="width:100%">
+    <div style ="float:left"><%= form_tag("/") do %>
+      <%=select_tag 'supplier_address_book', options_for_select(@suppliers.map {|s| [s.company_name, s.id]}), :multiple => true, :size => 10, :class => "multi-select"%>
+      <%end%>
+    </div>
+
+    <div style ="float:left"><%= form_tag("/") do %>
+      <%=select_tag 'consignee_address_book', options_for_select(@consignees.map {|s| [s.company_name, s.id]}), :multiple => true, :size => 10, :class => "multi-select"%>
+      <%end%>
+    </div>  
+  </div>  
+  <div>
+
+    <button type="button" class="btn btn-success" onclick='destroy_supplier_consignee_address()'> Destroy</button> 
+  </div>
+</div>
+
+<script>
+  function destroy_supplier_consignee_address(){
+    var supplier_ids = $("#supplier_address_book").val() ? $("#supplier_address_book").val(): [];
+    var consignee_ids = $("#consignee_address_book").val() ? $("#consignee_address_book").val(): [] ;
+    var ids = $.merge( supplier_ids, consignee_ids )
+    $.ajax({
+      type: "DELETE",
+      data: {ids:ids},
+      url:"/address_books/suppliers_consignees_destroy",
+      success: function(data){
+        $.each(supplier_ids, function( index, value ) {
+          $("#supplier_address_book option[value='"+value+"']").remove();
+      });
+        $.each(consignee_ids, function( index, value ) {
+          $("#consignee_address_book option[value='"+value+"']").remove();
+      });
+      },
+      failure: function(data){
+        alert("something went wrong");
+      }
+    })
+
+  }
+</script>>

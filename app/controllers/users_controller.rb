@@ -20,6 +20,9 @@ class UsersController < ApplicationController
     address_books = current_user.address_books
     @suppliers = address_books.supplier_address
     @consignees = address_books.consignee_address
+    respond_to do |format |
+        format.html 
+    end
   end
 
   def privacy
