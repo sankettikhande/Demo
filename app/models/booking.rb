@@ -9,4 +9,5 @@ class Booking < ActiveRecord::Base
   scope :bookings_on_hold, -> {where(aasm_state: 'hold')}
   scope :draft_bookings, -> {where(aasm_state: 'draft')}
   scope :archived_bookings, -> {where(aasm_state: 'archived')}
+  scope :confirmed_bookings, -> {where(aasm_state: 'confirmed')}
 end

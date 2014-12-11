@@ -1,5 +1,6 @@
 class FreightsController < ApplicationController
 
+  before_action :authenticate_user!, except: :search
   
   def index
     @freights = current_user.freights
@@ -34,7 +35,7 @@ class FreightsController < ApplicationController
           pick_up_date: session['search']['date'],
           freight_type: session['search']['freight_type']).id
 
-        format.html { redirect_to get_quote_bookings_path(id:id)}
+        format.html { redirect_to get_quote_booking_path(id:id)}
       else
           format.html { render :template => "freights/guest_user_sign_up"}
       end

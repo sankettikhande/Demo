@@ -39,8 +39,8 @@ html {min-height: 100%;position: relative;}
 .open-r {font-family: 'open_sansregular',Helvetica,Arial,Sans-serif;}
 .open-b {font-family: 'open_sansbold',Helvetica,Arial,Sans-serif;font-weight: normal;}
 
-body {padding-top: 50px;font-size: 14px;margin-bottom: 180px;font-family: 'open_sansregular',Helvetica,Arial,Sans-serif;background-color: #f7f7f7;}
-.air-bg {background-image:url('flight-ff.jpg');background-repeat:no-repeat;background-position:center center;background-size: cover;-webkit-background-size: cover;-moz-background-size: cover;background-attachment: fixed;}
+body {padding-top: 50px;font-size: 14px;margin-bottom: 180px;font-family: 'open_sansregular',Helvetica,Arial,Sans-serif;background-color: #cae5ff;}
+.air-bg {background-repeat:no-repeat;background-position:center center;background-size: cover;-webkit-background-size: cover;-moz-background-size: cover;background-attachment: fixed;}
 
 .container {width: 1170px !important;}
 

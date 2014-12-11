@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post "registrations/register_guest_user", to: "registrations#register_guest_user", as: :register_guest_user
+    #get "/myaccount", to: 'registrations#edit' 
   end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -41,6 +43,11 @@ Rails.application.routes.draw do
   end
   resources :address_books 
 
+  resources :users do 
+
+  end
+
+  get 'myaccount', to: 'users#edit'
   # Example resource route with options:
   #   resources :products do
   #     member do
