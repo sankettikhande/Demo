@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   resources :home
   resources :bookings do
     member do
-      delete :archive
       get :get_quote
     end
     collection do 
