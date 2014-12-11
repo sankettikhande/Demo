@@ -38,7 +38,7 @@ class BookingsController < ApplicationController
   end
 
   def archived_bookings
-    @bookings = current_user.buyer_bookings.archived_bookings
+    @archived_bookings = current_user.buyer_bookings.archived_bookings
   end
 
   def get_quote

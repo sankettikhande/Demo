@@ -1,0 +1,33 @@
+<div class="right-body">
+  <div class="container">
+    <% @archived_bookings.each do |booking| %>
+        <div class="col-xs-10 panel panel-default">
+          <div class="col-xs-3">
+            <% if booking.seller_id  %>
+                <%= image_tag(booking.seller.avatar_url, height: 100, width: 100) if booking.seller.avatar? %>
+            <% end %>
+            <p>
+              <b>Last Price</b>
+              <br/>
+              USD:<%= booking.price %>
+            </p>
+            <p><b>Booking Fee</b>:</p>
+            <p><b>Booking ID: BOOK<%= booking.id %></b></p>
+          </div>
+          <div class="col-xs-6">
+            <p><b>Booking last modified on:</b><%= booking.updated_at.strftime("%d/%m/%Y") %></p>
+            <p><b>Service:</b></p>
+            <p><b>From:</b><%= booking.source %><span><b>Cut off:</b> <%= booking.cut_off_date.strftime("%d/%m/%Y")%></span></p>
+            <p><b>To:</b><%= booking.destination %> <span><b>Delivery:</b><%= (booking.cut_off_date + booking.transition_days).strftime("%d/%m/%Y") %> </span></p>
+            <p><b>Cargo:</b><%= booking.cbm %> cmb,<%= booking.weight %> kg, Delicte or any note from client end</p>
+            <p><b style="color: red;">Status:</b> <%= booking.aasm_state.capitalize %></p>
+          </div>
+          <div class="col-xs-3">
+            <div style="margin: 10px 0px">
+              <%= button_tag("Details",{type: "button", class: 'btn btn-warning'}) %>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+  </div>
+</div>
