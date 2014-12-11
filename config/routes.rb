@@ -46,7 +46,10 @@ Rails.application.routes.draw do
 
   end
 
-  get 'myaccount', to: 'users#edit'
+  get '/myaccount', to: 'users#edit'
+  get '/privacy', to: 'users#privacy'
+  post '/deleteUserAccount', to: 'users#delete_user_account'
+  get '/deleteUserAccount', to: 'users#delete_user_account' 
   # Example resource route with options:
   #   resources :products do
   #     member do

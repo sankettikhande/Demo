@@ -16,10 +16,20 @@ class UsersController < ApplicationController
 
   end
 
-  def register_supplier_consignees
+  def register_supplier_consignee
     address_books = current_user.address_books
     @suppliers = address_books.supplier_address
-    @consignees = address_books.consignees_address
+    @consignees = address_books.consignee_address
+  end
+
+  def privacy
+
+  end
+
+  def delete_user_account
+    if params[:user].present? && current_user.validate_user(params[:user][:email], params[:user][:password])
+       redirect_to root_path if current_user.update(is_active: false)
+    end    
   end
 
  protected

@@ -30,7 +30,7 @@
   <%= f.label :cargo_description %>:
   <%= f.text_field :cargo_description %><br />
 
-  <%= fields_for 'consignees', @consignees_address do |c| %>
+  <%= fields_for 'consignee', @consignee_address do |c| %>
     <%= c.hidden_field :address_type %>
     <%= c.label :company_name %>:
     <%= c.text_field :company_name %><br />

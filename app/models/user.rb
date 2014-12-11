@@ -15,8 +15,15 @@ class User < ActiveRecord::Base
   has_many :buyer_bookings, class_name: "Booking", foreign_key: "buyer_id"
   has_many :address_books       
   has_many :freights, foreign_key: "seller_id"
+
+  default_scope {where(is_active: true)}
+
   def avatar_size_validation
     errors[:avatar] << "should be less than 5MB" if avatar && avatar.size > 5.megabytes
   end
 
+  def validate_user(email, password)
+    user = User.where(email: email).first
+    user && user.valid_password?(password)
+  end
 end
