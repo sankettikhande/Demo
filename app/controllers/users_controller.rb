@@ -16,6 +16,12 @@ class UsersController < ApplicationController
 
   end
 
+  def register_supplier_consignees
+    address_books = current_user.address_books
+    @suppliers = address_books.supplier_address
+    @consignees = address_books.consignees_address
+  end
+
  protected
 
   def user_params
