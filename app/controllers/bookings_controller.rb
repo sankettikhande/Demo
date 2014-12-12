@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :authenticate_user!, only: :draft_bookings
+  before_action :authenticate_user!, except: :get_quote
 
   def index
 
