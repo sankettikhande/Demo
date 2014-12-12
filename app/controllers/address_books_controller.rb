@@ -17,4 +17,10 @@ class AddressBooksController < ApplicationController
     redirect_to payment_bookings_path
   end
 
+  def suppliers_consignees_destroy
+    @address_book = AddressBook.where(id: params[:ids])
+    @address_book.destroy_all
+    render nothing: true 
+  end
+
 end
