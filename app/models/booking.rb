@@ -7,7 +7,8 @@ class Booking < ActiveRecord::Base
   belongs_to :buyer, class_name: "User", foreign_key: "buyer_id"
 
   validates_inclusion_of :aasm_state, :in => ['draft', 'active', 'hold', 'confirmed', 'pending']
-
+  validates :buyer_id, :aasm_state, :source, :destination, :freight_type, :cbm, :weight, :pick_up_date, presence: true
+  
   scope :active_bookings, -> {where(aasm_state: 'active')}
   scope :bookings_on_hold, -> {where(aasm_state: 'hold')}
   scope :draft_bookings, -> {where(aasm_state: 'draft')}
