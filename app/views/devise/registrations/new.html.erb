@@ -104,6 +104,13 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-6">
+                      <%= f.radio_button :role, :buyer%> Buyer &nbsp;&nbsp;
+                      <%= f.radio_button :role, :seller%> Seller
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="col-xs-4 control-label">Preferred Currency</label>
                     <div class="col-xs-6">
                       <%= f.text_field :preferred_currency, placeholder: "Currency", class: "form-control" %>
