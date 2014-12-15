@@ -20,24 +20,26 @@ class FreightsController < ApplicationController
   end
 
   def search
-    session[:search] = params[:search].first if params[:search].present?
-    search_parameter = session[:search]
+    session[:bookind_ids] = []
+    session[:search] = params[:search] if params[:search].present?
+    search_parameter = session[:search].first
     @freight_rates = Freight.search conditions: {source: search_parameter[:source], destination: search_parameter[:destination]}
     respond_to do |format |
       if current_user
-        id = Booking.create(
-          buyer_id: current_user.id, 
-          source: session['search']['source'], 
-          destination: session['search']['destination'], 
-          aasm_state: 'draft',
-          cbm: session['search']['cbm'],
-          weight: session['search']['weight'],
-          pick_up_date: session['search']['date'],
-          freight_type: session['search']['freight_type']).id
-
-        format.html { redirect_to get_quote_booking_path(id:id)}
+        (session[:search] || []).each do |search_freight|
+          session[:bookind_ids] << Booking.create(
+            buyer_id: current_user.id, 
+            source: search_freight['source'], 
+            destination: search_freight['destination'], 
+            aasm_state: 'draft',
+            cbm: search_freight['cbm'],
+            weight: search_freight['weight'],
+            pick_up_date: search_freight['date'],
+            freight_type: search_freight['freight_type']).id
+        end
+        format.html { redirect_to get_quote_booking_path(id:session[:bookind_ids].first)}
       else
-          format.html { render :template => "freights/guest_user_sign_up"}
+        format.html { render :template => "freights/guest_user_sign_up"}
       end
     end
   end

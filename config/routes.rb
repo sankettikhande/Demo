@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     resources :rates
     member do
       get :get_quote
+      post :add_to_cart
+      post :remove_from_cart
     end
     collection do 
       get :active_bookings

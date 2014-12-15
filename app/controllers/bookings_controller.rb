@@ -1,4 +1,7 @@
 class BookingsController < ApplicationController
+
+  include BookingsHelper
+
   before_action :authenticate_user!, except: :get_quote
 
   def index
@@ -59,6 +62,21 @@ class BookingsController < ApplicationController
                                     ) #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
   end
   
+  def add_to_cart
+    booking = Booking.find(params[:id])
+    freight = Freight.find(params[:freight_id])
+    add_to_cart_session(booking, freight)
+    booking.update(seller_id: freight.seller_id, cut_off_date: freight.cut_off_date, transition_days: freight.transition_days, spot_rate: freight.price)
+    render nothing: true
+  end
+
+  def remove_from_cart
+    booking = Booking.find(params[:id])
+    freight = Freight.find(params[:freight_id])
+    remove_from_cart_session(booking)
+    render nothing: true
+  end
+
   def payment
   end
 
