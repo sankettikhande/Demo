@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :buyer_bookings, class_name: "Booking", foreign_key: "buyer_id"
   has_many :address_books       
   has_many :freights, foreign_key: "seller_id"
+  has_many :buyer_payments, class: 'Payment', foreign_key: 'buyer_id'
+  has_many :seller_payments, class: 'Payment', foreign_key: 'seller_id'
 
   default_scope {where(is_active: true)}
 
