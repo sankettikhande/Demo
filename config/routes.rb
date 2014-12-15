@@ -54,6 +54,11 @@ Rails.application.routes.draw do
 
   end
 
+  resources :payments do
+    collection do
+      post :payment_processing 
+    end
+  end
   get '/myaccount', to: 'users#edit'
   get '/privacy', to: 'users#privacy'
   post '/deleteUserAccount', to: 'users#delete_user_account'

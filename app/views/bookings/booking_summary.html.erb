@@ -36,8 +36,7 @@
   </tr>
 </table>
 <%= link_to 'Go Back', get_quote_booking_path(id:@cart.keys.first), class: 'btn btn-primary' %>
-
-<button type="button" class="btn btn-primary">Submit</button>
+<%= link_to 'Submit',  '/bookings/payment', class: 'btn btn-primary' %>
 <style>
   table, th, td {
       border: 1px solid black;
