@@ -12,9 +12,11 @@ class RatesController < ApplicationController
 
   def create
     @booking = Booking.find(params[:booking_id])
-    rateable_type, rateable_id = @booking.buyer_id == current_user.id ? ["buyer", @booking.buyer_id] : ["seller", @booking.seller_id]
-    Rate.create(rate_params.merge(booking_id: @booking.id, rater_id: current_user.id, rateable_type: rateable_type ,rateable_id: rateable_id))
 
+    authorize @booking, :can_rate?
+    rateable_type, rateable_id = current_user.id == @booking.buyer_id ? ["seller", @booking.seller_id] : ["buyer", @booking.buyer_id]
+
+    @rate = Rate.create(rate_params.merge(booking_id: @booking.id, rater_id: current_user.id, rateable_type: rateable_type ,rateable_id: rateable_id))
     respond_to do |format|
       format.js
     end

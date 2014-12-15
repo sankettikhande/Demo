@@ -10,4 +10,8 @@ class BookingPolicy
     user == booking.buyer && (booking.is_hold? || booking.is_draft?)
   end
 
+  def can_rate?
+    user == booking.buyer || user == booking.seller
+  end
+
 end
