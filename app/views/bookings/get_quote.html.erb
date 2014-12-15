@@ -96,7 +96,7 @@
 
           <% @freight_rates.each do |freight_rate|%>
             <div class="result-item">
-              <div class="rb-item rb-name"><img src="/assets/dhl.png" alt="DHL"></div>
+              <div class="rb-item rb-name"><%=image_tag company_logo(freight_rate)%></div>
               <div class="rb-item rb-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> (10)</div>
               <div class="rb-item rb-coff"><%= freight_rate.cut_off_date.strftime("%-d, %b")%></div>
               <div class="rb-item rb-del"><%= delivery_date(freight_rate).strftime("%-d, %b")%></div>
