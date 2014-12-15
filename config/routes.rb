@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     collection do 
       get :active_bookings
       get :bookings_on_hold
+      get :negotiation_round_one
+      post :round_one_price_update
       get :draft_bookings
       get :archived_bookings
       get :payment

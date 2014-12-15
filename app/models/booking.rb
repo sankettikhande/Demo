@@ -15,6 +15,7 @@ class Booking < ActiveRecord::Base
   scope :draft_bookings, -> {where(aasm_state: 'draft')}
   scope :archived_bookings, -> {where(is_archived: true)}
   scope :confirmed_bookings, -> {where(aasm_state: 'confirmed')}
+  scope :pending_bookings, -> {where(aasm_state: 'pending')}
 
   def is_draft?
     aasm_state == "draft"
@@ -23,5 +24,6 @@ class Booking < ActiveRecord::Base
   def is_hold?
     aasm_state == "hold"
   end
+
 
 end

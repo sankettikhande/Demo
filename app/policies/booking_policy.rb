@@ -14,4 +14,8 @@ class BookingPolicy
     user == booking.buyer || user == booking.seller
   end
 
+  def can_update_round_one?
+    user == booking.seller
+  end
+
 end
