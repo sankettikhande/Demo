@@ -5,17 +5,18 @@
           <div class="btn-group frmto-drpdn">
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-map-marker"></i> From - To <span class="caret"></span> <span class="frmto-count">(<%= session['bookind_ids'].present? ? session['bookind_ids'].count : 1 %>)</span></button>
             <ul class="dropdown-menu" role="menu">
-            <% (session['bookind_ids'] || [@draft_booking.id]).each do |booking_id| %>
-              <% booking = Booking.find(booking_id)%>
-              <li class="loc-item">
-                <%= link_to  get_quote_booking_path(id: booking.id) do %>
-                  <div class="loc-pos"><%= booking.source%></div>
-                  <div class="loc-pos"><%= booking.destination%></div>
-                  <button class="btn btn-danger btn-del" type="button">&times;</button>
-                <%end%>  
-              </li>
-            <%end%>  
-            </div>
+              <% (session['bookind_ids'] || [@draft_booking.id]).each do |booking_id| %>
+                <% booking = Booking.find(booking_id)%>
+                <li class="loc-item">
+                  <%= link_to  get_quote_booking_path(id: booking.id) do %>
+                    <div class="loc-pos"><%= booking.source%></div>
+                    <div class="loc-pos"><%= booking.destination%></div>
+                    <button class="btn btn-danger btn-del" type="button">&times;</button>
+                  <%end%>  
+                </li>
+              <%end%>  
+            </ul>
+          </div>  
         </div>
         <div class="col-xs-7">
           <ul class="list-inline order-label-heading">
@@ -71,16 +72,21 @@
         </div>
         <div class="col-xs-3">
           <ul class="list-inline order-sort">
-              <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Download" data-toggle="tooltip" data-placement="top">Download</button></li>
-              <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Eligible for Discount" data-toggle="tooltip" data-placement="top">With Discount</button></li>
-              <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Minutes" data-toggle="tooltip" data-placement="top">Total Minutes</button></li>
-              <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Fastest" data-toggle="tooltip" data-placement="top">Total Fastest</button></li>
-          </div>
+
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Download" data-toggle="tooltip" data-placement="top">Download</button></li>
+
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Eligible for Discount" data-toggle="tooltip" data-placement="top">With Discount</button></li>
+
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Minutes" data-toggle="tooltip" data-placement="top">Total Minutes</button></li>
+
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Fastest" data-toggle="tooltip" data-placement="top">Total Fastest</button></li>
+
+          </ul>  
         </div>
       </div>
   </div>
 
-  <div class="result-content seperator-25">
+  <div class="result-content">
     <div class="row">
       <div class="col-xs-9 col-xs-offset-1">
         <div class="rlist-wrapper">
@@ -97,7 +103,9 @@
           <% @freight_rates.each do |freight_rate|%>
             <div class="result-item">
               <div class="rb-item rb-name"><%=image_tag 'dhl.png'%></div>
-              <div class="rb-item rb-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> (10)</div>
+              <div class="rb-item rb-rating">
+                <span class="rview-rating"></span> <span class="rview-rating-c">(10)</span>
+              </div>              
               <div class="rb-item rb-coff"><%= freight_rate.cut_off_date.strftime("%-d, %b")%></div>
               <div class="rb-item rb-del"><%= delivery_date(freight_rate).strftime("%-d, %b")%></div>
               <div class="rb-item rb-day"><%= freight_rate.transition_days%></div>
@@ -112,15 +120,39 @@
         </div>
       </div>
       <div class="col-xs-2">
-        
+       <div class="slctd-sr-list">
+        <% session['cart'].each do |key, value|%>
+          <%booking = Booking.find(key)%>
+          <%freight = Freight.find(value)%>
+          <ul class="well slctd-sr-item">
+            <li class="ssri-item">
+              <div class="ssri-item-l"><%= freight.source%></div>
+              <div class="ssri-item-l"><%= freight.destination%></div>                       
+            </li>
+            <li class="ssri-item-p">$<%= freight.price%></li>
+            <li class="ssri-item-d"><%= freight.transition_days%></li>
+          </ul>
+        <%end%>
+       </div>          
       </div>
     </div>
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2">
         <div class="form-group text-center">
           <button type="button" class="btn btn-primary">Book Now</button>
-          <%= link_to 'View Summary', booking_summary_bookings_path, class: "btn btn-default pull-right" %>
+          <%= link_to booking_summary_bookings_path, class: "btn btn-default pull-right" do %>
+            View Summary
+            <i class="fa fa-angle-double-right"></i>  
+          <% end %>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-10">
+        <ul class="gtotal">
+          <li class="gtotal-l">Grand Total</li>
+          <li class="gtotal-v">$ 100</li>
+        </ul>
       </div>
     </div>
   </div>

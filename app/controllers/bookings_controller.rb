@@ -77,6 +77,9 @@ class BookingsController < ApplicationController
     render nothing: true
   end
 
+  def payment
+  end
+  
   def booking_summary
     @cart = session['cart'] || {}
   end
