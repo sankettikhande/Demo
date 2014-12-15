@@ -80,6 +80,10 @@ class BookingsController < ApplicationController
   def payment
   end
 
+  def booking_summary
+    @cart = session['cart'] || {}
+  end
+
   def destroy
     booking = Booking.find(params[:id])
     authorize  booking, :destroy?

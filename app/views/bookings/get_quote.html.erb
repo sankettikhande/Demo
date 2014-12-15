@@ -96,7 +96,7 @@
 
           <% @freight_rates.each do |freight_rate|%>
             <div class="result-item">
-              <div class="rb-item rb-name"><%=image_tag company_logo(freight_rate)%></div>
+              <div class="rb-item rb-name"><%=image_tag 'dhl.png'%></div>
               <div class="rb-item rb-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> (10)</div>
               <div class="rb-item rb-coff"><%= freight_rate.cut_off_date.strftime("%-d, %b")%></div>
               <div class="rb-item rb-del"><%= delivery_date(freight_rate).strftime("%-d, %b")%></div>
@@ -119,7 +119,7 @@
       <div class="col-xs-8 col-xs-offset-2">
         <div class="form-group text-center">
           <button type="button" class="btn btn-primary">Book Now</button>
-          <button type="button" class="btn btn-default pull-right">View Summary</button>
+          <%= link_to 'View Summary', booking_summary_bookings_path, class: "btn btn-default pull-right" %>
         </div>
       </div>
     </div>
