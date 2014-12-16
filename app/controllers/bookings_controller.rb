@@ -40,6 +40,28 @@ class BookingsController < ApplicationController
     @draft_bookings = current_user.buyer_bookings.draft_bookings
   end
 
+  def negotiation_round_one
+    @bookings = current_user.seller_bookings.pending_bookings
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @bookings }
+    end
+  end
+
+  def round_one_price_update
+    booking_details_hash = params[:round_one_rate_details] if params[:round_one_rate_details].present?
+    if booking_details_hash
+        booking_details_hash.each do |key, value|
+        booking = Booking.find(key)
+        authorize  booking, :can_update_round_one?
+        booking.update_attribute(:round_one_rate, value)
+      end
+      respond_to do |format|
+        format.html {redirect_to  negotiation_round_one_bookings_path}
+      end
+    end
+  end
+
   def archived_bookings
     @archived_bookings = current_user.buyer_bookings.archived_bookings
   end

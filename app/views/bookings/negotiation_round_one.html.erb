@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="right-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tabbed-panel home-search-tabs">
+            <ul class="nav nav-tabs panel-tabs">
+              <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
+              <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-p1">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th class="col-xs-2">Ref ID </th>
+                    <th class="col-xs-2">From</th>
+                    <th class="col-xs-2">To</th>
+                    <th class="col-xs-2">Date</th>
+                    <th class="col-xs-2">Cbm</th>
+                    <th class="col-xs-2">Kg</th>
+                    <th class="col-xs-4">Spot Rate</th>
+                    <th class="col-xs-4">Min SR</th>
+                    <th class="col-xs-2">Acg SR</th>
+                    <th class="col-xs-2">R1</th>
+                    <th class="col-xs-2">DC</th>
+                    <th class="col-xs-2">DL</th>
+                    <th class="col-xs-2">Action</th>
+                  </tr>
+                  </thead>
+                  <%if @bookings.present? %>
+                      <tbody>
+                      <% @bookings.each  do |booking| %>
+                          <tr id='seller_booking_<%=booking.id%>' >
+                            <td> <%=booking.id  %></td>
+                            <td> <%=booking.source  %></td>
+                            <td> <%=booking.destination  %></td>
+                            <td> <%=booking.pick_up_date %></td>
+                            <td> <%=booking.cbm %></td>
+                            <td> <%=booking.weight %></td>
+                            <td> Spot Rate</td>
+                            <td> Min SR</td>
+                            <td> Acg SR</td>
+                            <td> <%= text_field_tag "round_one_rate_#{booking.id}",nil, class: "round_value", id: "round_one_rate_#{booking.id}", booking_id: booking.id, value: booking.round_one_rate ,placeholder: "Round one Rate" %></td>
+                            <td> <%=booking.round_one_end_date %> </td>
+                            <td> DL </td>
+                            <td>
+                              <%= button_tag ("Submit"), :onclick=> "update_bookings(#{booking.id});" %>
+                            </td>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                  <%end%>
+                </table>
+                <%if @bookings.present? %>
+                <%= button_tag ("Submit All"), :onclick=> "submit_booking_data();" %>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function update_bookings(id){
+        round_one_rate_details = {}
+        var val = $('#round_one_rate_'+id).val();
+        round_one_rate_details[id] = val;
+        update_booking_with_ajax(round_one_rate_details)
+    }
+
+    function submit_booking_data(){
+        var table = $("table tbody");
+        round_one_rate_details = {}
+        table.find("tr").each(function() {
+            var booking_id = $(this).find('.round_value').attr('booking_id');
+            var round_value = $(this).find('.round_value').val();
+            round_one_rate_details[booking_id] = round_value
+        })
+        update_booking_with_ajax(round_one_rate_details)
+
+    }
+
+    function update_booking_with_ajax(round_one_rate_details_hash){
+        $.ajax({
+            type: "POST",
+            url: "/bookings/round_one_price_update/",
+            data: {round_one_rate_details: round_one_rate_details_hash},
+            success: function () {
+                alert("Price Updated")}
+        });
+
+    }
+
+
+</script>
