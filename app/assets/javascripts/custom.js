@@ -6,6 +6,7 @@ $(document).ready(function(){
 
 	$('body').on('click', '#search-more-btn', function(){
 		$($('.search-list .search-row').first().html()).clone().insertAfter(".search-row");
+    $('.selecter').selecter();
 	});
 
   $('#forgot-link').click(function(){
