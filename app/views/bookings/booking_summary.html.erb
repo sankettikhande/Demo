@@ -1,0 +1,53 @@
+<%grand_total = []%>
+<table style="width:100%">
+  <tr>
+    <th>From</th>
+    <th>To</th>    
+    <th>CBM</th>
+    <th>Wt</th>
+    <th>Date</th>    
+    <th>Company</th>
+    <th>Price</th>
+  </tr>
+  <% @cart.each do |key, value| %>
+    <% freight = Freight.find(value) %>
+    <% booking = Booking.find(key)%>  
+    <tr>
+      <td><%= freight.source%></td>
+      <td><%= freight.destination%></td>    
+      <td><%= freight.cbm%></td>
+      <td><%= booking.weight%></td>
+      <td><%= delivery_date(freight).strftime("%-d, %b") %></td>    
+      <td><%= freight.seller.company_name %></td>
+      <td><%= freight.price%>
+        <%grand_total << freight.price%>
+        <%= link_to 'Edit', get_quote_booking_path(id: booking.id), class: 'btn btn-primary' %>
+      </td>    
+    </tr>
+  <%end%>
+  <tr>
+    <td colspan="6">
+      Grand Total
+    </td>
+    
+    <td>
+      <%= grand_total.inject(:+)%>
+    </td>
+  </tr>
+</table>
+<%= link_to 'Go Back', get_quote_booking_path(id:session[:bookind_ids].first), class: 'btn btn-primary' %>
+<%= link_to 'Submit',  '/bookings/payment', class: 'btn btn-primary' %>
+<style>
+  table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
+  th, td {
+      padding: 5px;
+      text-align: left;
+  }
+  table#t01 {
+      width: 100%;    
+      background-color: #f1f1c1;
+  }
+</style>

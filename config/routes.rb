@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     resources :rates
     member do
       get :get_quote
+      post :add_to_cart
+      post :remove_from_cart
     end
     collection do 
       get :active_bookings
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
       get :draft_bookings
       get :archived_bookings
       get :payment
+      get :booking_summary
     end   
   end
   resources :address_books  do
@@ -51,6 +54,11 @@ Rails.application.routes.draw do
 
   end
 
+  resources :payments do
+    collection do
+      post :payment_processing 
+    end
+  end
   get '/myaccount', to: 'users#edit'
   get '/privacy', to: 'users#privacy'
   post '/deleteUserAccount', to: 'users#delete_user_account'
