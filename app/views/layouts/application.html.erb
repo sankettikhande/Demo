@@ -5,7 +5,11 @@
 </head>
 <body class="air-bg">
   <%= render :partial => "layouts/header" %>
-  <%= render :partial => "layouts/side_bar" %>
+    <% if  user_signed_in? && current_user.seller?  %>
+      <%= render :partial => "layouts/seller_side_bar" %>
+    <%else%>
+     <%= render :partial => "layouts/buyer_side_bar" %>
+    <%end%>
   <div class="container-fluid">
     <div class="right-body">
       <div class="container">
