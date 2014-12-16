@@ -35,7 +35,7 @@
     </td>
   </tr>
 </table>
-<%= link_to 'Go Back', get_quote_booking_path(id:@cart.keys.first), class: 'btn btn-primary' %>
+<%= link_to 'Go Back', get_quote_booking_path(id:session[:bookind_ids].first), class: 'btn btn-primary' %>
 <%= link_to 'Submit',  '/bookings/payment', class: 'btn btn-primary' %>
 <style>
   table, th, td {

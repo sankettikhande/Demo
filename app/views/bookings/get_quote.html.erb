@@ -121,7 +121,7 @@
       </div>
       <div class="col-xs-2">
        <div class="slctd-sr-list">
-        <% session['cart'].each do |key, value|%>
+        <% (session['cart'] || []).each do |key, value|%>
           <%booking = Booking.find(key)%>
           <%freight = Freight.find(value)%>
           <ul class="well slctd-sr-item">
