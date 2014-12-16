@@ -1,0 +1,20 @@
+<% grand_total = []%>
+<% (session['cart'] || []).each do |key, value|%>
+  <%booking = Booking.find(key)%>
+  <%freight = Freight.find(value)%>
+  <%grand_total << freight.price%>
+  <ul class="well slctd-sr-item">
+    <li class="ssri-item">
+      <div class="ssri-item-l"><%= freight.source%></div>
+      <div class="ssri-item-l"><%= freight.destination%></div>                       
+    </li>
+    <li class="ssri-item-p">$<%= freight.price%></li>
+    <li class="ssri-item-d"><%= freight.transition_days%></li>
+  </ul>
+<%end%>
+<div class="form-group">
+ <ul class="gtotal">
+   <li class="gtotal-l">Grand Total</li>
+   <li class="gtotal-v"><%= grand_total.inject(:+)%></li>
+ </ul>                   
+</div>

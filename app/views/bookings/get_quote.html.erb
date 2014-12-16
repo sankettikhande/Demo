@@ -4,15 +4,17 @@
         <div class="col-xs-2">
           <div class="btn-group frmto-drpdn">
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-map-marker"></i> From - To <span class="caret"></span> <span class="frmto-count">(<%= session['bookind_ids'].present? ? session['bookind_ids'].count : 1 %>)</span></button>
-            <ul class="dropdown-menu" role="menu">
+            <ul class="dropdown-menu frmto-menu" role="menu">
               <% (session['bookind_ids'] || [@draft_booking.id]).each do |booking_id| %>
                 <% booking = Booking.find(booking_id)%>
                 <li class="loc-item">
-                  <%= link_to  get_quote_booking_path(id: booking.id) do %>
-                    <div class="loc-pos"><%= booking.source%></div>
-                    <div class="loc-pos"><%= booking.destination%></div>
-                    <button class="btn btn-danger btn-del" type="button">&times;</button>
-                  <%end%>  
+                  <div class="loc-item-in">
+                    <%= link_to get_quote_booking_path(id: booking.id), class: 'loc-item-link' do %>
+                      <div class="loc-pos"><%= booking.source%></div>
+                      <div class="loc-pos"><%= booking.destination%></div>
+                    <%end%>
+                    <a class="btn btn-danger btn-del" href="#">&times;</a>
+                  </div>    
                 </li>
               <%end%>  
             </ul>
@@ -49,7 +51,7 @@
                 Min
               </span>
               <span class="ol-val">
-                $57
+                <%= @minimum_freight_price%>
               </span>
             </li>
             <li class="col-xs-2">
@@ -57,7 +59,7 @@
                 Average
               </span>
               <span class="ol-val">
-                25
+                <%= @average_price %>
               </span>
             </li>
             <li class="col-xs-2">
@@ -65,7 +67,7 @@
                 Fastest
               </span>
               <span class="ol-val">
-                22
+                <%= @fastest_delivery%>
               </span>
             </li>
           </ul>
@@ -120,20 +122,50 @@
         </div>
       </div>
       <div class="col-xs-2">
-       <div class="slctd-sr-list">
-        <% (session['cart'] || []).each do |key, value|%>
-          <%booking = Booking.find(key)%>
-          <%freight = Freight.find(value)%>
-          <ul class="well slctd-sr-item">
-            <li class="ssri-item">
-              <div class="ssri-item-l"><%= freight.source%></div>
-              <div class="ssri-item-l"><%= freight.destination%></div>                       
-            </li>
-            <li class="ssri-item-p">$<%= freight.price%></li>
-            <li class="ssri-item-d"><%= freight.transition_days%></li>
-          </ul>
-        <%end%>
-       </div>          
+        <div class="slctd-sr-list cart_detail">
+          <%= render :partial => 'bookings/cart_details'%> 
+        </div>           
+      
+        <div class="ssdd-btn btn-group">
+         <a href="#" class="btn btn-default dropdown" data-toggle="dropdown">
+           Selected Shippers <span class="caret"></span>
+         </a>
+         <ul class="dropdown-menu ss-dd-list" role="menu">
+           <li class="dd-li">
+               <label for="checkbox_1">One</label>
+               <input type="checkbox" id="checkbox_1" name="checkbox_1" value="Checkbox One" />
+           </li>
+           <li class="dd-li">
+               <label for="checkbox_2">Two</label>
+               <input type="checkbox" id="checkbox_2" name="checkbox_2" value="Checkbox One" />
+           </li>
+           <li class="dd-li">
+               <label for="checkbox_3">Three</label>
+               <input type="checkbox" id="checkbox_3" name="checkbox_3" value="Checkbox One" />
+           </li>
+           <li class="dd-li">
+               <label for="checkbox_4">Four</label>
+               <input type="checkbox" id="checkbox_4" name="checkbox_4" value="Checkbox One" />
+           </li>
+           <li class="dd-li">
+               <label for="checkbox_5">One</label>
+               <input type="checkbox" id="checkbox_5" name="checkbox_5" value="Checkbox One" />
+           </li>
+           <li class="dd-li">
+               <label for="checkbox_6">Two</label>
+               <input type="checkbox" id="checkbox_6" name="checkbox_6" value="Checkbox One" />
+           </li>
+           <li class="dd-li">
+               <label for="checkbox_7">Three</label>
+               <input type="checkbox" id="checkbox_7" name="checkbox_7" value="Checkbox One" />
+           </li>
+           <li class="dd-li">
+               <label for="checkbox_8">Four</label>
+               <input type="checkbox" id="checkbox_8" name="checkbox_8" value="Checkbox One" />
+           </li>                     
+         </ul>
+        </div>
+
       </div>
     </div>
     <div class="row">
@@ -145,14 +177,6 @@
             <i class="fa fa-angle-double-right"></i>  
           <% end %>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2 col-xs-offset-10">
-        <ul class="gtotal">
-          <li class="gtotal-l">Grand Total</li>
-          <li class="gtotal-v">$ 100</li>
-        </ul>
       </div>
     </div>
   </div>

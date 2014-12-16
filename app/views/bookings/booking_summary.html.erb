@@ -1,6 +1,7 @@
 <%grand_total = []%>
-<table style="width:100%">
-  <tr>
+<table class="table table-striped table-bordered table-details">
+<thead>
+   <tr>
     <th>From</th>
     <th>To</th>    
     <th>CBM</th>
@@ -8,7 +9,10 @@
     <th>Date</th>    
     <th>Company</th>
     <th>Price</th>
-  </tr>
+    <th>&nbsp;</th>
+  </tr> 
+</thead>
+<tbody>
   <% @cart.each do |key, value| %>
     <% freight = Freight.find(value) %>
     <% booking = Booking.find(key)%>  
@@ -17,12 +21,16 @@
       <td><%= freight.destination%></td>    
       <td><%= freight.cbm%></td>
       <td><%= booking.weight%></td>
-      <td><%= delivery_date(freight).strftime("%-d, %b") %></td>    
+      <td><%= delivery_date(freight).strftime("%-d, %b") %></td>
       <td><%= freight.seller.company_name %></td>
       <td><%= freight.price%>
         <%grand_total << freight.price%>
-        <%= link_to 'Edit', get_quote_booking_path(id: booking.id), class: 'btn btn-primary' %>
-      </td>    
+      </td>
+      <td>
+        <%= link_to get_quote_booking_path(id: booking.id), class: 'btn btn-inverse' do %>
+          <i class="fa fa-pencil"></i>
+        <%end%>  
+      </td>
     </tr>
   <%end%>
   <tr>
@@ -30,24 +38,26 @@
       Grand Total
     </td>
     
-    <td>
+    <td colspan="2">
       <%= grand_total.inject(:+)%>
     </td>
   </tr>
+  </tbody>
 </table>
-<%= link_to 'Go Back', get_quote_booking_path(id:session[:bookind_ids].first), class: 'btn btn-primary' %>
-<%= link_to 'Submit',  '/bookings/payment', class: 'btn btn-primary' %>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group text-right">
+      <%= link_to get_quote_booking_path(id:session[:bookind_ids].first), class: 'btn btn-inverse' do %>
+        <i class="fa fa-angle-double-left"></i>
+        Go Back
+      <%end%>
+      <%= link_to 'Submit',  '/bookings/payment', class: 'btn btn-success' %>
+    </div>
+
+  </div>
+
+</div>
+
 <style>
-  table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-  }
-  th, td {
-      padding: 5px;
-      text-align: left;
-  }
-  table#t01 {
-      width: 100%;    
-      background-color: #f1f1c1;
-  }
+  .table-details thead tr {background: #d8f2fe;}
 </style>

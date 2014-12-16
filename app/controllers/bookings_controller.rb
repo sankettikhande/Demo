@@ -82,6 +82,10 @@ class BookingsController < ApplicationController
                                         max_weight: @draft_booking.weight..10**30
                                       }
                                     ) #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
+    @minimum_freight_price = @freight_rates.map(&:price).min
+    @fastest_delivery = @freight_rates.map(&:transition_days).min
+    @average_price = (@freight_rates.map(&:price).inject(:+))/@freight_rates.count
+    @draft_booking.update(min_rate: @minimum_freight_price, avg_rate: @average_price, min_transition_days: @fastest_delivery )
   end
   
   def add_to_cart
@@ -114,4 +118,8 @@ class BookingsController < ApplicationController
     redirect_to draft_bookings_bookings_path
   end
   
+  def update_cart_details_section
+    render :partial => "bookings/cart_details"
+  end
+
 end

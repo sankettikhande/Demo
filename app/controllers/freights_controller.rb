@@ -21,6 +21,7 @@ class FreightsController < ApplicationController
 
   def search
     session[:bookind_ids] = []
+    session[:cart] = {}
     session[:search] = params[:search] if params[:search].present?
     search_parameter = session[:search].first
     @freight_rates = Freight.search conditions: {source: search_parameter[:source], destination: search_parameter[:destination]}
