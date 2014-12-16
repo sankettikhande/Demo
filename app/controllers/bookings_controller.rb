@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
 
   include BookingsHelper
 
-  before_action :authenticate_user!, except: :get_quote
+  before_action :authenticate_user!
 
   def index
 

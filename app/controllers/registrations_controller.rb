@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
       return render :template => "freights/guest_user_sign_up", locals: { notice: "Email allready taken!" } if User.exists?(email: email)
       user = User.new(guest_user_params.merge({role: :guest, password: email, password_confirmation: email}))
       user.skip_confirmation!
-      user.save!
+      user.save(validate: false)
       sign_in( user )
       redirect_to search_freights_path
     end

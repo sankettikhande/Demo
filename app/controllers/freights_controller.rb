@@ -1,7 +1,8 @@
 class FreightsController < ApplicationController
 
   before_action :authenticate_user!, except: :search
-  
+  before_action :access_denied!, except: :search , unless: proc { current_user.seller?} 
+
   def index
     @freights = current_user.freights
     respond_to do |format|
@@ -12,7 +13,6 @@ class FreightsController < ApplicationController
 
   def new
     @freight = Freight.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @freight }
@@ -69,6 +69,12 @@ class FreightsController < ApplicationController
     params.require(:freight).permit(:source, :destination, :cbm, :seller_id, :freight_type, :cut_off_date, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date)
   end
 
+
+  protected
+
+  def access_denied!
+    redirect_to(root_path) and return
+  end
 end
 
 
