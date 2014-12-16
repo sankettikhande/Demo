@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       get :archived_bookings
       get :payment
       get :booking_summary
+      get :update_cart_details_section
     end   
   end
   resources :address_books  do

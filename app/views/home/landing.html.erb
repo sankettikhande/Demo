@@ -22,7 +22,7 @@
                               <label for="frm-search">
                                 From
                               </label>
-                              <%= country_select( "user", "source", {selected: search_parameter['source']}, { class: 'form-control', placeholder: "Source", id: "frm-search", name: "search[][source]", required: 'required'}) %>
+                              <%= country_select( "user", "source", {selected: search_parameter['source']}, { class: 'form-control selecter', placeholder: "Source", id: "frm-search", name: "search[][source]", required: 'required'}) %>
                             </div>
                           </div>
                           <div class="col-xs-3">
@@ -30,7 +30,7 @@
                               <label for="to-search">
                                 To
                               </label>
-                              <%= country_select( "user", "destination", {selected: search_parameter['destination']}, { class: 'form-control', placeholder: "Source", id: "frm-search", name: "search[][destination]", required: 'required'}) %>
+                              <%= country_select( "user", "destination", {selected: search_parameter['destination']}, { class: 'form-control selecter', placeholder: "Source", id: "frm-search", name: "search[][destination]", required: 'required'}) %>
                             </div>
                           </div>
                           <div class="col-xs-2">
