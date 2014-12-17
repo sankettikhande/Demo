@@ -1,43 +1,39 @@
-<h1>your frieght rates are ready</h1>
-
-<p>Complete your contact details below to have the best from 14 selected fright forwards displayed - with price guarantee </p>
-
-Your contact details will only be used to secure your price guarantee.
-
 <div class="row">
-  <div class="form-horizontal col-xs-12">
-    <p class="notice"><%= notice %></p>
-    <%= form_for User.new, url: register_guest_user_path do |f| %>
-        <div class="form-group">
-          <div class="col-xs-9">
-            <%= f.text_field :company_name,{placeholder: "Company Name", required: :required} %>
+  <div class="col-xs-12">
+    <h1 class="page-title text-center">Your Frieght rates are ready!</h1>
+    <p class="text-left">
+      Complete your contact details below to have the best rates from <span>14</span> selected freight forwarders displayed - with price guarantee!
+    </p>
+    <p class="text-left">
+      Your contact details will only be used to secure your price guarantee.
+    </p>
+  </div>
+</div>
+
+<div class="col-xs-4 col-xs-offset-4">
+  <div class="panel seperator-25">
+    <div class="panel-body">
+      <p class="notice"><%= notice %></p>
+      <%= form_for User.new, url: register_guest_user_path do |f| %>
+          <div class="form-group">
+            <%= f.text_field :company_name,{class: 'form-control', placeholder: "Company Name", required: :required} %>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-9">
-            <%= f.text_field :first_name,{placeholder: "First Name",required: :required} %>
+          <div class="form-group">
+            <%= f.text_field :first_name,{class: 'form-control', placeholder: "First Name",required: :required} %>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-9">
-            <%= f.text_field :last_name,{placeholder: "Last Name",required: :required}%>
+          <div class="form-group">
+            <%= f.text_field :last_name,{class: 'form-control', placeholder: "Last Name",required: :required}%>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-9">
-            <%= f.email_field :email, {placeholder: "Email", required: :required}%>
+          <div class="form-group">
+            <%= f.email_field :email,{class: 'form-control', placeholder: "Email", required: :required}%>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-9">
-            <%= f.text_field :phone_number, {placeholder: "Phone Number",required: :required}%>
+          <div class="form-group">
+            <%= f.text_field :phone_number,{class: 'form-control', placeholder: "Phone Number",required: :required}%>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-9">
-            <%= f.submit "SEE PRICES NOW!"%>
+          <div class="form-group text-center">
+            <%= f.submit "SEE PRICES NOW!", {class: 'btn btn-primary btn-block'}%>
           </div>
-        </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
