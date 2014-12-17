@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   resources :address_books  do
     collection do
       delete :suppliers_consignees_destroy
+      get :add_supplier_consignee
+      get :check_address_and_redirect
     end
   end
 
@@ -59,7 +61,8 @@ Rails.application.routes.draw do
 
   resources :payments do
     collection do
-      post :payment_processing 
+      get :payment_options
+      get :processing_payment 
     end
   end
   get '/myaccount', to: 'users#edit'

@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$('.aside-toggle').click(function(){
 		$(this).toggleClass('animate');
 		$('.side-wrapper').toggleClass('active');
+    $('.page-overlay').toggle();
 	});
 
 	$('body').on('click', '#search-more-btn', function(){
@@ -23,8 +24,6 @@ $(document).ready(function(){
       $('.forgot-form').addClass('hidden');
       $('.login-form').removeClass('hidden');
   });
-
-	$('.selecter').selecter();
 
   $('[data-toggle="tooltip"]').tooltip({
      container: 'body'
@@ -56,3 +55,7 @@ $(function(){
       $(this).parents('.search-item').remove();
     });
 }); 
+
+function call_selec (){
+  $('.selecter').selecter();
+}
