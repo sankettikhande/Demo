@@ -1,5 +1,10 @@
 class SessionsController < Devise::SessionsController
 
+  def new
+    @show_popup = true
+    super
+  end
+
   def create
     self.resource = warden.authenticate!(scope: resource_name, recall: "sessions#failure")
     set_flash_message(:notice, :signed_in) if is_navigational_format?
