@@ -30,8 +30,9 @@
         </div>
       </div>
     </div>
-
-    <%= render partial: "address_books/supplier_consignee_form" %>
+    <div class="row address_form" id='address_book_<%= @booking.id%>'>
+      <%= render partial: "address_books/supplier_consignee_form" %>
+    </div>  
   </div>
 </div>
  

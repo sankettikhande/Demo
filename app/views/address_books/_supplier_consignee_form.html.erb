@@ -1,101 +1,99 @@
-<div class="row address_form" id='address_book_<%= @booking.id%>'>
-  <%= form_for @supplier_address, remote: true, as: :supplier do |f| %>
-    <%= fields_for 'consignee', @consignee_address do |c| %>
-      <div class="col-xs-3">
-        <div class="form-group seperator-15">
-          <label>Address</label>
-          <select class="form-control selecter booking_address_for" name='booking_id' required='required'>
-            <option hidden value=''>Select Booking</option>
-            <% (session[:cart]|| []).each do |key, value| %>
-              <% booking = Booking.find(key) %>
-              <% if params[:booking_id] == booking.id.to_s %>
-                <option value="<%= key%>" selected>
-                  <%= booking.source + '-' + booking.destination %>
-                </option> 
-              <%else%>
-                <option value="<%= key%>" >
-                  <%= booking.source + '-' + booking.destination %>
-                </option>                 
-              <%end%>  
-            <%end%>              
-          </select>
-        </div>
+<%= form_for @supplier_address, remote: true, as: :supplier do |f| %>
+  <%= fields_for 'consignee', @consignee_address do |c| %>
+    <div class="col-xs-3">
+      <div class="form-group seperator-15">
+        <label>Address</label>
+        <select class="form-control selecter booking_address_for" name='booking_id' required='required'>
+          <option hidden value=''>Select Booking</option>
+          <% (session[:cart]|| []).each do |key, value| %>
+            <% booking = Booking.find(key) %>
+            <% if params[:booking_id] == booking.id.to_s %>
+              <option value="<%= key%>" selected>
+                <%= booking.source + '-' + booking.destination %>
+              </option> 
+            <%else%>
+              <option value="<%= key%>" >
+                <%= booking.source + '-' + booking.destination %>
+              </option>                 
+            <%end%>  
+          <%end%>              
+        </select>
       </div>
-      <input type="hidden" value="supplier" name="supplier[address_type]" id="supplier_address_type">
-      <input type="hidden" value="consignee" name="consignee[address_type]" id="supplier_address_type">
-      <div class="col-xs-8 col-xs-offset-1">
-        <div class="acb-address-form">
-          <table class="table table-striped">
-            <colgroup>
-              <col class="col-xs-4">
-              <col class="col-xs-4">
-              <col class="col-xs-4">
-            </colgroup>
-            <thead>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Supplier</th>
-                <th>Delivery</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><label>Company</label></td>
-                <td><%= f.text_field :company_name, class: 'form-control', placeholder: "Company Name", required: 'required'%></td>
-                <td><%= c.text_field :company_name, class: 'form-control', placeholder: "Company Name", required: 'required' %></td>
-              </tr>
-              <tr>
-                <td><label>First Name</label></td>
-                <td><%= f.text_field :first_name, class: 'form-control', placeholder: "First Name" , required: 'required' %></td>
-                <td><%= c.text_field :first_name, class: 'form-control', placeholder: "First Name", required: 'required'  %></td>
-              </tr>
-              <tr>
-                <td><label>Last Name</label></td>                    
-                <td><%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name", required: 'required'  %></td>
-                <td><%= c.text_field :last_name, class: 'form-control', placeholder: "Last Name", required: 'required'  %></td>
-              </tr>
-              <tr>
-                <td><label>Email</label></td>
-                <td><%= f.email_field :email, class: 'form-control', placeholder: "Email Address", required: 'required' %></td>
-                <td><%= c.email_field :email, class: 'form-control', placeholder: "Email Address", required: 'required' %></td>
-              </tr>
-              <tr>
-                <td><label>Phone Number</label></td>
-                <td><%= f.telephone_field :phone_number, class: 'form-control', placeholder: "Phone Number", required: 'required' %></td>
-                <td><%= c.telephone_field :phone_number, class: 'form-control', placeholder: "Phone Number", required: 'required' %></td>
-              </tr>
-              <tr>
-                <td><label>Address</label></td>
-                <td>
-                  <%= f.text_area :address, class: 'form-control', placeholder: "Valid Address", required: 'required' %></textarea>
-                </td>
-                <td>
-                  <%= c.text_area :address, class: 'form-control', placeholder: "Valid Address", required: 'required' %></textarea>
-                </td>
-              </tr>
-              <tr>
-                <td><label>Postcode</label></td>
-                <td><%= f.text_field :post_code, class: 'form-control', placeholder: "Postcode", required: 'required'  %></td>
-                <td><%= c.text_field :post_code, class: 'form-control', placeholder: "Postcode", required: 'required'  %></td>
-              </tr>
-              <tr>
-                <td><label>City</label></td>
-                <td><%= f.text_field :city, class: 'form-control', placeholder: "City", required: 'required'  %></td>
-                <td><%= c.text_field :city, class: 'form-control', placeholder: "City", required: 'required'  %></td>
-              </tr>
-              <tr>
-                <td><label>Cargo Description</label></td>
-                <td colspan="2"><input type="text" class="form-control" placeholder="Urgent" name="cargo_description", required='required'></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="form-group text-right">
-          <button type="button" class="btn btn-inverse"><i class="fa fa-angle-double-left"></i> Go Back</button>
-          <%= submit_tag 'Submit', class: "btn btn-primary"%>
-          <button type="button" class="btn btn-primary" onclick='check_address_and_redirect()'>Payment<i class="fa fa-angle-double-right"></i></button>
-        </div>
+    </div>
+    <input type="hidden" value="supplier" name="supplier[address_type]" id="supplier_address_type">
+    <input type="hidden" value="consignee" name="consignee[address_type]" id="supplier_address_type">
+    <div class="col-xs-8 col-xs-offset-1">
+      <div class="acb-address-form">
+        <table class="table table-striped">
+          <colgroup>
+            <col class="col-xs-4">
+            <col class="col-xs-4">
+            <col class="col-xs-4">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>Supplier</th>
+              <th>Delivery</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><label>Company</label></td>
+              <td><%= f.text_field :company_name, class: 'form-control', placeholder: "Company Name", required: 'required'%></td>
+              <td><%= c.text_field :company_name, class: 'form-control', placeholder: "Company Name", required: 'required' %></td>
+            </tr>
+            <tr>
+              <td><label>First Name</label></td>
+              <td><%= f.text_field :first_name, class: 'form-control', placeholder: "First Name" , required: 'required' %></td>
+              <td><%= c.text_field :first_name, class: 'form-control', placeholder: "First Name", required: 'required'  %></td>
+            </tr>
+            <tr>
+              <td><label>Last Name</label></td>                    
+              <td><%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name", required: 'required'  %></td>
+              <td><%= c.text_field :last_name, class: 'form-control', placeholder: "Last Name", required: 'required'  %></td>
+            </tr>
+            <tr>
+              <td><label>Email</label></td>
+              <td><%= f.email_field :email, class: 'form-control', placeholder: "Email Address", required: 'required' %></td>
+              <td><%= c.email_field :email, class: 'form-control', placeholder: "Email Address", required: 'required' %></td>
+            </tr>
+            <tr>
+              <td><label>Phone Number</label></td>
+              <td><%= f.telephone_field :phone_number, class: 'form-control', placeholder: "Phone Number", required: 'required' %></td>
+              <td><%= c.telephone_field :phone_number, class: 'form-control', placeholder: "Phone Number", required: 'required' %></td>
+            </tr>
+            <tr>
+              <td><label>Address</label></td>
+              <td>
+                <%= f.text_area :address, class: 'form-control', placeholder: "Valid Address", required: 'required' %></textarea>
+              </td>
+              <td>
+                <%= c.text_area :address, class: 'form-control', placeholder: "Valid Address", required: 'required' %></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td><label>Postcode</label></td>
+              <td><%= f.text_field :post_code, class: 'form-control', placeholder: "Postcode", required: 'required'  %></td>
+              <td><%= c.text_field :post_code, class: 'form-control', placeholder: "Postcode", required: 'required'  %></td>
+            </tr>
+            <tr>
+              <td><label>City</label></td>
+              <td><%= f.text_field :city, class: 'form-control', placeholder: "City", required: 'required'  %></td>
+              <td><%= c.text_field :city, class: 'form-control', placeholder: "City", required: 'required'  %></td>
+            </tr>
+            <tr>
+              <td><label>Cargo Description</label></td>
+              <td colspan="2"><input type="text" class="form-control" placeholder="Urgent" name="cargo_description", required='required'></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    <%end%>    
-  <%end%>  
-</div>
+      <div class="form-group text-right">
+        <button type="button" class="btn btn-inverse"><i class="fa fa-angle-double-left"></i> Go Back</button>
+        <%= submit_tag 'Submit', class: "btn btn-primary"%>
+        <button type="button" class="btn btn-primary" onclick='check_address_and_redirect()'>Payment<i class="fa fa-angle-double-right"></i></button>
+      </div>
+    </div>
+  <%end%>    
+<%end%>  
