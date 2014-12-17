@@ -62,6 +62,18 @@ class BookingsController < ApplicationController
     end
   end
 
+  def seller_confirmation_order
+    @seller_bookings = current_user.seller_bookings.active_bookings
+  end
+
+  def update_booking_status
+    seller_booking = current_user.seller_bookings.find(params[:booking_id])
+    seller_booking.update_attributes!(:aasm_state => params[:order_status],:remark=>params[:remark])
+    respond_to do |format|
+      format.html {redirect_to  seller_confirmation_order_bookings_path}
+    end
+  end
+
   def archived_bookings
     @archived_bookings = current_user.buyer_bookings.archived_bookings
   end
