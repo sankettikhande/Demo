@@ -66,12 +66,13 @@ function check_address_and_redirect(){
   $.ajax({
     type: "GET",
     url:"/address_books/check_address_and_redirect",
-    success: function(data){
-      window.location.href = '/payments/processing_payment'        
-    },
     statusCode: {
       202: function(){
         alert('please add supplier and consignee address for all bookings');
+        return;
+      },
+      200: function(){
+        window.location.href = '/payments/processing_payment';     
       }
     },
     error: function(data){
