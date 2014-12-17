@@ -1,0 +1,113 @@
+<div class="container-fluid" xmlns:form="http://www.w3.org/1999/xhtml">
+  <div class="right-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tabbed-panel home-search-tabs">
+            <ul class="nav nav-tabs panel-tabs">
+              <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
+              <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-p1">
+                <table class="table table-striped views-table">
+                  <thead>
+                  <tr style="width: 100%">
+                    <th width="10%">From</th>
+                    <th width="10%">To</th>
+                    <th width="10%">Date</th>
+                    <th width="10%">Cbm</th>
+                    <th width="10%">Kg</th>
+                    <th width="10%">Buyer Price</th>
+                    <th width="15%">Status</th>
+                    <th width="15%">Action</th>
+                    <th width="10%">Remark</th>
+                  </tr>
+                  </thead>
+                  <%if @seller_bookings.present? %>
+                      <tbody>
+                      <% @seller_bookings.each  do |booking| %>
+                          <tr>
+                            <%status_for_order =  booking.aasm_state =="pending" ? "Pending Confirmation": booking.aasm_state%>
+                            <td> <%=booking.source  %></td>
+                            <td> <%=booking.destination  %></td>
+                            <td> <%=booking.pick_up_date %></td>
+                            <td> <%=booking.cbm %></td>
+                            <td> <%=booking.weight %></td>
+                            <td> <%=booking.spot_rate %></td>
+                            <td id="status_field_<%=booking.id%>"><%=status_for_order %></td>
+                            <td> <%= button_tag ("Confirm"), :onclick=> "confirm_bookings(#{booking.id});" %>
+                                <%= button_tag ("Reject"), :onclick=> "reject_booking(#{booking.id});" %>
+                            </td>
+                            <td id="remark_field_<%=booking.id %>"> <%=booking.remark %> </td>
+                          </tr>
+                      <% end %>
+                      </tbody>
+                  <%end%>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Please add the remark/question for Buyer</h4>
+      </div>
+      <div class="modal-body">
+        <%=hidden_field_tag 'id', nil ,:id => 'booking_hidden_field_id'%>
+        <%= text_area_tag 'remark', nil, :size=> '75x5', :class=>'remark' %>
+      </div>
+      <div class="modal-footer">
+        <%= button_tag ("Just For Buyers Flow"),:class=>"btn btn-default col-xs-6",:data=>{'dismiss'=>"modal"} %>        
+        <%= button_tag ("Submit"),:id=>"reject_submit",:class=>"btn btn-primary",:onclick=>"save_remarks()"%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function confirm_bookings(id){
+        update_booking_status(id,'confirmed','-')
+    }
+
+    function reject_booking(id){
+        $('#myModal').modal('show');
+        $("#booking_hidden_field_id").val(id);
+        $(".remark").val('');
+    }
+
+    function save_remarks(){
+        var reason_to_reject = $(".remark").val();
+        var booking_id = $("#booking_hidden_field_id").val();
+        update_booking_status(booking_id,'hold',reason_to_reject);
+        $('#myModal').modal('hide');
+    }
+
+    function update_booking_status(id,status, remark) {
+        $.ajax({
+            type: "POST",
+            url: "/bookings/update_booking_status/",
+            data: {booking_id: id, order_status: status,remark: remark},
+            success: function () {
+              $("#status_field_"+id).html(status);
+              $("#remark_field_"+id).html(remark);
+              if(status == 'confirmed')
+                alert("Order confirmed");
+              else
+                alert("Email has been sent");
+            }
+        });
+    }
+</script>
