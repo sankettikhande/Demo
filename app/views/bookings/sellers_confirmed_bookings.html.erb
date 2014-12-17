@@ -13,33 +13,28 @@
                 <table class="table table-striped views-table">
                   <thead>
                   <tr style="width: 100%">
+                    <th width="10%">Booking Id</th>
                     <th width="10%">From</th>
                     <th width="10%">To</th>
                     <th width="10%">Date</th>
                     <th width="10%">Cbm</th>
                     <th width="10%">Kg</th>
-                    <th width="10%">Buyer Price</th>
-                    <th width="15%">Status</th>
                     <th width="15%">Action</th>
-                    <th width="10%">Remark</th>
                   </tr>
                   </thead>
-                  <%if @seller_bookings.present? %>
+                  <%if @seller_confirmed_bookings.present? %>
                       <tbody>
-                      <% @seller_bookings.each  do |booking| %>
+                      <% @seller_confirmed_bookings.each  do |booking| %>
                           <tr>
-                            <%status_for_order =  booking.aasm_state =="pending" ? "Pending Confirmation": booking.aasm_state%>
+                            <td> <%=booking.id %></td>
                             <td> <%=booking.source  %></td>
                             <td> <%=booking.destination  %></td>
                             <td> <%=booking.pick_up_date %></td>
                             <td> <%=booking.cbm %></td>
                             <td> <%=booking.weight %></td>
-                            <td> <%=booking.spot_rate %></td>
-                            <td id="status_field_<%=booking.id%>"><%=status_for_order %></td>
-                            <td> <%= button_tag ("Confirm"), :onclick=> "confirm_bookings(#{booking.id});" %>
-                                <%= button_tag ("Reject"), :onclick=> "reject_booking(#{booking.id});" %>
+                            <td>
+                              <%= button_tag ("Reject"), :onclick=> "reject_booking(#{booking.id});" %>
                             </td>
-                            <td id="remark_field_<%=booking.id %>"> <%=booking.remark %> </td>
                           </tr>
                       <% end %>
                       </tbody>
@@ -54,7 +49,6 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -67,20 +61,14 @@
         <%= text_area_tag 'remark', nil, :size=> '75x5', :class=>'remark' %>
       </div>
       <div class="modal-footer">
-        <%= button_tag ("Just For Buyers Flow"),:class=>"btn btn-default col-xs-6",:data=>{'dismiss'=>"modal"} %>        
+        <%= button_tag ("Just For Buyers Flow"),:class=>"btn btn-default col-xs-6",:data=>{'dismiss'=>"modal"} %>
         <%= button_tag ("Submit"),:id=>"reject_submit",:class=>"btn btn-primary",:onclick=>"save_remarks()"%>
       </div>
     </div>
   </div>
 </div>
 
-
-
 <script type="text/javascript">
-
-    function confirm_bookings(id){
-        update_booking_status(id,'confirmed','-')
-    }
 
     function reject_booking(id){
         $('#myModal').modal('show');
@@ -94,4 +82,6 @@
         update_booking_status(booking_id,'hold',reason_to_reject);
         $('#myModal').modal('hide');
     }
+
+
 </script>

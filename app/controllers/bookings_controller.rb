@@ -21,19 +21,16 @@ class BookingsController < ApplicationController
     
   end
 
-  def destroy
-  end
-
   def show
 
   end
 
   def active_bookings
-    @bookings = current_user.buyer_bookings.active_bookings
+    @active_bookings = current_user.buyer_bookings.active_bookings
   end
 
   def bookings_on_hold
-    @bookings = current_user.buyer_bookings.bookings_on_hold
+    @bookings_on_hold = current_user.buyer_bookings.bookings_on_hold
   end
 
   def draft_bookings
@@ -67,11 +64,19 @@ class BookingsController < ApplicationController
   end
 
   def update_booking_status
-    seller_booking = current_user.seller_bookings.find(params[:booking_id])
-    seller_booking.update_attributes!(:aasm_state => params[:order_status],:remark=>params[:remark])
+    if current_user.seller?
+    booking = current_user.seller_bookings.find(params[:booking_id])
+    elsif current_user.buyer?
+      booking = current_user.buyer_bookings.find(params[:booking_id])
+    end
+      booking.update_attributes!(:aasm_state => params[:order_status],:remark=>params[:remark])
     respond_to do |format|
       format.html {redirect_to  seller_confirmation_order_bookings_path}
     end
+  end
+
+  def sellers_confirmed_bookings
+    @seller_confirmed_bookings = current_user.seller_bookings.confirmed_bookings
   end
 
   def archived_bookings
@@ -131,7 +136,10 @@ class BookingsController < ApplicationController
     booking = Booking.find(params[:id])
     authorize  booking, :destroy?
     booking.destroy
-    redirect_to draft_bookings_bookings_path
+    respond_to do |format|
+      format.js
+    end
+
   end
   
   def update_cart_details_section

@@ -1,0 +1,37 @@
+<div class="right-body">
+  <div class="container">
+    <% @bookings_on_hold.each do |booking| %>
+        <div class="col-xs-10 panel panel-default" id="booking_<%=booking.id%>">
+          <div class="col-xs-3">
+            <% if booking.seller_id  %>
+                <%= image_tag(booking.seller.avatar_url, height: 100, width: 100) if booking.seller.avatar? %>
+            <% else %>
+                <p>To be decided</p>
+            <% end %>
+            <p>
+              <b>Last Price</b>
+              <br/>
+              NA
+            </p>
+          </div>
+          <div class="col-xs-6">
+            <p><b>Booking last modified on:</b><%= booking.updated_at.strftime("%d/%m/%Y") %></p>
+            <p><b>Service:</b></p>
+            <p><b>From:</b><%= booking.source %><span><b>Cut off:</b></span></p>
+            <p><b>To:</b><%= booking.destination %> <span><b>Delivery:</b></span></p>
+            <p><b>Cargo:</b></p>
+            <p class="text-danger"><b>REMARK:</b> <%=booking.remark %></p>
+          </div>
+          <div class="col-xs-3">
+            <div style="margin: 10px 0px">
+              <%= button_tag ("CONFIRM BOOKING"), :onclick=> "update_booking_status(#{booking.id},'confirmed');" ,:class=> 'btn btn-success'%>
+            </div>
+            <div style="margin: 10px 0px">
+              <%= link_to "DELETE BOOKING", booking_path(booking), {method: :delete, data: {confirm: "Are you sure?"}, :remote=>true, class: 'btn btn-danger'} %>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+  </div>
+</div>
+

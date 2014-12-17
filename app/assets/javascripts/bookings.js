@@ -64,25 +64,38 @@
     })  
   }
 
-  function check_cart(redirect_url){
-    $.ajax({
-      type: "GET",
-      url:"/bookings/check_cart_session",
-      statusCode: {
-        202: function(){
-          alert('Nothing in the cart');
-          return;
-        },
-        200: function(){
-          window.location.href = redirect_url;     
-        }
-      },
-      error: function(data){
-        alert("something went wrong");
-      }
-    })    
-  }
-
   function triggerClickEvent(booking_id, freight_id){
     $('button#freight_'+freight_id).trigger('click');
   }
+
+  function check_cart(redirect_url) {
+      $.ajax({
+          type: "GET",
+          url: "/bookings/check_cart_session",
+          statusCode: {
+              202: function () {
+                  alert('Nothing in the cart');
+                  return;
+              },
+              200: function () {
+                  window.location.href = redirect_url;
+              }
+          },
+          error: function (data) {
+              alert("something went wrong");
+          }
+      })
+  }
+
+  function update_booking_status(id,status, remark) {
+      $.ajax({
+          type: "POST",
+          url: "/bookings/update_booking_status/",
+          data: {booking_id: id, order_status: status,remark: remark},
+          success: function () {
+              $("#status_field_"+id).html(status);
+              $("#remark_field_"+id).html(remark);
+          }
+      });
+  }
+

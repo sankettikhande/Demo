@@ -7,7 +7,7 @@ class BookingPolicy
   end
 
   def destroy?
-    user == booking.buyer && (booking.is_hold? || booking.is_draft?)
+    (user == booking.buyer) && (booking.is_hold? || booking.is_draft?)
   end
 
   def can_rate?

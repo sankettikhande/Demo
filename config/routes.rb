@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       post :round_one_price_update
       get :seller_confirmation_order
       post :update_booking_status
+      get :sellers_confirmed_bookings
       get :draft_bookings
       get :archived_bookings
       get :payment
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
       get :update_cart_details_section
       get :check_cart_session
     end   
+
   end
   resources :address_books  do
     collection do
