@@ -1,0 +1,81 @@
+<div class="result-page">
+  <div class="result-content">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="rlist-wrapper">
+          <ul class="rlist-headings">
+            <li>&nbsp;</li>
+            <li>Ratings</li>
+            <li>Cut Offs</li>
+            <li>Delivery</li>
+            <li>Days</li>
+            <li>All - in Price</li>
+            <li>&nbsp;</li>
+          </ul>
+          <% (session['cart'] || []).each do |key, value|%>
+            <%booking = Booking.find(key)%>
+            <%freight = Freight.find(value)%>
+            <div class="result-item">
+              <div class="rb-item rb-name"><img src="/assets/dhl.png" alt="DHL"></div>
+              <div class="rb-item rb-rating">
+                <span class="rview-rating"></span> <span class="rview-rating-c">(10)</span></div>
+              <div class="rb-item rb-coff"><%= freight.cut_off_date.strftime("%-d, %b")%></div>
+              <div class="rb-item rb-del"><%= delivery_date(freight).strftime("%-d, %b")%></div>
+              <div class="rb-item rb-day"><%= freight.transition_days%></div>
+              <div class="rb-item rb-aip">US $<%= freight.price %></div>
+              <div class="rb-item rb-buk"><button class="btn btn-success" type="button" >Selected</button></div>
+            </div>
+          <%end%>  
+
+        </div>
+      </div>
+    </div>
+
+    <%= render partial: "address_books/supplier_consignee_form" %>
+  </div>
+</div>
+ 
+<script>
+  $(document).ready(function() {
+
+    $('body').on('change', '.booking_address_for', function(){
+      booking_id = $("select option:selected" ).val();
+      if (booking_id != ''){
+        render_address_form(booking_id);
+      }
+    }); 
+
+    function render_address_form(booking_id){
+      $.ajax({
+        type: "GET",
+        data: {booking_id: booking_id},
+        url:"/address_books/add_supplier_consignee",
+        success: function(data){
+          $('.address_form').html(data);
+          call_selec();      
+        },
+        error: function(data){
+          alert("something went wrong");
+        }
+      })
+    }
+});
+
+function check_address_and_redirect(){
+  $.ajax({
+    type: "GET",
+    url:"/address_books/check_address_and_redirect",
+    success: function(data){
+      window.location.href = '/payments/processing_payment'        
+    },
+    statusCode: {
+      202: function(){
+        alert('please add supplier and consignee address for all bookings');
+      }
+    },
+    error: function(data){
+      alert("something went wrong");
+    }
+  })
+}  
+</script>

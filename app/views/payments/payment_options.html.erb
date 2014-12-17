@@ -1,0 +1,4 @@
+<%= form_tag '/payments/processing_payment' do %>
+ <%= select_tag "people", options_for_select([ "Credit Card", "Bank Transfer", "Pay pal" ], "MasterCard") %>
+ <%= submit_tag 'Pay', class: 'btn btn-success' %>
+<%end%>
