@@ -20,7 +20,7 @@ class FreightsController < ApplicationController
   end
 
   def search
-    session[:bookind_ids] = []
+    session[:booking_ids] = []
     session[:cart] = {}
     session[:search] = params[:search] if params[:search].present?
     search_parameter = session[:search].first
@@ -28,7 +28,7 @@ class FreightsController < ApplicationController
     respond_to do |format |
       if current_user
         (session[:search] || []).each do |search_freight|
-          session[:bookind_ids] << Booking.create(
+          session[:booking_ids] << Booking.create(
             buyer_id: current_user.id, 
             source: search_freight['source'], 
             destination: search_freight['destination'], 
@@ -38,7 +38,7 @@ class FreightsController < ApplicationController
             pick_up_date: search_freight['date'],
             freight_type: search_freight['freight_type']).id
         end
-        format.html { redirect_to get_quote_booking_path(id:session[:bookind_ids].first)}
+        format.html { redirect_to get_quote_booking_path(id:session[:booking_ids].first)}
       else
         format.html { render :template => "freights/guest_user_sign_up"}
       end

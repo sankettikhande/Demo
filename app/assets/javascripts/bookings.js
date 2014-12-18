@@ -47,3 +47,38 @@
       }
     })    
   }
+
+  function remove_booking(booking_id, del_el){
+    $.ajax({
+      type: "GET",
+      url:"/bookings/"+booking_id+"/remove_from_search",
+      success: function(data){
+        $(del_el).parents('.loc-item').fadeOut( "slow", function() {
+         $(this).parents('.loc-item').remove();
+        });
+        update_cart_detail_section();
+      },
+      error: function(data){
+        alert("something went wrong");
+      }
+    })  
+  }
+
+  function check_cart(redirect_url){
+    $.ajax({
+      type: "GET",
+      url:"/bookings/check_cart_session",
+      statusCode: {
+        202: function(){
+          alert('Nothing in the cart');
+          return;
+        },
+        200: function(){
+          window.location.href = redirect_url;     
+        }
+      },
+      error: function(data){
+        alert("something went wrong");
+      }
+    })    
+  }

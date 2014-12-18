@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       get :get_quote
       post :add_to_cart
       post :remove_from_cart
+      get :remove_from_search
     end
     collection do 
       get :active_bookings
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
       get :payment
       get :booking_summary
       get :update_cart_details_section
+      get :check_cart_session
     end   
   end
   resources :address_books  do

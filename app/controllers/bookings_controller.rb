@@ -115,6 +115,13 @@ class BookingsController < ApplicationController
     render nothing: true
   end
 
+  def remove_from_search
+    booking = Booking.find(params[:id])
+    remove_from_cart_session(booking)
+    session['booking_ids'].delete(booking.id)
+    render nothing: true  
+  end
+
   def payment
   end
   
@@ -126,12 +133,19 @@ class BookingsController < ApplicationController
     booking = Booking.find(params[:id])
     authorize  booking, :destroy?
     booking.destroy
-
     redirect_to draft_bookings_bookings_path
   end
   
   def update_cart_details_section
     render :partial => "bookings/cart_details"
+  end
+
+  def check_cart_session
+    if session[:cart].present?
+      render nothing: true  
+    else
+      render nothing: true, status: 202  
+    end  
   end
 
 end
