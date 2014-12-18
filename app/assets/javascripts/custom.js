@@ -33,13 +33,6 @@ $(document).ready(function(){
       e.stopPropagation();
   });
 
-
-  $('.btn-del').click(function(){
-     $(this).parents('.loc-item').fadeOut( "slow", function() {
-         $(this).parents('.loc-item').remove();
-     });
-  });
-
   $('.rview-rating').raty({ 
     score: 3,
     half: true,

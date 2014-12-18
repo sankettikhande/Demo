@@ -7,8 +7,10 @@
   <%= render :partial => "layouts/header" %>
     <% if  user_signed_in? && current_user.seller?  %>
       <%= render :partial => "layouts/seller_side_bar" %>
+    <%elsif user_signed_in? && current_user.buyer?%>
+      <%= render :partial => "layouts/buyer_side_bar" %>
     <%else%>
-     <%= render :partial => "layouts/buyer_side_bar" %>
+      <%= render :partial => "layouts/side_bar" %>    
     <%end%>
   <div class="container-fluid">
     <div class="right-body">

@@ -3,17 +3,17 @@
       <div class="row">
         <div class="col-xs-2">
           <div class="btn-group frmto-drpdn">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-map-marker"></i> From - To <span class="caret"></span> <span class="frmto-count">(<%= session['bookind_ids'].present? ? session['bookind_ids'].count : 1 %>)</span></button>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-map-marker"></i> From - To <span class="caret"></span> <span class="frmto-count">(<%= session['booking_ids'].present? ? session['booking_ids'].count : 1 %>)</span></button>
             <ul class="dropdown-menu frmto-menu" role="menu">
-              <% (session['bookind_ids'] || [@draft_booking.id]).each do |booking_id| %>
+              <% (session['booking_ids'] || [@draft_booking.id]).each do |booking_id| %>
                 <% booking = Booking.find(booking_id)%>
-                <li class="loc-item">
+                <li class="loc-item" id='booking_<%= booking_id%>'>
                   <div class="loc-item-in">
                     <%= link_to get_quote_booking_path(id: booking.id), class: 'loc-item-link' do %>
                       <span class="loc-pos"><%= booking.source%></span>
                       <span class="loc-pos"><%= booking.destination%></span>
                     <%end%>
-                    <button class="btn btn-danger btn-del" type="button">&times;</button>
+                    <button class="btn btn-danger btn-del" type="button" onclick="remove_booking(<%= booking_id%>, this)">&times;</button>
                   </div>    
                 </li>
               <%end%>  
@@ -127,8 +127,8 @@
         <div class="row">
           <div class="col-xs-8 col-xs-offset-2">
             <div class="form-group text-center">
-              <%= link_to 'Book Now', add_supplier_consignee_address_books_path, class: "btn btn-primary"%>
-              <%= link_to booking_summary_bookings_path, class: "btn btn-default pull-right" do %>
+              <%= link_to 'Book Now', 'javascript:void()', onclick: "check_cart('/address_books/add_supplier_consignee')", class: "btn btn-primary"%>
+              <%= link_to 'javascript:void()', class: "btn btn-default pull-right", onclick: "check_cart('/bookings/booking_summary')" do %>
                 View Summary
                 <i class="fa fa-angle-double-right"></i>  
               <% end %>
