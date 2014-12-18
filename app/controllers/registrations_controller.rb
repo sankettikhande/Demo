@@ -19,7 +19,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def guest_user_params
-    params.require(:user).permit(:first_name, :last_name, :company_name, :phone_number, :email)
+    params.require(:user).permit(:first_name, :last_name, :company_name, :phone_number, :email,:calling_code)
   end
 
 end
