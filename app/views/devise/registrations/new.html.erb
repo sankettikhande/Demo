@@ -99,8 +99,13 @@
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Phone Number <span class="text-xs">(Optional)</span></label>
-                    <div class="col-xs-6">
-                      <%= f.text_field :phone_number, placeholder: "Contact Number", class: "form-control" %>                    
+                    <div class="col-xs-8">
+                      <div class="col-xs-4">
+                          <%=f.select :calling_code, GlobalConstants::CALLING_CODES.map { |c| [ '+'+c.to_s, c ] },{},{class: 'form-control selecter'} %>
+                        </div>
+                        <div class="col-xs-8">
+                          <%= f.text_field :phone_number,{class: 'form-control', placeholder: "Phone Number",required: :required, maxlength: "10"}%>
+                        </div>
                     </div>
                   </div>
                   <div class="form-group">

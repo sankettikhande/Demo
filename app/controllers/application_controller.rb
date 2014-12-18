@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    permitted_parameters = [:first_name, :last_name, :company_name, :company_registration_number, :address_line_1, :address_line_2, :address_line_3, :post_code, :city, :state, :country, :phone_number, :preferred_currency, :avatar, :role]
+    permitted_parameters = [:first_name, :last_name, :company_name, :company_registration_number, :address_line_1, :address_line_2, :address_line_3, :post_code, :city, :state, :country, :phone_number, :preferred_currency, :avatar, :role, :calling_code]
     devise_parameter_sanitizer.for(:sign_up) << permitted_parameters
     devise_parameter_sanitizer.for(:account_update) << permitted_parameters
   end
