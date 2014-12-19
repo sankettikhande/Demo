@@ -82,3 +82,7 @@
       }
     })    
   }
+
+  function triggerClickEvent(booking_id, freight_id){
+    $('button#freight_'+freight_id).trigger('click');
+  }
