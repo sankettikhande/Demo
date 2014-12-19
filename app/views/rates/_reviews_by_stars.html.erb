@@ -1,0 +1,19 @@
+<% if @valid_star %>
+	<% @rates.each do |r|%>
+    <div class="each-rvw">
+      <span class="rv-pts"><%=@star%> of 5</span>
+      <span class="rv-text"><%=r.feedback%></span>
+      <span class="rv-date"><%=r.created_at.strftime('%d %B %Y')%></span>
+    </div>
+	<%end%>
+<% else%>
+	<% @rates.group_by{ |r| r.score}.sort.reverse.each do |score, rates|%>
+	  <% rates.each do |r|%>
+	    <div class="each-rvw">
+        <span class="rv-pts"><%=score%> of 5</span>
+        <span class="rv-text"><%=r.feedback%></span>
+        <span class="rv-date"><%=r.created_at.strftime('%d %B %Y')%></span>
+      </div>
+	  <%end%>
+	<%end%>
+<%end%>

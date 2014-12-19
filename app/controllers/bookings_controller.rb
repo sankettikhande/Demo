@@ -94,6 +94,9 @@ class BookingsController < ApplicationController
                                         max_weight: @draft_booking.weight..10**30
                                       }
                                     ) #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
+    
+    seller_ids = @freight_rates.map(&:seller_id)
+    @ratings = Rate.where(created_at: 6.months.ago..Time.now, rateable_id: seller_ids).group(:rateable_id).count
     @minimum_freight_price = @freight_rates.map(&:price).min
     @fastest_delivery = @freight_rates.map(&:transition_days).min
     @average_price = (@freight_rates.map(&:price).inject(:+))/@freight_rates.count

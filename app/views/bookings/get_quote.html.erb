@@ -106,9 +106,9 @@
 
               <% @freight_rates.each do |freight_rate|%>
                 <div class="result-item">
-                  <div class="rb-item rb-name"><%=image_tag 'dhl.png'%></div>
-                  <div class="rb-item rb-rating">
-                    <span class="rview-rating"></span> <span class="rview-rating-c">(10)</span>
+                  <div class="rb-item rb-name closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>"><%= image_tag(freight_rate.seller.avatar_url, height: 100, width: 100) if freight_rate.seller.avatar? %></div>
+                  <div class="rb-item rb-rating closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>">
+                    <span class="rview-rating" rate_count="<%= @ratings[freight_rate.seller_id] || 0%>"></span> <span class="rview-rating-c">(<%= @ratings[freight_rate.seller_id] || 0%>)</span>
                   </div>              
                   <div class="rb-item rb-coff"><%= freight_rate.cut_off_date.strftime("%-d, %b")%></div>
                   <div class="rb-item rb-del"><%= delivery_date(freight_rate).strftime("%-d, %b")%></div>
@@ -120,6 +120,8 @@
                     <button style="display: <%= !is_in_cart?(@draft_booking, freight_rate) ? 'block' : 'none' %>" class="btn btn-success select" id = "freight_<%=  freight_rate.id%>" freight_id = "<%= freight_rate.id %>" booking_id="<%= @draft_booking.id%>" type="button" onclick="add_to_cart(<%= @draft_booking.id%>, <%= freight_rate.id%>);">Select</button>
                   </div>
                 </div>
+
+                <div class="r-collapsed-info collapse" id="ri-<%=freight_rate.id%>"></div>
               <%end%>
             </div>  
           </div>
