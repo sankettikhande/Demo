@@ -1,59 +1,92 @@
-<div class="container-fluid" xmlns:form="http://www.w3.org/1999/xhtml">
-  <div class="right-body">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="tabbed-panel home-search-tabs">
-            <ul class="nav nav-tabs panel-tabs">
-              <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
-              <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
+ <div class="row">
+        <div class="col-xs-12">                  
+            <ul class="nav nav-tabs page-tabs">
+              <li><a href="#tab-b-1" data-toggle="tab">My Accounts</a></li>
+              <li class="active"><a href="#tab-b-2" data-toggle="tab">Bookings</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="tab-p1">
-                <table class="table table-striped views-table">
-                  <thead>
-                  <tr style="width: 100%">
-                    <th width="10%">From</th>
-                    <th width="10%">To</th>
-                    <th width="10%">Date</th>
-                    <th width="10%">Cbm</th>
-                    <th width="10%">Kg</th>
-                    <th width="10%">Buyer Price</th>
-                    <th width="15%">Status</th>
-                    <th width="15%">Action</th>
-                    <th width="10%">Remark</th>
-                  </tr>
-                  </thead>
-                  <%if @seller_bookings.present? %>
-                      <tbody>
-                      <% @seller_bookings.each  do |booking| %>
+
+              <div class="tab-pane" id="tab-b-1"></div>
+              <div class="tab-pane active" id="tab-b-2">
+                <div class="coll-b-header">
+                  <div class="row">
+                    <div class="col-xs-1">#</div>
+                    <div class="col-xs-3">Buyer Name</div>
+                    <div class="col-xs-5 text-center">Total CBM/Weight</div>
+                    <div class="col-xs-3 text-right">Details</div>
+                  </div>
+                </div>
+                <div id="tab-col-parent-1">
+                <%i=0%>
+                <% @seller_bookings.each do |user,bookings| %>                
+                <div class="panel panel-coll">
+                  <div class="panel-heading" data-target="#bs-coll-<%=user%>" data-toggle="collapse" data-parent="#tab-col-parent-1">
+                    <div class="row">
+                      <div class="col-xs-1"><%=i+1%></div>                     
+                      <div class="col-xs-3">BUYER</div>                     
+                      <div class="col-xs-5 text-center">WEIGHT</div>
+                      <div class="col-xs-3"><div class="text-right"><i class="fa fa-chevron-down"></i></div></div>
+                    </div>                    
+                  </div>
+                  <div class="panel-body collapse" id="bs-coll-<%=user%>">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <table class="table coll-table table-striped">
+                          <colgroup>
+                            <col class="tcol-1">
+                            <col class="tcol-7">
+                            <col class="tcol-8">
+                            <col class="tcol-4">
+                            <col class="tcol-5">
+                            <col class="tcol-6">
+                            <col class="tcol-2">
+                            <col class="tcol-3">
+                            <col class="tcol-9">
+                            <col class="tcol-10">
+                          </colgroup>
+                            <thead>
+                              <tr>
+                              <th>From</th>
+                              <th>To</th>
+                              <th>Date</th>
+                              <th>Cbm</th>
+                              <th>Kg</th>
+                              <th>Buyer Price</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                              <th>Remark</th>
+                              </tr>
+                            </thead>                       
+                         <tbody>
+                      <% bookings.each  do |booking| %>
                           <tr>
-                            <%status_for_order =  booking.aasm_state =="active" ? "Pending Confirmation": 'Awaiting buyers response'%>
                             <td> <%=booking.source.full_address  %></td>
                             <td> <%=booking.destination.full_address  %></td>
                             <td> <%=booking.pick_up_date %></td>
                             <td> <%=booking.cbm %></td>
                             <td> <%=booking.weight %></td>
                             <td> <%=booking.spot_rate %></td>
-                            <td id="status_field_<%=booking.id%>"><%=status_for_order %></td>
-                            <td> <%= button_tag ("Confirm"), :onclick=> "confirm_bookings(#{booking.id});" %>
-                                <%= button_tag ("Reject"), :onclick=> "reject_booking(#{booking.id});" %>
+                            <td id="status_field_<%=booking.id%>"><%=booking.aasm_state %></td>
+                            <td> <%= button_tag ("Confirm"),:style=>"width:auto", :class=>"btn btn-warning btn-sm",:onclick=> "confirm_bookings(#{booking.id});" %>
+                                <%= button_tag ("Reject"),:style=>"width:auto", :class=>"btn btn-success btn-sm",:onclick=> "reject_booking(#{booking.id});" %>
                             </td>
                             <td id="remark_field_<%=booking.id %>"> <%=booking.remark %> </td>
                           </tr>
                       <% end %>
                       </tbody>
-                  <%end%>
-                </table>
+                          <%i += 1%>                          
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%end%>
+                </div>                                                                 
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -12,10 +12,18 @@ class BookingsController < ApplicationController
   end
 
   def edit
+		@booking = Booking.find(params[:id])
+		respond_to do |format|
+			format.js
+		end
   end
 
-  def update
-  end
+	def update
+		@booking = Booking.find(params[:id])   
+		authorize  @booking, :can_update_round_one?
+		invoice_number = params[:booking][:invoice_number] if params[:booking][:invoice_number].present?
+		@booking.update_attribute(:invoice_number,invoice_number) if invoice_number		
+	end
 
   def create
     
@@ -59,9 +67,9 @@ class BookingsController < ApplicationController
     end
   end
 
-  def seller_confirmation_order
-    @seller_bookings = current_user.seller_bookings.pending_confirmations
-  end
+	def seller_confirmation_order
+		@seller_bookings = current_user.seller_bookings.pending_confirmations.group_by(&:buyer_id)
+	end
 
   def update_booking_status
     if current_user.seller?
@@ -75,9 +83,9 @@ class BookingsController < ApplicationController
 
   end
 
-  def sellers_confirmed_bookings
-    @seller_confirmed_bookings = current_user.seller_bookings.confirmed
-  end
+	def sellers_confirmed_bookings
+		@seller_confirmed_bookings = current_user.seller_bookings.confirmed.group_by(&:buyer_id)
+	end
 
   def archived_bookings
     @archived_bookings = current_user.buyer_bookings.archived
