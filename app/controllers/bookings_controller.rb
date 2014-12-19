@@ -92,15 +92,10 @@ class BookingsController < ApplicationController
                                         cbm: 0..@draft_booking.cbm, 
                                         min_weight: 0..@draft_booking.weight, 
                                         max_weight: @draft_booking.weight..10**30
-                                      }
-                                    ) #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
-    
-    seller_ids = @freight_rates.map(&:seller_id)
-    @ratings = Rate.where(created_at: 6.months.ago..Time.now, rateable_id: seller_ids).group(:rateable_id).count
-    @minimum_freight_price = @freight_rates.map(&:price).min
-    @fastest_delivery = @freight_rates.map(&:transition_days).min
-    @average_price = (@freight_rates.map(&:price).inject(:+))/@freight_rates.count
-    @draft_booking.update(min_rate: @minimum_freight_price, avg_rate: @average_price, min_transition_days: @fastest_delivery )
+                                      },
+                                    order: 'price asc'  
+                                    ).map #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
+    set_search_result_page_variables
   end
   
   def add_to_cart
@@ -151,4 +146,16 @@ class BookingsController < ApplicationController
     end  
   end
 
+  protected
+
+  def set_search_result_page_variables
+    @min_price_freight = @freight_rates.first.id if @freight_rates.present?
+    @fastest_delivery_freight = @freight_rates.map {|f| [f.id, f.transition_days]}.min_by {|t| t[1]}[0]  if @freight_rates.present?
+    seller_ids = @freight_rates.map(&:seller_id)
+    @ratings = Rate.where(created_at: 6.months.ago..Time.now, rateable_id: seller_ids).group(:rateable_id).count
+    @minimum_freight_price = @freight_rates.map(&:price).min
+    @fastest_delivery = @freight_rates.map(&:transition_days).min
+    @average_price = (@freight_rates.map(&:price).inject(:+))/@freight_rates.count if @freight_rates.present?
+    @draft_booking.update(min_rate: @minimum_freight_price, avg_rate: @average_price, min_transition_days: @fastest_delivery )
+  end
 end

@@ -117,7 +117,11 @@
                       <%= f.text_field :preferred_currency, placeholder: "Currency", class: "form-control" %>
                     </div>
                   </div>
-                  
+                  <%= image_tag(f.object.avatar_url, height: 100, width: 100) if f.object.avatar? %>
+
+                  <div><%= f.label :avatar %><br />
+                    <%= f.file_field :avatar %>
+                  </div>
                   <div class="form-group text-center seperator-25">
                     <%= f.submit "Submit", class: 'btn btn-success' %>
                   </div>

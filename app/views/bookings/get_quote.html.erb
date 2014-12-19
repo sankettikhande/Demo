@@ -51,7 +51,7 @@
                 Min
               </span>
               <span class="ol-val">
-                <%= @minimum_freight_price%>
+                <%= @minimum_freight_price || 0%>
               </span>
             </li>
             <li class="col-xs-2">
@@ -59,7 +59,7 @@
                 Average
               </span>
               <span class="ol-val">
-                <%= @average_price %>
+                <%= @average_price || 0%>
               </span>
             </li>
             <li class="col-xs-2">
@@ -67,7 +67,7 @@
                 Fastest
               </span>
               <span class="ol-val">
-                <%= @fastest_delivery%>
+                <%= @fastest_delivery || 0%>
               </span>
             </li>
           </ul>
@@ -79,9 +79,9 @@
 
             <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Eligible for Discount" data-toggle="tooltip" data-placement="top">With Discount</button></li>
 
-            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Minutes" data-toggle="tooltip" data-placement="top">Total Minutes</button></li>
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Minutes" data-toggle="tooltip" data-placement="top" onclick="triggerClickEvent(<%= @draft_booking.id%>, <%= @min_price_freight%>)">Total Minimum</button></li>
 
-            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Fastest" data-toggle="tooltip" data-placement="top">Total Fastest</button></li>
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Fastest" data-toggle="tooltip" data-placement="top" onclick="triggerClickEvent(<%= @draft_booking.id%>, <%= @fastest_delivery_freight%>)">Total Fastest</button></li>
 
           </ul>  
         </div>
@@ -106,7 +106,7 @@
 
               <% @freight_rates.each do |freight_rate|%>
                 <div class="result-item">
-                  <div class="rb-item rb-name closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>"><%= image_tag(freight_rate.seller.avatar_url, height: 100, width: 100) if freight_rate.seller.avatar? %></div>
+                  <div class="rb-item rb-name closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>"><%= image_tag(freight_rate.seller.avatar_url, height: 100, width: 100) if freight_rate.seller && freight_rate.seller.avatar? %></div>
                   <div class="rb-item rb-rating closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>">
                     <span class="rview-rating" rate_count="<%= @ratings[freight_rate.seller_id] || 0%>"></span> <span class="rview-rating-c">(<%= @ratings[freight_rate.seller_id] || 0%>)</span>
                   </div>              
@@ -115,7 +115,7 @@
                   <div class="rb-item rb-day"><%= freight_rate.transition_days%></div>
                   <div class="rb-item rb-aip">US $<%= freight_rate.price %></div>
                   <div class="rb-item rb-buk">
-                    <button style="display: <%= is_in_cart?(@draft_booking, freight_rate) ? 'block' : 'none' %>" class="btn btn-success selected" id = "selected_freight_<%=  freight_rate.id%>" freight_id = "<%= freight_rate.id %>" booking_id="<%= @draft_booking.id%>" type="button" onclick="remove_from_cart(<%= @draft_booking.id%>, <%= freight_rate.id%>);">Selected</button>
+                    <button style="display: <%= is_in_cart?(@draft_booking, freight_rate) ? 'block' : 'none' %>" class="btn selected" id = "selected_freight_<%=  freight_rate.id%>" freight_id = "<%= freight_rate.id %>" booking_id="<%= @draft_booking.id%>" type="button" onclick="remove_from_cart(<%= @draft_booking.id%>, <%= freight_rate.id%>);">Selected</button>
 
                     <button style="display: <%= !is_in_cart?(@draft_booking, freight_rate) ? 'block' : 'none' %>" class="btn btn-success select" id = "freight_<%=  freight_rate.id%>" freight_id = "<%= freight_rate.id %>" booking_id="<%= @draft_booking.id%>" type="button" onclick="add_to_cart(<%= @draft_booking.id%>, <%= freight_rate.id%>);">Select</button>
                   </div>
