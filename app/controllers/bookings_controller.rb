@@ -26,19 +26,19 @@ class BookingsController < ApplicationController
   end
 
   def active_bookings
-    @active_bookings = current_user.buyer_bookings.active_bookings
+    @active_bookings = current_user.buyer_bookings.where(aasm_state: ['active', 'confirmed'])
   end
 
   def bookings_on_hold
-    @bookings_on_hold = current_user.buyer_bookings.bookings_on_hold
+    @bookings_on_hold = current_user.buyer_bookings.on_hold
   end
 
   def draft_bookings
-    @draft_bookings = current_user.buyer_bookings.draft_bookings
+    @draft_bookings = current_user.buyer_bookings.draft
   end
 
   def negotiation_round_one
-    @bookings = current_user.seller_bookings.pending_bookings
+    @bookings = current_user.seller_bookings.pending_negotiation
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @bookings }
@@ -60,31 +60,32 @@ class BookingsController < ApplicationController
   end
 
   def seller_confirmation_order
-    @seller_bookings = current_user.seller_bookings.active_bookings
+    @seller_bookings = current_user.seller_bookings.pending_confirmations
   end
 
   def update_booking_status
     if current_user.seller?
-    booking = current_user.seller_bookings.find(params[:booking_id])
+      booking = current_user.seller_bookings.find(params[:booking_id])
+      booking.update_attributes!(:aasm_state => params[:order_status],:remark=>params[:remark])
     elsif current_user.buyer?
       booking = current_user.buyer_bookings.find(params[:booking_id])
+      booking.update_attributes!(:aasm_state => params[:order_status])
     end
-      booking.update_attributes!(:aasm_state => params[:order_status],:remark=>params[:remark])
-    respond_to do |format|
-      format.html {redirect_to  seller_confirmation_order_bookings_path}
-    end
+    render nothing: true
+
   end
 
   def sellers_confirmed_bookings
-    @seller_confirmed_bookings = current_user.seller_bookings.confirmed_bookings
+    @seller_confirmed_bookings = current_user.seller_bookings.confirmed
   end
 
   def archived_bookings
-    @archived_bookings = current_user.buyer_bookings.archived_bookings
+    @archived_bookings = current_user.buyer_bookings.archived
   end
 
   def get_quote
     @draft_booking = Booking.find params[:id]
+    session[:booking_ids] = session[:booking_ids] || [@draft_booking.id]
     @freight_rates = Freight.search(conditions: 
                                       {
                                         source: @draft_booking.source, 

@@ -7,15 +7,16 @@ class Booking < ActiveRecord::Base
   belongs_to :buyer, class_name: "User", foreign_key: "buyer_id"
   has_many :payments, through: :booking_payments
   has_many :booking_payments
-  validates_inclusion_of :aasm_state, :in => ['draft', 'active', 'hold', 'confirmed', 'pending']
+  validates_inclusion_of :aasm_state, :in => ['draft', 'active', 'hold', 'confirmed', 'negotiation']
   validates :buyer_id, :aasm_state, :source, :destination, :freight_type, :cbm, :weight, :pick_up_date, presence: true
   
-  scope :active_bookings, -> {where(aasm_state: 'active')}
-  scope :bookings_on_hold, -> {where(aasm_state: 'hold')}
-  scope :draft_bookings, -> {where(aasm_state: 'draft')}
-  scope :archived_bookings, -> {where(is_archived: true)}
-  scope :confirmed_bookings, -> {where(aasm_state: 'confirmed')}
-  scope :pending_bookings, -> {where(aasm_state: 'pending')}
+  scope :active, -> {where(aasm_state: 'active')}
+  scope :on_hold, -> {where(aasm_state: 'hold')}
+  scope :draft, -> {where(aasm_state: 'draft')}
+  scope :archived, -> {where(is_archived: true)}
+  scope :confirmed, -> {where(aasm_state: 'confirmed')}
+  scope :pending_negotiations, -> {where(aasm_state: 'negotiation')}
+  scope :pending_confirmations, -> {where(aasm_state: ['active', 'hold'])}
 
   def is_draft?
     aasm_state == "draft"
