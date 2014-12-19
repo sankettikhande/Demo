@@ -24,7 +24,7 @@
           </div>
           <div class="col-xs-3">
             <div style="margin: 10px 0px">
-              <%= button_tag ("CONFIRM BOOKING"), :onclick=> "update_booking_status(#{booking.id},'confirmed');" ,:class=> 'btn btn-success'%>
+              <%= button_tag ("CONFIRM BOOKING"), :onclick=> "update_booking_status(#{booking.id},'active');" ,:class=> 'btn btn-success'%>
             </div>
             <div style="margin: 10px 0px">
               <%= link_to "DELETE BOOKING", booking_path(booking), {method: :delete, data: {confirm: "Are you sure?"}, :remote=>true, class: 'btn btn-danger'} %>
