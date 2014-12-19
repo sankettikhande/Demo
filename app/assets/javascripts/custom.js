@@ -33,14 +33,6 @@ $(document).ready(function(){
       e.stopPropagation();
   });
 
-  $('.rview-rating').raty({ 
-    score: 3,
-    half: true,
-    starHalf:'assets/star-half.png',
-    starOff:'assets/star-off.png',
-    starOn:'assets/star-on.png'
-  });
-
 });
 
 $(function(){

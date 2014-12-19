@@ -1,0 +1,59 @@
+<div class="r-collapsed-info collapse in" id="ri-<%=@freight_id%>">
+  <div class="r-collapsed-inner">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="brand-info">
+          <h4 class="rsplr-name"><%=@seller.company_name%></h4>
+          <b>Registred Address:</b>
+          <address>
+            <%=@seller.address_line_1%>,
+            <%=@seller.address_line_2%>,
+            <%=@seller.address_line_3%>,
+            <%=@seller.city%>,
+            <%=@seller.state%>
+            <%=@seller.country%> - 
+            <%=@seller.post_code%>
+          </address>
+        </div>
+        <div class="rating-panel">
+          <b class="rtp-title"><%=@rates.count %> Reviews in recent <span>6</span> months</b> <a href="javascript:void(0)" onclick="show_stars_ratings('all')" class="btn-link">View all Reviews <i class="fa fa-angle-double-right"></i></a>
+          
+          <% 5.step(1, -1) do |count| %>
+            <ul class="star-grph">
+              <li class="star-srl">
+                <a href="javascript:void(0)" onclick="show_stars_ratings(<%=count%>)"> <%=count%> star</a>
+              </li>
+              <li class="star-lvl">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="6" aria-valuemin="0" aria-valuemax="10" style="width: <%=((@rates.group(:score).count[count] || 0)/@rates.count.to_f)*10%>%"></div>
+                </div>
+              </li>
+              <li class="star-src">(<%= (@rates.group(:score).count[count] || '0')%>)</li>
+            </ul>
+          <%end%>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="listed-revws mCustomScrollbar" data-mcs-theme="light" id="reviews_<%=@freight_id%>">
+          <% @rates.group_by{ |r| r.score}.sort.reverse.each do |score, rates|%>
+            <% rates.each do |r|%>
+              <div class="each-rvw">
+                <span class="rv-pts"><%=score%> of 5</span>
+                <span class="rv-text"><%=r.feedback%></span>
+                <span class="rv-date"><%=r.created_at.strftime('%d %B %Y')%></span>
+              </div>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function show_stars_ratings( count ){
+    var url = "/reviews_by_stars/<%=@seller.id%>/"+ count +"?freight_id=<%=@freight_id%>";
+    $.get( url );
+  }
+</script>

@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :freights, foreign_key: "seller_id"
   has_many :buyer_payments, class: 'Payment', foreign_key: 'buyer_id'
   has_many :seller_payments, class: 'Payment', foreign_key: 'seller_id'
-
+  has_many :rates, class_name: 'Rate', foreign_key: 'rateable_id' 
   default_scope {where(is_active: true)}
 
   def avatar_size_validation

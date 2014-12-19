@@ -69,6 +69,9 @@ Rails.application.routes.draw do
       get :processing_payment 
     end
   end
+
+  get '/reviews/:seller_id', to: 'rates#reviews', as: :get_reviews
+  get '/reviews_by_stars/:seller_id/:star', to: 'rates#reviews_by_stars'
   get '/myaccount', to: 'users#edit'
   get '/privacy', to: 'users#privacy'
   post '/deleteUserAccount', to: 'users#delete_user_account'
