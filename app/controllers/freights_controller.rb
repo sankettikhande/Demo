@@ -33,8 +33,11 @@ class FreightsController < ApplicationController
             source: search_freight['source'], 
             destination: search_freight['destination'], 
             aasm_state: 'draft',
-            cbm: search_freight['cbm'],
+            length: search_freight['length'],
+            height: search_freight['height'],
+            width: search_freight['width'],
             weight: search_freight['weight'],
+            quantity: search_freight['quantity'],
             pick_up_date: search_freight['date'],
             freight_type: search_freight['freight_type']).id
         end
@@ -66,7 +69,7 @@ class FreightsController < ApplicationController
   private
 
   def freight_params
-    params.require(:freight).permit(:source, :destination, :cbm, :seller_id, :freight_type, :cut_off_date, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date)
+    params.require(:freight).permit(:source, :destination, :height, :width, :length, :seller_id, :freight_type, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date, :remark)
   end
 
 

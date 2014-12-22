@@ -86,18 +86,22 @@ class BookingsController < ApplicationController
   def get_quote
     @draft_booking = Booking.find params[:id]
     session[:booking_ids] = session[:booking_ids] || [@draft_booking.id]
+    beginning, ending = Time.utc(1970), Time.utc(2030)
     @freight_rates = Freight.search(conditions: 
                                       {
                                         source: @draft_booking.source, 
                                         destination: @draft_booking.destination, 
-                                        cut_off_date: @draft_booking.pick_up_date, 
                                         freight_type: @draft_booking.freight_type 
                                       },
                                     with: 
                                       {
-                                        cbm: 0..@draft_booking.cbm, 
+                                        length: @draft_booking.length..10**10,
+                                        width: @draft_booking.width..10**10,
+                                        height: @draft_booking.height..10**10, 
                                         min_weight: 0..@draft_booking.weight, 
-                                        max_weight: @draft_booking.weight..10**30
+                                        max_weight: @draft_booking.weight..10**30,
+                                        start_date: beginning..@draft_booking.pick_up_date,
+                                        end_date: @draft_booking.pick_up_date..ending
                                       },
                                     order: 'price asc'  
                                     ).map #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
@@ -158,13 +162,13 @@ class BookingsController < ApplicationController
   protected
 
   def set_search_result_page_variables
-    @min_price_freight = @freight_rates.first.id if @freight_rates.present?
-    @fastest_delivery_freight = @freight_rates.map {|f| [f.id, f.transition_days]}.min_by {|t| t[1]}[0]  if @freight_rates.present?
+    @min_price_freight = @freight_rates.first.id if @freight_rates.any?
+    @fastest_delivery_freight = @freight_rates.map {|f| [f.id, f.transition_days]}.min_by {|t| t[1]}[0]  if @freight_rates.any?
     seller_ids = @freight_rates.map(&:seller_id)
     @ratings = Rate.where(created_at: 6.months.ago..Time.now, rateable_id: seller_ids).group(:rateable_id).count
     @minimum_freight_price = @freight_rates.map(&:price).min
     @fastest_delivery = @freight_rates.map(&:transition_days).min
-    @average_price = (@freight_rates.map(&:price).inject(:+))/@freight_rates.count if @freight_rates.present?
+    @average_price = (@freight_rates.map(&:price).inject(:+))/@freight_rates.count if @freight_rates.any?
     @draft_booking.update(min_rate: @minimum_freight_price, avg_rate: @average_price, min_transition_days: @fastest_delivery )
   end
 end

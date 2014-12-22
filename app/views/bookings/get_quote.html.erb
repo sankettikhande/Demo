@@ -22,20 +22,39 @@
         </div>
         <div class="col-xs-7">
           <ul class="list-inline order-label-heading">
-            <li class="col-xs-2">
+            <li class="col-xs-1">
               <span class="ol-lab">
-                CBM
+                L
               </span>
               <span class="ol-val">
-                <%= @draft_booking.cbm%>
+                <%= @draft_booking.length%>
               </span>
             </li>
-            <li class="col-xs-2">
+
+            <li class="col-xs-1">
               <span class="ol-lab">
-                Weight
+                W
               </span>
               <span class="ol-val">
-                <%= @draft_booking.cbm%>kg
+                <%= @draft_booking.width%>
+              </span>
+            </li>
+
+            <li class="col-xs-1">
+              <span class="ol-lab">
+                H
+              </span>
+              <span class="ol-val">
+                <%= @draft_booking.height%>
+              </span>
+            </li>
+
+            <li class="col-xs-1">
+              <span class="ol-lab">
+                Wt(kg)
+              </span>
+              <span class="ol-val">
+                <%= @draft_booking.weight%>
               </span>
             </li>
             <li class="col-xs-2">
@@ -110,8 +129,8 @@
                   <div class="rb-item rb-rating closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>">
                     <span class="rview-rating" rate_count="<%= @ratings[freight_rate.seller_id] || 0%>"></span> <span class="rview-rating-c">(<%= @ratings[freight_rate.seller_id] || 0%>)</span>
                   </div>              
-                  <div class="rb-item rb-coff"><%= freight_rate.cut_off_date.strftime("%-d, %b")%></div>
-                  <div class="rb-item rb-del"><%= delivery_date(freight_rate).strftime("%-d, %b")%></div>
+                  <div class="rb-item rb-coff"><%= @draft_booking.pick_up_date.strftime("%-d, %b")%></div>
+                  <div class="rb-item rb-del"><%= delivery_date(@draft_booking, freight_rate).strftime("%-d, %b")%></div>
                   <div class="rb-item rb-day"><%= freight_rate.transition_days%></div>
                   <div class="rb-item rb-aip">US $<%= freight_rate.price %></div>
                   <div class="rb-item rb-buk">

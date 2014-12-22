@@ -16,7 +16,7 @@
                     <div class="col-xs-12 search-list">
                       <div class="search-row">
                         <div class="row search-item">
-                          <div class="col-xs-3">
+                          <div class="col-xs-2">
                             <div class="form-group">
                               <%= hidden_field_tag 'search[][freight_type]', 'sea', id: 'landing_tab_freight_type' %>
                               <label for="frm-search">
@@ -25,7 +25,8 @@
                               <%= select_tag('search[][source]', options_for_select([["India", "IN"], ["Pakistan", "PK"]], search_parameter['source']), class: 'form-control selecter', placeholder: "Source", id: "frm-search", required: 'required')%>
                             </div>
                           </div>
-                          <div class="col-xs-3">
+
+                          <div class="col-xs-2">
                             <div class="form-group">
                               <label for="to-search">
                                 To
@@ -33,6 +34,7 @@
                               <%= select_tag('search[][destination]', options_for_select([["India", "IN"], ["Pakistan", "PK"]], search_parameter['destination']), class: 'form-control selecter', placeholder: "Source", id: "frm-search", required: 'required')%>
                             </div>
                           </div>
+
                           <div class="col-xs-2">
                             <div class="form-group">
                               <label for="hm-date">
@@ -46,25 +48,55 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-xs-2">
+
+                          <div class="col-xs-1">
                             <div class="form-group">
-                              <label for="hm-cbm">
-                                Cbm
+                              <label for="hm-length">
+                                Length
                               </label>
-                              <%= text_field_tag "search[][cbm]", search_parameter['cbm'], class: "form-control", id: "hm-cbm", placeholder: "Cbm", required: 'required' %>
+                              <%= text_field_tag "search[][length]", search_parameter['length'], class: "form-control", id: "hm-length", placeholder: "L", required: 'required' %>
                             </div>
                           </div>
-                          <div class="col-xs-2">
+
+                          <div class="col-xs-1">
+                            <div class="form-group">
+                              <label for="hm-width">
+                                Width
+                              </label>
+                              <%= text_field_tag "search[][width]", search_parameter['width'], class: "form-control", id: "hm-width", placeholder: "W", required: 'required' %>
+                            </div>
+                          </div>
+                          <div class="col-xs-1">
+                            <div class="form-group">
+                              <label for="hm-height">
+                                Height
+                              </label>
+                              <%= text_field_tag "search[][height]", search_parameter['height'], class: "form-control", id: "hm-height", placeholder: "H", required: 'required' %>
+                            </div>
+                          </div>
+
+                          <div class="col-xs-1">
                             <div class="form-group">
                               <label for="hm-weight">
                                 Kg
                               </label>
                               <%= text_field_tag "search[][weight]", search_parameter['weight'], class: "form-control", id: "hm-weight", placeholder: "Weight", required: 'required' %>
+                            </div>                           
+                          </div>
+
+                          <div class="col-xs-1">
+                            <div class="form-group">
+                              <label for="hm-qty">
+                                QTY
+                              </label>
+                              <%= text_field_tag "search[][quantity]", search_parameter['quantity'], class: "form-control", id: "hm-qty", placeholder: "QTY", required: 'required' %>
                             </div>
+
                             <div class="flow-remove">
                               <button type="button" class="btn btn-danger btn-remove">X</button>
-                            </div>                            
+                            </div> 
                           </div>
+
                         </div>
                       </div>
                       <div class="form-group text-right">
