@@ -8,7 +8,7 @@ class Booking < ActiveRecord::Base
   has_many :payments, through: :booking_payments
   has_many :booking_payments
   validates_inclusion_of :aasm_state, :in => ['draft', 'active', 'hold', 'confirmed', 'negotiation']
-  validates :buyer_id, :aasm_state, :source, :destination, :freight_type, :cbm, :weight, :pick_up_date, presence: true
+  validates :buyer_id, :aasm_state, :source, :destination, :freight_type, :length, :height, :width, :weight, :pick_up_date, presence: true
   
   scope :active, -> {where(aasm_state: 'active')}
   scope :on_hold, -> {where(aasm_state: 'hold')}

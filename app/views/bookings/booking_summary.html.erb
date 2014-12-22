@@ -4,7 +4,9 @@
    <tr>
     <th>From</th>
     <th>To</th>    
-    <th>CBM</th>
+    <th>L</th>
+    <th>W</th>
+    <th>H</th>
     <th>Wt</th>
     <th>Date</th>    
     <th>Company</th>
@@ -19,9 +21,11 @@
     <tr>
       <td><%= freight.source%></td>
       <td><%= freight.destination%></td>    
-      <td><%= freight.cbm%></td>
+      <td><%= booking.length%></td>
+      <td><%= booking.width%></td>
+      <td><%= booking.height%></td>
       <td><%= booking.weight%></td>
-      <td><%= delivery_date(freight).strftime("%-d, %b") %></td>
+      <td><%= delivery_date(booking, freight).strftime("%-d, %b") %></td>
       <td><%= freight.seller.company_name %></td>
       <td><%= freight.price%>
         <%grand_total << freight.price%>

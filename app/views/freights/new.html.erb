@@ -31,6 +31,21 @@
 
                         </div>
 
+                        <div class="row form-group">
+                          <div class="col-md-6">
+                            <div class="col-md-3">L(Max)</div>
+                            <div class="col-md-6"><%= f.text_field :length, class: "form-control", id: "hm-length", placeholder: "Length", required: 'required' %></div>
+                          </div>
+                          <div class="col-xs-6">
+                            <div class="col-md-3">H(Max)</div>
+                            <div class="col-md-6"><%= f.text_field :width, class: "form-control", id: "hm-width", placeholder: "Width", required: 'required' %></div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="col-md-3">W(Max)</div>
+                            <div class="col-md-6"><%= f.text_field :height, class: "form-control", id: "hm-height", placeholder: "Height", required: 'required' %></div>
+                          </div>
+                        </div>
 
                         <div class="row form-group">
                           <div class="col-md-6">
@@ -65,14 +80,7 @@
                             </div>
                           </div>
 
-
-
-
                         <div class="row form-group">
-                          <div class="col-xs-6">
-                            <div class="col-md-3">CBM</div>
-                            <div class="col-md-6"> <%= f.text_field "cbm", class: "form-control", id: "hm-weight", placeholder: "CBM", required: 'required' %></div>
-                          </div>
 
                           <div class="col-md-6">
                             <div class="col-md-3">Price</div>
@@ -82,20 +90,9 @@
 
                         <div class="row form-group">
                           <div class="col-xs-6">
-                            <div class="col-md-3">Delivery Days</div>
+                            <div class="col-md-3">Transit Time(In days)</div>
                             <div class="col-md-6"> <%= f.text_field "transition_days", class: "form-control", id: "hm-weight", placeholder: "delivery_days", required: 'required' %></div>
                           </div>
-
-                          <div class="col-xs-6">
-                            <div class="col-md-3">Cut Off Date</div>
-                            <div class="col-md-6 input-group date">
-                              <%= f.text_field "cut_off_date", class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required', data: { provide: "datepicker"}, 'data-date-format'=> "yyyy/mm/dd" %>
-                              <span class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
 
                         <div class="row form-group">
                           <div class="col-xs-6">
@@ -104,7 +101,12 @@
                           </div>
                         </div>
 
-
+                        <div class="row form-group">
+                          <div class="col-xs-6">
+                            <div class="col-md-3">Remark</div>
+                            <div class="col-md-6"> <%= f.text_area :remark, class: "form-control", id: "hm-remark", placeholder: "Remark", required: 'required'%></div>
+                          </div>
+                        </div>
 
                       </div>
 

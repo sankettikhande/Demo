@@ -19,8 +19,8 @@
               <div class="rb-item rb-name"><img src="/assets/dhl.png" alt="DHL"></div>
               <div class="rb-item rb-rating">
                 <span class="rview-rating"></span> <span class="rview-rating-c">(10)</span></div>
-              <div class="rb-item rb-coff"><%= freight.cut_off_date.strftime("%-d, %b")%></div>
-              <div class="rb-item rb-del"><%= delivery_date(freight).strftime("%-d, %b")%></div>
+              <div class="rb-item rb-coff"><%= booking.pick_up_date.strftime("%-d, %b")%></div>
+              <div class="rb-item rb-del"><%= delivery_date(booking, freight).strftime("%-d, %b")%></div>
               <div class="rb-item rb-day"><%= freight.transition_days%></div>
               <div class="rb-item rb-aip">US $<%= freight.price %></div>
               <div class="rb-item rb-buk"><button class="btn btn-success" type="button" >Selected</button></div>
