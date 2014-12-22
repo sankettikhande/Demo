@@ -1,5 +1,5 @@
 class BookingMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "from@bluecompass.com"
 
   def seller_active_booking(booking)
     @booking = booking
