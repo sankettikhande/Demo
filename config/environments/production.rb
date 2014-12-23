@@ -1,3 +1,5 @@
+require 'exception_notification'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -75,4 +77,25 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'kiran.test.mail1@gmail.com',
+    password:             'testmail',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
+
+  config.action_mailer.default_url_options = { :host => 'bluecompass.sodelsolutions.com' }
+
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[BK] ",
+      :sender_address => %{"Blue Compress Notifier" <noreply@bluecompass.com>},
+      :exception_recipients => %w{ranjeet.maurya@sodelsolutions.com, kiran.kumara@sodelsolutions.com, sanket.tikhande@sodelsolutions.com}
+    }
+
 end
