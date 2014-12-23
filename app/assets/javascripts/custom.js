@@ -6,9 +6,13 @@ $(document).ready(function(){
 	});
 
 	$('body').on('click', '#search-more-btn', function(){
-		$($('.search-list .search-row').first().html()).clone().insertAfter(".search-row");
-    $('.selecter').selecter();
-	});
+    var html = $($('.search-list .search-row').first().html()).clone();
+    html.find('.custom-combobox').remove();
+
+	  html.insertAfter(".search-row");
+	  $(".source-auto-complete" ).combobox();
+    $(".destination-auto-complete" ).combobox();
+  });
 
   $('#forgot-link').click(function(){
       $('.login-form').addClass('hidden');
