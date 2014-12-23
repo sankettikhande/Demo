@@ -29,8 +29,8 @@ class FreightsController < ApplicationController
         (session[:search] || []).each do |search_freight|
           session[:booking_ids] << Booking.create(
             buyer_id: current_user.id, 
-            source: search_freight['source'], 
-            destination: search_freight['destination'], 
+            source_id: search_freight['source_id'], 
+            destination_id: search_freight['destination_id'], 
             aasm_state: 'draft',
             length: search_freight['length'],
             height: search_freight['height'],

@@ -22,7 +22,7 @@
                               <label for="frm-search">
                                 From
                               </label>
-                              <%= select_tag('search[][source]', options_for_select([["India", "IN"], ["Pakistan", "PK"]], search_parameter['source']), class: 'form-control selecter', placeholder: "Source", id: "frm-search", required: 'required')%>
+                              <%= select_tag('search[][source_id]', options_from_collection_for_select(Location.all, "id", "full_address", search_parameter['source_id']), include_blank: true, class: 'form-control selecter', placeholder: "Source", id: "frm-search", required: 'required')%>
                             </div>
                           </div>
 
@@ -31,7 +31,7 @@
                               <label for="to-search">
                                 To
                               </label>
-                              <%= select_tag('search[][destination]', options_for_select([["India", "IN"], ["Pakistan", "PK"]], search_parameter['destination']), class: 'form-control selecter', placeholder: "Source", id: "frm-search", required: 'required')%>
+                              <%= select_tag('search[][destination_id]', options_from_collection_for_select(Location.all, "id", "full_address", search_parameter['destination_id']), include_blank: true, class: 'form-control selecter', placeholder: "Source", id: "frm-search", required: 'required')%>
                             </div>
                           </div>
 
