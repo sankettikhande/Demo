@@ -24,14 +24,13 @@ class FreightsController < ApplicationController
     session[:cart] = {}
     session[:search] = params[:search] if params[:search].present?
     search_parameter = session[:search].first
-    @freight_rates = Freight.search conditions: {source: search_parameter[:source], destination: search_parameter[:destination]}
     respond_to do |format |
       if current_user
         (session[:search] || []).each do |search_freight|
           session[:booking_ids] << Booking.create(
             buyer_id: current_user.id, 
-            source: search_freight['source'], 
-            destination: search_freight['destination'], 
+            source_id: search_freight['source_id'], 
+            destination_id: search_freight['destination_id'], 
             aasm_state: 'draft',
             length: search_freight['length'],
             height: search_freight['height'],
@@ -69,7 +68,7 @@ class FreightsController < ApplicationController
   private
 
   def freight_params
-    params.require(:freight).permit(:source, :destination, :height, :width, :length, :seller_id, :freight_type, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date, :remark)
+    params.require(:freight).permit(:source_id, :destination_id, :height, :width, :length, :seller_id, :freight_type, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date, :remark)
   end
 
 

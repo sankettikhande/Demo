@@ -38,8 +38,8 @@
                   <% @freights.each_with_index do |freight,index| %>
                       <tr>
                         <td><%=index+1%></td>
-                        <td> <%=freight.source  %></td>
-                        <td> <%=freight.destination  %></td>
+                        <td> <%=freight.source.full_address  %></td>
+                        <td> <%=freight.destination.full_address  %></td>
                         <td> <%=freight.length  %></td>
                         <td> <%=freight.width  %></td>
                         <td> <%=freight.height  %></td>

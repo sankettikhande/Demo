@@ -89,8 +89,8 @@ class BookingsController < ApplicationController
     beginning, ending = Time.utc(1970), Time.utc(2030)
     @freight_rates = Freight.search(conditions: 
                                       {
-                                        source: @draft_booking.source, 
-                                        destination: @draft_booking.destination, 
+                                        source_id: @draft_booking.source_id, 
+                                        destination_id: @draft_booking.destination_id, 
                                         freight_type: @draft_booking.freight_type 
                                       },
                                     with: 

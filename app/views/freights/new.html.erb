@@ -22,11 +22,11 @@
                         <div class="row form-group">
                           <div class="col-md-6">
                             <div class="col-md-3">From</div>
-                            <div class="col-md-6"><%= country_select( "freight", "source", {}, { class: 'form-control selecter', required: 'required'}) %></div>
+                            <div class="col-md-6"><%= f.select "source_id", options_from_collection_for_select(Location.all, "id", "full_address"), {:include_blank=>true} %></div>
                           </div>
                           <div class="col-xs-6">
                             <div class="col-md-3">To</div>
-                            <div class="col-md-6"><%= country_select( "freight", "destination", {}, { class: 'form-control selecter',required: 'required'}) %></div>
+                            <div class="col-md-6"><%= f.select "destination_id", options_from_collection_for_select(Location.all, "id", "full_address"), {:include_blank=>true} %></div>
                           </div>
 
                         </div>
