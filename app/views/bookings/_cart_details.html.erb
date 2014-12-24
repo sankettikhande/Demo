@@ -5,8 +5,8 @@
   <%grand_total << freight.price%>
   <ul class="well slctd-sr-item">
     <li class="ssri-item">
-      <div class="ssri-item-l"><%= freight.source%></div>
-      <div class="ssri-item-l"><%= freight.destination%></div>                       
+      <div class="ssri-item-l"><%= freight.source.port%></div>
+      <div class="ssri-item-l"><%= freight.destination.port%></div>                       
     </li>
     <li class="ssri-item-p">$<%= freight.price%></li>
     <li class="ssri-item-d"><%= freight.transition_days%></li>
