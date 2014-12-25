@@ -22,11 +22,11 @@
                         <div class="row form-group">
                           <div class="col-md-6">
                             <div class="col-md-3">From</div>
-                            <div class="col-md-6"><%= f.select "source_id", options_from_collection_for_select(Location.all, "id", "full_address"), {:include_blank=>true} %></div>
+                            <div class="col-md-6"><%= f.select "source_id", options_from_collection_for_select(Location.all, "id", "full_address"), {:include_blank=>true}, class: 'form-control source-auto-complete', placeholder: "Source", id: "source", required: 'required'  %></div>
                           </div>
                           <div class="col-xs-6">
                             <div class="col-md-3">To</div>
-                            <div class="col-md-6"><%= f.select "destination_id", options_from_collection_for_select(Location.all, "id", "full_address"), {:include_blank=>true} %></div>
+                            <div class="col-md-6"><%= f.select "destination_id", options_from_collection_for_select(Location.all, "id", "full_address"), {:include_blank=>true}, class: 'form-control source-auto-complete', placeholder: "Source", id: "source", required: 'required' %></div>
                           </div>
 
                         </div>
@@ -124,3 +124,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(function() {
+    $(".source-auto-complete" ).combobox();
+    $(".destination-auto-complete" ).combobox();
+  });
+</script>
