@@ -17,8 +17,8 @@
           <div class="col-xs-6">
             <p><b>Booking last modified on:</b><%= booking.updated_at.strftime("%d/%m/%Y") %></p>
             <p><b>Service:</b></p>
-            <p><b>From:</b><%= booking.source %><span><b>Cut off:</b></span></p>
-            <p><b>To:</b><%= booking.destination %> <span><b>Delivery:</b></span></p>
+            <p><b>From:</b><%= booking.source.full_address %><span><b>Cut off:</b></span></p>
+            <p><b>To:</b><%= booking.destination.full_address %> <span><b>Delivery:</b></span></p>
             <p><b>Cargo:</b></p>
           </div>
           <div class="col-xs-3">

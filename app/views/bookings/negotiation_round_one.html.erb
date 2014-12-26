@@ -33,8 +33,8 @@
                       <% @bookings.each  do |booking| %>
                           <tr id='seller_booking_<%=booking.id%>' >
                             <td> <%=booking.id  %></td>
-                            <td> <%=booking.source  %></td>
-                            <td> <%=booking.destination  %></td>
+                            <td> <%=booking.source.full_address  %></td>
+                            <td> <%=booking.destination.full_address  %></td>
                             <td> <%=booking.pick_up_date %></td>
                             <td> <%=booking.cbm %></td>
                             <td> <%=booking.weight %></td>
