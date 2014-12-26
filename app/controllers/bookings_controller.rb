@@ -86,26 +86,9 @@ class BookingsController < ApplicationController
   def get_quote
     @draft_booking = Booking.find params[:id]
     session[:booking_ids] = session[:booking_ids] || [@draft_booking.id]
-    beginning, ending = Time.utc(1970), Time.utc(2030)
-    @freight_rates = Freight.search(conditions: 
-                                      {
-                                        source_id: @draft_booking.source_id, 
-                                        destination_id: @draft_booking.destination_id, 
-                                        freight_type: @draft_booking.freight_type 
-                                      },
-                                    with: 
-                                      {
-                                        length: @draft_booking.length..10**10,
-                                        width: @draft_booking.width..10**10,
-                                        height: @draft_booking.height..10**10, 
-                                        min_weight: 0..@draft_booking.weight, 
-                                        max_weight: @draft_booking.weight..10**30,
-                                        start_date: beginning..@draft_booking.pick_up_date,
-                                        end_date: @draft_booking.pick_up_date..ending
-                                      },
-                                    order: 'price asc'  
-                                    ).map #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.
+    @freight_rates = get_freight_quote(@draft_booking)
     set_search_result_page_variables
+    get_freight_forwarders
   end
   
   def add_to_cart
@@ -157,6 +140,13 @@ class BookingsController < ApplicationController
     else
       render nothing: true, status: 202  
     end  
+  end
+
+  def filter_with_seller
+    @draft_booking = Booking.find(params[:id])
+    get_freight_quote(@draft_booking)
+    set_search_result_page_variables
+    render partial: 'bookings/result_content'
   end
 
   protected

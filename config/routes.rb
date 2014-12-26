@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       get :booking_summary
       get :update_cart_details_section
       get :check_cart_session
+      post :filter_with_seller
     end   
 
   end
