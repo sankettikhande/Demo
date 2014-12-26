@@ -27,6 +27,7 @@ $(document).ready(function(){
   $('#login-modal').on("hidden.bs.modal", function(){
       $('.forgot-form').addClass('hidden');
       $('.login-form').removeClass('hidden');
+      $('#forgot-link-sent').empty().removeClass('alert alert-info');
   });
 
   $('[data-toggle="tooltip"]').tooltip({
