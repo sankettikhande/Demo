@@ -108,10 +108,35 @@
   </div>
   
   <div class="result-content">
-    <% if @freight_rates.any? %>
-      <%= render 'result_content'%>
-    <% else %>
-      <%= render 'no_freights' %>
-    <%end%>  
+    <div class="row">
+      <div class='searched-freight'>
+        <% if @freight_rates.any? %>
+          <%= render 'result_content'%>
+        <% else %>
+          <%= render 'no_freights' %>
+        <%end%>
+      </div>
+      <div class="col-xs-2">
+        <div class="slctd-sr-list cart_detail">
+          <%= render :partial => 'bookings/cart_details'%> 
+        </div>           
+      
+        <div class="ssdd-btn btn-group">
+          <a href="#" class="btn btn-default dropdown" data-toggle="dropdown">
+           Selected Shippers <span class="caret"></span>
+          </a>
+          <%= hidden_field_tag "booking_id", @draft_booking.id, id: "booking_id"%>
+          <ul class="dropdown-menu ss-dd-list" role="menu">
+            <% @sellers.each do |seller| %>
+              <li class="dd-li seller-filter">
+                <label for="checkbox_1"><%= seller.company_name %></label>
+                <input type="checkbox" id="<%= seller.id%>" class='seller-chk' name="seller_ids[]" value="<%= seller.id%>" />
+              </li>
+            <% end %>
+          </ul>       
+        </div>
+      </div>
+    </div>  
+  
   </div>  
 </div>

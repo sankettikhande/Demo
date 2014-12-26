@@ -1,3 +1,19 @@
+  $(document).ready(function() {
+    $(".seller-chk").click(function() {
+      booking_id = $('#booking_id').val();
+      $.ajax({
+        type: "POST",
+        data: $('input[name="seller_ids[]"]:checked').serialize(),
+        url:"/bookings/filter_with_seller?id="+ booking_id,
+        success: function(data){
+          $('.searched-freight').html(data);      
+        },
+        error: function(data){
+          alert("something went wrong");
+        }
+      })
+    });
+  });  
 
   function add_to_cart(booking_id, freight_id){
     $.ajax({
@@ -93,9 +109,8 @@
           url: "/bookings/update_booking_status/",
           data: {booking_id: id, order_status: status,remark: remark},
           success: function () {
-              $("#status_field_"+id).html(status);
-              $("#remark_field_"+id).html(remark);
+            $("#status_field_"+id).html(status);
+            $("#remark_field_"+id).html(remark);
           }
       });
   }
-
