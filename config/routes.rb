@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {sessions: "sessions", registrations: "registrations"}
+  devise_for :users, controllers: {sessions: "sessions", passwords: "passwords", registrations: "registrations"}
 
   devise_scope :user do
     post "registrations/register_guest_user", to: "registrations#register_guest_user", as: :register_guest_user
