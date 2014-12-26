@@ -4,6 +4,9 @@ class Rate < ActiveRecord::Base
   belongs_to :user, class_name: 'User', foreign_key: 'reteable_id'
 
   validate :allow_rating_once
+
+  validates :score, :feedback, presence: :true
+  validates :is_courteous, :on_time_delivery, inclusion: { in: [true, false]}
   
 
   def allow_rating_once

@@ -1,5 +1,5 @@
 <% if @rate.errors.any? %>
-    $("#booking_<%= @booking.id %>").html('<%=@rate.errors.full_messages.join(',')  %>');
+    $("#booking_<%= @booking.id %>").html("<%= escape_javascript(render 'form' )%>");
 <% else  %>
     $("#booking_<%= @booking.id %>").html('Thanks for your feedback!');
 <% end  %>
