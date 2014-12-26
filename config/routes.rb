@@ -78,7 +78,9 @@ Rails.application.routes.draw do
   get '/privacy', to: 'users#privacy'
   post '/deleteUserAccount', to: 'users#delete_user_account'
   get '/deleteUserAccount', to: 'users#delete_user_account' 
-  get '/register_supplier_consignee', to: 'users#register_supplier_consignee' 
+  get '/register_supplier_consignee', to: 'users#register_supplier_consignee'
+  get '/thank_you', to: 'users#thank_you', as: 'thank_you'
+
   # Example resource route with options:
   #   resources :products do
   #     member do

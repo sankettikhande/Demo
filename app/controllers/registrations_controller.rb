@@ -22,4 +22,10 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:first_name, :last_name, :company_name, :phone_number, :email,:calling_code)
   end
 
+
+  protected
+    def after_inactive_sign_up_path_for(resource)
+      thank_you_url
+    end
+
 end

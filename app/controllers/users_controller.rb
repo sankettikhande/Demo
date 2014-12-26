@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :thank_you
 
   def edit
     @user = current_user
@@ -33,6 +33,12 @@ class UsersController < ApplicationController
     if params[:user].present? && current_user.validate_user(params[:user][:email], params[:user][:password])
        redirect_to root_path if current_user.update(is_active: false)
     end    
+  end
+
+  def thank_you
+    if current_user
+      redirect_to root_path
+    end
   end
 
  protected
