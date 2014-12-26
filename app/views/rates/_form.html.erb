@@ -1,18 +1,24 @@
 <%= form_for [@booking, @rate], {remote: true} do |f| %>
+    <p>
+      <% if @rate.errors.messages.any? %>
+        <div>All star fields are mandatory</div>
+      <% end %>
+    </p>
+
     <h3>How did <%= @booking.seller.first_name %> do?</h3>
     <p>
-        Was your shipment available before <%= (@booking.cut_off_date + @booking.transition_days).strftime("%d/%m/%Y") %> &nbsp;&nbsp;
+       * Was your shipment available before <%= (@booking.cut_off_date + @booking.transition_days).strftime("%d/%m/%Y") %> &nbsp;&nbsp;
         <%= f.radio_button :on_time_delivery, true %> Yes &nbsp;&nbsp;
         <%= f.radio_button :on_time_delivery, false %> No
     </p>
     <p>
-        Was the customer service prompt and courteous? &nbsp;&nbsp;
+        * Was the customer service prompt and courteous? &nbsp;&nbsp;
         <%= f.radio_button :is_courteous, true %> Yes &nbsp;&nbsp;
         <%= f.radio_button :is_courteous, false %> No
     </p>
 
-    <p>Forwarder rating (1 to 5 stars): <span class="star-rating"></span> </p>
-    <p>Tell others about this forwarder:</p>
+    <p>* Forwarder rating (1 to 5 stars): <span class="star-rating"></span> </p>
+    <p>*Tell others about this forwarder:</p>
     <p>(E.g. customer service experience, timeliness, value for money)</p>
     <p>
       <%= f.text_area :feedback%>
