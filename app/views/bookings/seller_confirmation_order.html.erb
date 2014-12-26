@@ -29,8 +29,8 @@
                       <% @seller_bookings.each  do |booking| %>
                           <tr>
                             <%status_for_order =  booking.aasm_state =="active" ? "Pending Confirmation": 'Awaiting buyers response'%>
-                            <td> <%=booking.source  %></td>
-                            <td> <%=booking.destination  %></td>
+                            <td> <%=booking.source.full_address  %></td>
+                            <td> <%=booking.destination.full_address  %></td>
                             <td> <%=booking.pick_up_date %></td>
                             <td> <%=booking.cbm %></td>
                             <td> <%=booking.weight %></td>
