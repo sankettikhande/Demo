@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$('.aside-toggle').click(function(){
 		$(this).toggleClass('animate');
 		$('.side-wrapper').toggleClass('active');
-    $('.page-overlay').toggle();
+    $('.page-overlay').fadeToggle();
 	});
 
 	$('body').on('click', '#search-more-btn', function(){

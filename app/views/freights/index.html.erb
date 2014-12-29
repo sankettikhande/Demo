@@ -8,41 +8,49 @@
               <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
               <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
             </ul>
-            <%= button_to "New freight ", new_freight_path, :class => "button", :method => :get  %>
+            <%= button_to "New freight", new_freight_path, :class => "button", :method => :get  %>
+            <div class="nav navbar-nav navbar-right"><%= button_to "Export", generate_csv_online_freights_path, :class => "button", :method => :post,format: "csv"  %></div>
             <div class="tab-content">
               <div class="tab-pane active" id="tab-p1">
+                <%= select_tag(:select_val, options_for_select([["Constant Value","constant_value"],["Change by %","change_by_percent"]])) %>
+
+                <%= select_tag(:manipulate_val, options_for_select([["Add","addition"],["Subtract","subtract"]]),:include_blank => 'Select') %>
+
+                <%= text_area_tag 'manipulate_value', nil, :size=> '5x1', :class=>'set_value' %><br>
+                <%= button_tag ("Apply"), :onclick=> "manipulate_the_price();" %>
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th class="col-xs-2"># </th>
                     <th class="col-xs-2">From</th>
                     <th class="col-xs-2">To</th>
                     <th class="col-xs-2">L(Max)</th>
                     <th class="col-xs-2">W(Max)</th>
                     <th class="col-xs-2">H(Max)</th>
+                    <th class="col-xs-2">CBM</th>
                     <th class="col-xs-2">Wt.From</th>
                     <th class="col-xs-2">Wt.To</th>
                     <th class="col-xs-4">Date From</th>
                     <th class="col-xs-4">Date To</th>
                     <th class="col-xs-2">Price</th>
-
                     <th class="col-xs-4">Freight Type</th>
                     <th class="col-xs-2">Transition Days</th>
 
+
                     <th class="col-xs-2">Action</th>
-                    <th class="col-xs-2">All</th>
+                    <th class="col-xs-2">All<br>
+                      <%=check_box_tag "freight", '', false, class: 'select_all'%>
                   </tr>
                   </thead>
-                  <%if @freights.present? %>
+
                   <tbody>
-                  <% @freights.each_with_index do |freight,index| %>
-                      <tr>
-                        <td><%=index+1%></td>
-                        <td> <%=freight.source.full_address  %></td>
-                        <td> <%=freight.destination.full_address  %></td>
+                  <% @freights.each do |freight| %>
+                      <tr id="edit_freight_form_<%=freight.id%>">
+                        <td> <%#=freight.source.full_address  %></td>
+                        <td> <%#=freight.destination.full_address  %></td>
                         <td> <%=freight.length  %></td>
                         <td> <%=freight.width  %></td>
                         <td> <%=freight.height  %></td>
+                        <td> <%=freight.cbm  %></td>
                         <td> <%=freight.min_weight %></td>
                         <td> <%=freight.max_weight %></td>
                         <td> <%=freight.start_date %></td>
@@ -50,15 +58,17 @@
                         <td> <%=freight.price  %></td>
                         <td> <%=freight.freight_type  %></td>
                         <td> <%=freight.transition_days  %></td>
-
+                        <td>
+                          <%= link_to 'edit',edit_freight_path(freight.id),{:remote=>true} %>
+                          <%= link_to "delete", freight_path(freight), {method: :delete, data: {confirm: "Are you sure?"}, :remote=>true} %>
+                        </td>
+                        <td>
+                          <%=check_box_tag "freight_#{freight.id}", '', false, class: 'freight_price',freight_id:freight.id%>
+                        </td>
                       </tr>
                   <% end %>
                   </tbody>
-                   <%end%>
                 </table>
-
-
-
               </div>
             </div>
           </div>
@@ -67,3 +77,52 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="freightModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content freight-content">
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.select_all').click(function(event) {
+          var isChecked = this.checked;
+          $('.freight_price').each(function() {
+            this.checked = isChecked;
+          }); 
+        });
+    });
+
+    function manipulate_the_price() {
+        var change_val = $("#select_val option:selected").val();
+        var manipulate_val = $("#manipulate_val option:selected").val();
+        var price = $('#manipulate_value').val();
+        freights_data_value = {}
+        var table = $("table tbody");
+        table.find("tr").each(function () {
+                    var freight_id = $(this).find('.freight_price').attr('freight_id');
+                    if ($("#freight_"+freight_id).is(':checked'))
+                        freights_data_value[freight_id] = price
+                }
+        )        
+        change_price_of_all_freights(freights_data_value,change_val,manipulate_val)
+    }
+
+
+    function change_price_of_all_freights(freights_data_value,change_val,manipulate_val){
+         $.ajax({
+                type: "POST",
+                url: "/freights/update_freights_price/",
+                data: {freight_data: freights_data_value,change_val: change_val,manipulate_val: manipulate_val},
+             success: function () {
+                 window.location.reload()
+             }
+
+         });
+
+    }
+
+</script>

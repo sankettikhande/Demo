@@ -1,0 +1,6 @@
+<td class="invoice_booking_<%=@booking.id%>">
+	<%=@booking.invoice_number %> &nbsp;&nbsp;&nbsp;                             
+	<%= link_to edit_booking_path(@booking),{:remote=>true} do %>
+		<i class="fa fa-pencil"></i>
+	<% end %>
+</td>

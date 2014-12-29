@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       post :search
       get :search
       post :import
+      post :update_freights_price
+      post :generate_csv_online
     end
   end
 

@@ -1,0 +1,106 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h4 class="modal-title">Update the Freight</h4>
+</div>
+<div class="modal-body">
+
+  <%= form_for @freight do |f|%>
+      <% @freight.errors.full_messages.each do |msg| %>
+          <div class="text-danger"><li><%= msg %></li></div>
+      <% end %>
+      <%= f.hidden_field 'seller_id', :value => current_user.id %>
+      <div class="row">
+        <div class="col-xs-12 search-list">
+
+          <div class="row form-group">
+            <div class="col-md-6">
+              <div class="col-md-3">From</div>
+              <div class="col-md-6"><%= country_select( "freight", "source", {}, { class: 'form-control selecter', required: 'required',:disabled => true }) %></div>
+            </div>
+            <div class="col-xs-6">
+              <div class="col-md-3">To</div>
+              <div class="col-md-6"><%= country_select( "freight", "destination", {}, { class: 'form-control selecter',required: 'required',:disabled => true}) %></div>
+            </div>
+
+          </div>
+
+
+          <div class="row form-group">
+            <div class="col-md-6">
+              <div class="col-md-3">Wt. From</div>
+              <div class="col-md-6"> <%= f.text_field "min_weight", class: "form-control", id: "hm-weight", placeholder: "Wt. From" %></div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-3">Wt.To</div>
+              <div class="col-md-6"> <%= f.text_field "max_weight", class: "form-control", id: "hm-weight", placeholder: "Wt-To", required: 'required' %></div>
+            </div>
+          </div>
+
+
+          <div class="row form-group">
+            <div class="col-xs-6">
+              <div class="col-md-3">Date From</div>
+              <div class="col-md-6 input-group date">
+                <%= f.text_field "start_date", class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required', data: { provide: "datepicker"}, 'data-date-format'=> "yyyy/mm/dd" %>
+                <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="col-md-3">Date To</div>
+              <div class="col-md-6 input-group date">
+                <%= f.text_field "end_date", class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required', data: { provide: "datepicker"}, 'data-date-format'=> "yyyy/mm/dd" %>
+                <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="row form-group">
+            <div class="col-xs-6">
+              <div class="col-md-3">CBM</div>
+              <div class="col-md-6"> <%= f.text_field "cbm", class: "form-control", id: "hm-weight", placeholder: "CBM", required: 'required' %></div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="col-md-3">Price</div>
+              <div class="col-md-6"> <%= f.text_field "price", class: "form-control", id: "hm-weight", placeholder: "Price", required: 'required' %></div>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-xs-6">
+              <div class="col-md-3">Delivery Days</div>
+              <div class="col-md-6"> <%= f.text_field "transition_days", class: "form-control", id: "hm-weight", placeholder: "delivery_days", required: 'required' %></div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="col-md-3">Cut Off Date</div>
+              <div class="col-md-6 input-group date">
+                <%= f.text_field "cut_off_date", class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required', data: { provide: "datepicker"}, 'data-date-format'=> "yyyy/mm/dd" %>
+                <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-xs-6">
+              <div class="col-md-3">freight_type</div>
+              <div class="col-md-6"> <%= f.select "freight_type", ['sea', 'air'],{}, {class: "form-control selecter", id: "hm-weight", required: 'required'} %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.submit 'save'%>
+      </div>
+  <%end%>
+</div>
+

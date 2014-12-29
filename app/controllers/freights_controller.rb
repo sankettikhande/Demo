@@ -1,7 +1,7 @@
 class FreightsController < ApplicationController
 
   before_action :authenticate_user!, except: :search
-  before_action :access_denied!, except: :search , unless: proc { current_user.seller?} 
+  before_action :access_denied!, except: :search , unless: proc { current_user.seller?}
 
   def index
     @freights = current_user.freights
@@ -11,11 +11,58 @@ class FreightsController < ApplicationController
     end
   end
 
+  def update
+    begin
+      freight = Freight.find(params[:id])
+      authorize  freight, :can_access_freight?
+      freight.update_attributes(freight_params)
+    rescue => e
+      flash[:notice] = "You Are Not Authorize"
+    end
+    redirect_to freights_path
+  end
+
   def new
     @freight = Freight.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @freight }
+    end
+  end
+
+  def edit
+    @freight = Freight.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy
+    freight = Freight.find(params[:id])
+    authorize  freight, :can_access_freight?
+    freight.destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def generate_csv_online
+    freights = current_user.freights
+    csv_string = Freight.generate_csv_report_for_freights_data(freights)
+    send_data csv_string,
+              :type => 'text/csv; charset=iso-8859-1; header=present',
+              :disposition => "attachment; filename=Freight.csv"
+  end
+
+
+  def update_freights_price
+    if params[:freight_data].present?
+     Freight.manipulate_freight_data(params)
+    else
+     flash[:notice]="Please select the freight"
+    end
+    respond_to do |format|
+      format.html {redirect_to  freights_path}
     end
   end
 
@@ -68,7 +115,7 @@ class FreightsController < ApplicationController
   private
 
   def freight_params
-    params.require(:freight).permit(:source_id, :destination_id, :height, :width, :length, :seller_id, :freight_type, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date, :remark)
+    params.require(:freight).permit(:source_id, :destination_id, :cbm,:height, :width, :length, :seller_id,:cut_off_date, :freight_type, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date, :remark)
   end
 
 
