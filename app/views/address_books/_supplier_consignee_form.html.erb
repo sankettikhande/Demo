@@ -4,7 +4,6 @@
       <div class="form-group seperator-15">
         <label>Address</label>
         <select class="form-control selecter booking_address_for" name='booking_id' required='required'>
-          <option hidden value=''>Select Booking</option>
           <% (session[:cart]|| []).each do |key, value| %>
             <% booking = Booking.find(key) %>
             <% if params[:booking_id] == booking.id.to_s %>
