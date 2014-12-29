@@ -43,9 +43,9 @@ Rails.application.routes.draw do
       get :bookings_on_hold
       get :negotiation_round_one
       post :round_one_price_update
-      get :seller_confirmation_order
+      get :pending
       post :update_booking_status
-      get :sellers_confirmed_bookings
+      get :confirmed
       get :draft_bookings
       get :archived_bookings
       get :payment

@@ -67,9 +67,9 @@ class BookingsController < ApplicationController
     end
   end
 
-	def seller_confirmation_order
+	def pending
 		@seller_bookings = current_user.seller_bookings.pending_confirmations.group_by(&:buyer_id)
-	end
+  end
 
   def update_booking_status
     if current_user.seller?
@@ -83,7 +83,7 @@ class BookingsController < ApplicationController
 
   end
 
-	def sellers_confirmed_bookings
+	def confirmed
 		@seller_confirmed_bookings = current_user.seller_bookings.confirmed.group_by(&:buyer_id)
 	end
 
