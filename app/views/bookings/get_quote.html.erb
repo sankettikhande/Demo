@@ -130,7 +130,7 @@
             <% @sellers.each do |seller| %>
               <li class="dd-li seller-filter">
                 <label for="checkbox_1"><%= seller.company_name %></label>
-                <input type="checkbox" id="<%= seller.id%>" class='seller-chk' name="seller_ids[]" value="<%= seller.id%>" />
+                <input type="checkbox" id="<%= seller.id%>" class='seller-chk' name="filter[seller_ids][]" value="<%= seller.id%>" />
               </li>
             <% end %>
           </ul>       

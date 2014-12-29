@@ -3,10 +3,11 @@
       booking_id = $('#booking_id').val();
       $.ajax({
         type: "POST",
-        data: $('input[name="seller_ids[]"]:checked').serialize(),
+        data: $('input[name="filter[seller_ids][]"]:checked').serialize(),
         url:"/bookings/filter_with_seller?id="+ booking_id,
         success: function(data){
-          $('.searched-freight').html(data);      
+          $('.searched-freight').html(data);
+          bind_raty();     
         },
         error: function(data){
           alert("something went wrong");
@@ -49,7 +50,6 @@
     })
 
   }
-
 
   function update_cart_detail_section(){
     $.ajax({

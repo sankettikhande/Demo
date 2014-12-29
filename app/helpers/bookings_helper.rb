@@ -21,22 +21,24 @@ module BookingsHelper
 
   def get_freight_quote(booking)
     beginning, ending = Time.utc(1970), Time.utc(2030)
-    @freight_rates = Freight.search(conditions: 
-                                      {
-                                        source_id: booking.source_id, 
-                                        destination_id: booking.destination_id, 
-                                        freight_type: booking.freight_type 
-                                      },
-                                    with: 
-                                      {
-                                        length: booking.length..10**5,
-                                        width: booking.width..10**5,
-                                        height: booking.height..10**5, 
-                                        min_weight: 0..booking.weight, 
-                                        max_weight: booking.weight..10**7,
-                                        start_date: beginning..booking.pick_up_date,
-                                        end_date: booking.pick_up_date..ending
-                                      },
+
+    conditions =  {
+                    source_id: booking.source_id, 
+                    destination_id: booking.destination_id,
+                    freight_type: booking.freight_type
+                  }
+    with = {
+            length: booking.length..10**5,
+            width: booking.width..10**5,
+            height: booking.height..10**5, 
+            min_weight: 0..booking.weight, 
+            max_weight: booking.weight..10**7,
+            start_date: beginning..booking.pick_up_date,
+            end_date: booking.pick_up_date..ending
+          }  
+    with.merge!(seller_id: params[:filter][:seller_ids]) if params[:filter] && params[:filter][:seller_ids]     
+    @freight_rates = Freight.search(conditions: conditions,
+                                    with: with,
                                     order: 'price asc'  
                                     ).map #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.    
   end
