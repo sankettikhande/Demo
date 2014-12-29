@@ -28,7 +28,7 @@ class Freight < ActiveRecord::Base
         elsif params[:change_val]== "change_by_percent"
           freight_price = freight_cal == "addition" ?  (freight.price + freight.price.to_f * (value/100).to_f) : (freight.price.to_f - (freight.price * value/100).to_f)
         end
-        freight.update_attribute(:price,freight_price)
+        freight.update_attribute(:price, freight_price)
       end
     end
 
@@ -38,7 +38,7 @@ class Freight < ActiveRecord::Base
         csv << cols
         csv << []
         freights.each do |freight|
-          csv <<[freight.source,freight.destination,freight.min_weight,freight.max_weight,freight.start_date,freight.end_date,freight.price,freight.freight_type,freight.cut_off_date,freight.transition_days]
+          csv <<[freight.source, freight.destination, freight.cbm, freight.min_weight, freight.max_weight, freight.start_date, freight.end_date,freight.price,freight.freight_type,freight.cut_off_date,freight.transition_days]
         end
       end
     end

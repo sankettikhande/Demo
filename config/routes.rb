@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     post "registrations/register_guest_user", to: "registrations#register_guest_user", as: :register_guest_user
     #get "/myaccount", to: 'registrations#edit' 
   end
+  
+  resources :users do 
+  end
+  
 
+  resources :user_information
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -19,6 +24,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
+  
   resources :freights do
     collection do
       post :search
@@ -65,10 +71,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users do 
-
-  end
-
   resources :payments do
     collection do
       get :payment_options
@@ -84,6 +86,8 @@ Rails.application.routes.draw do
   get '/deleteUserAccount', to: 'users#delete_user_account' 
   get '/register_supplier_consignee', to: 'users#register_supplier_consignee'
   get '/thank_you', to: 'users#thank_you', as: 'thank_you'
+  get '/company_information', to: 'user_information#edit'
+  get '/verify_company_information', to: 'user_information#new'
 
   # Example resource route with options:
   #   resources :products do
