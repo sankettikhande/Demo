@@ -48,7 +48,7 @@ class FreightsController < ApplicationController
 
   def generate_csv_online
     freights = current_user.freights
-    csv_string = Freight.generate_csv_report_for_freights_data(freights)
+    csv_string = Freight.export(freights)
     send_data csv_string,
               :type => 'text/csv; charset=iso-8859-1; header=present',
               :disposition => "attachment; filename=Freight.csv"

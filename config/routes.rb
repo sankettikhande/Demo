@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       post :add_to_cart
       post :remove_from_cart
       get :remove_from_search
+      get :search_result_download_to_csv
     end
     collection do 
       get :active_bookings

@@ -94,8 +94,8 @@
         <div class="col-xs-3">
           <ul class="list-inline order-sort">
 
-            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Download" data-toggle="tooltip" data-placement="top">Download</button></li>
-
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Download" data-toggle="tooltip" data-placement="top" onclick="download_csv(<%= @draft_booking.id%>)">Download</button></li>
+ 
             <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Eligible for Discount" data-toggle="tooltip" data-placement="top">With Discount</button></li>
 
             <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Minutes" data-toggle="tooltip" data-placement="top" onclick="triggerClickEvent(<%= @draft_booking.id%>, <%= @min_price_freight%>)">Total Minimum</button></li>
