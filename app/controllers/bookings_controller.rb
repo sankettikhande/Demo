@@ -157,6 +157,14 @@ class BookingsController < ApplicationController
     render partial: 'bookings/result_content'
   end
 
+  def search_result_download_to_csv
+    booking = Booking.find(params[:id])
+    freight_rates = get_freight_quote(booking)  
+    respond_to do |format|
+      format.csv { send_data Freight.to_csv(freight_rates) }
+    end
+  end
+
   protected
 
   def set_search_result_page_variables

@@ -114,3 +114,14 @@
           }
       });
   }
+
+  function download_csv(booking_id){
+    $.ajax({
+        type: "GET",
+        url: "/bookings/"+booking_id+"/search_result_download_to_csv.csv",
+        success: function (data) {
+          window.open( "data:text/csv;charset=utf-8," + escape(data)) 
+        }
+    });
+    
+  }
