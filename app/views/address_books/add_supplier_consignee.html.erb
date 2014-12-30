@@ -16,7 +16,7 @@
             <%booking = Booking.find(key)%>
             <%freight = Freight.find(value)%>
             <div class="result-item">
-              <div class="rb-item rb-name"><img src="/assets/dhl.png" alt="DHL"></div>
+              <div class="rb-item rb-name"><%= image_tag(freight.seller.avatar_url, height: 100, width: 100) if freight.seller && freight.seller.avatar? %></div>
               <div class="rb-item rb-rating">
                 <span class="rview-rating"></span> <span class="rview-rating-c">(10)</span></div>
               <div class="rb-item rb-coff"><%= booking.pick_up_date.strftime("%-d, %b")%></div>
