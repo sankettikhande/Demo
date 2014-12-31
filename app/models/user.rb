@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validate :avatar_size_validation
   validates :first_name, :last_name, :company_name, :company_registration_number, :address_line_1, :post_code, :city, :state, :country, :phone_number, :presence => true
 
-
+  has_one :user_information
   has_many :seller_bookings, class_name: "Booking", foreign_key: "seller_id"
   has_many :buyer_bookings, class_name: "Booking", foreign_key: "buyer_id"
   has_many :address_books       

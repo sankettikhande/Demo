@@ -1,0 +1,141 @@
+<div class="container-fluid">
+  <div class="right-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+              <h3 class="page-title text-center"></i> Buyer Varification-Company Information</h3>
+            </div>
+          </div>          
+          <%= form_for @user_information do |f| %>           
+            <div class="sign-up-form form-horizontal">
+              <div class="row">
+                <div class="col-xs-6 col-xs-offset-3">
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">CIN</label>
+                    <div class="col-xs-8">
+                      <%= f.text_field :cin, autofocus: true,required: 'required',placeholder: "CIN number", class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Company Name</label>
+                    <div class="col-xs-8">
+                      <%= f.text_field :company_name,required: 'required', placeholder: "Enter Company name", class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Company Registration Number</label>
+                    <div class="col-xs-8">
+                      <%= f.text_field :company_registration_number,required: 'required', placeholder: "Enter ompany Registration Number", class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Scan Registraion</label>
+                    <div class="col-xs-8 registration_copy" style="display:none">
+                      <%= f.file_field :scan_registration_copy, class: "form-control" %>  
+                    </div>
+                    <div class="col-xs-4 show_registration_copy_div"> Change
+                    <%= image_tag(f.object.scan_registration_copy_url, height: 40, width: 50) if f.object.scan_registration_copy? %>
+                    </div>
+                    
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Company PAN No.</label>
+                    <div class="col-xs-8">
+                      <%= f.text_field :company_pan_number,required: 'required', placeholder: "Company PAN No.", class: "form-control" %>
+                    </div>
+                   
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Scan PAN</label>
+                    <div class="col-xs-8 scan_pan_copy" style="display:none">
+                      <%= f.file_field :scan_pan_copy, class: "form-control" %>                     
+                    </div>
+                    <div class="col-xs-4 show_scan_copy_div" style="padding-left:15px"> Change
+                    <%= image_tag(f.object.scan_pan_copy, height: 40, width: 50) if f.object.scan_pan_copy? %>
+                    </div>
+                     
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Class Of Company</label>
+                    <div class="col-xs-8">
+                       <%= f.radio_button :company_class, 'public' %> Public &nbsp;&nbsp;
+                      <%= f.radio_button :company_class, 'private'%> Private
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Authorised Capital
+                    <span class="text-xs">(in Rs.)</span></label>
+                    <div class="col-xs-8">
+                      <%= f.text_field :authorised_capital,required: 'required', placeholder: "Authorised Capital", class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Paid Capital<span class="text-xs">(in Rs.)</span></label>
+                    <div class="col-xs-8">
+                      <%= f.text_field :paid_up_capital,required: 'required', placeholder: "Paid Capital", class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Date Of Incopration</span></label>
+                      <div class="col-md-4 input-group date" style="padding-left:15px">
+                        <%= f.text_field "date_of_incoporation", class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required', data: { provide: "datepicker"}, 'data-date-format'=> "yyyy/mm/dd" %>
+                        <span class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </span>
+                      </div>
+                  </div>
+                   <div class="form-group">
+                    <label class="col-xs-4 control-label">Whether Listead or not</label>
+                    <div class="col-xs-6">
+                       <%= f.radio_button :is_listed, 'true'%> Listed &nbsp;&nbsp;
+                      <%= f.radio_button :is_listed, 'false'%> Un Listed
+                    </div>
+                  </div>               
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Date Of Last Balance Sheet</label>
+                    <div class="col-md-4 input-group date" style="padding-left:15px">
+                        <%= f.text_field "date_of_last_balance_sheet", class: "form-control", id: "hm-date",required: 'required', placeholder: "yyyy/mm/dd", required: 'required', data: { provide: "datepicker"}, 'data-date-format'=> "yyyy/mm/dd" %>
+                        <span class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </span>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Company Status</label> 
+                    <div class="col-xs-6">
+                      <%= f.text_field :company_status,required: 'required', placeholder: "Company Status", class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Category</label>
+                    <div class="col-xs-6">
+                      <%= f.text_field :category,required: 'required', placeholder: "Company Status", class: "form-control" %>
+                    </div>
+                  </div>
+                  <div class="form-group text-center seperator-25">
+                    <%= f.submit "Submit", class: 'btn btn-success' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <%end%>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$( ".show_scan_copy_div" ).click(function() {
+  $(".scan_pan_copy" ).show();
+  $(".show_scan_copy_div").hide();
+
+});
+$( ".show_registration_copy_div" ).click(function() {
+  $(".registration_copy" ).show();
+  $(".show_registration_copy_div").hide();
+
+});
+</script>
