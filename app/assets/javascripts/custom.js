@@ -17,6 +17,7 @@ $(document).ready(function(){
   $('#forgot-link').click(function(){
       $('.login-form').addClass('hidden');
       $('.forgot-form').removeClass('hidden');
+      $('.forgot-form .new_user')[0].reset();
   });
 
 
@@ -24,10 +25,15 @@ $(document).ready(function(){
       $('#login-modal').modal('show');
   });
 
+  $('#login-modal').on("show.bs.modal", function(){
+      $('.login-form .new_user')[0].reset();
+  });
+
   $('#login-modal').on("hidden.bs.modal", function(){
       $('.forgot-form').addClass('hidden');
       $('.login-form').removeClass('hidden');
       $('#forgot-link-sent').empty().removeClass('alert alert-info');
+      $('.login-form .alert-danger').empty().hide();
   });
 
   $('[data-toggle="tooltip"]').tooltip({
