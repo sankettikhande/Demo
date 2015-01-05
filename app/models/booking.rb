@@ -70,6 +70,14 @@ class Booking < ActiveRecord::Base
       end
     end
 
+    event :hold_to_confirmed do
+      transitions from: :hold, to: :confirmed
+      success do
+        BookingMailer.seller_booking_confirmation( self ).deliver
+        BookingMailer.buyer_booking_confirmation( self ).deliver
+      end
+    end
+
     event :confirmed_to_hold do
       transitions from: :confirmed, to: :hold
       success do
