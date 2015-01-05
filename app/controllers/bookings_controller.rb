@@ -74,11 +74,11 @@ class BookingsController < ApplicationController
   def update_booking_status
     if current_user.seller?
       booking = current_user.seller_bookings.find(params[:booking_id])
-      booking.update_attributes!(:aasm_state => params[:order_status],:remark=>params[:remark])
+      booking.update_attributes!(:remark=>params[:remark])
     elsif current_user.buyer?
       booking = current_user.buyer_bookings.find(params[:booking_id])
-      booking.update_attributes!(:aasm_state => params[:order_status])
     end
+    booking.send("#{booking.aasm_state}_to_#{params[:order_status]}!")
     render nothing: true
 
   end
