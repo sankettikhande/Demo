@@ -47,47 +47,42 @@ class Booking < ActiveRecord::Base
     end
 
     event :active_to_confirmed do
-      transitions from: :active, to: :confirmed do
-        after do
-          BookingMailer.seller_booking_confirmation( self ).deliver
-          BookingMailer.buyer_booking_confirmation( self ).deliver
-        end
+      transitions from: :active, to: :confirmed
+      success do
+        BookingMailer.seller_booking_confirmation( self ).deliver
+        BookingMailer.buyer_booking_confirmation( self ).deliver
       end
     end
 
     event :active_to_hold do
-      transitions from: :active, to: :hold do
-        after do
-          BookingMailer.seller_booking_rejection( self ).deliver
-          BookingMailer.buyer_booking_rejection( self ).deliver
-        end
+      transitions from: :active, to: :hold
+      success do
+        BookingMailer.seller_booking_rejection( self ).deliver
+        BookingMailer.buyer_booking_rejection( self ).deliver
       end
     end
 
     event :hold_to_active do
-      transitions from: :hold, to: :active do
-        after do
-          BookingMailer.seller_active_booking( self ).deliver
-          BookingMailer.buyer_active_booking( self ).deliver
-        end
+      transitions from: :hold, to: :active
+      success do
+        BookingMailer.seller_active_booking( self ).deliver
+        BookingMailer.buyer_active_booking( self ).deliver
       end
     end
 
     event :confirmed_to_hold do
-      transitions from: :confirmed, to: :hold do
-        after do
-          BookingMailer.seller_booking_rejection( self ).deliver
-          BookingMailer.buyer_booking_rejection( self ).deliver
-        end
+      transitions from: :confirmed, to: :hold
+      success do
+        BookingMailer.seller_booking_rejection( self ).deliver
+        BookingMailer.buyer_booking_rejection( self ).deliver
       end
     end
 
     event :active_to_cancelled do
-      transitions from: :active, to: :cancelled do
-        after do
-          BookingMailer.seller_booking_cancellation( self ).deliver
-          BookingMailer.buyer_booking_cancellation( self ).deliver
-        end
+      transitions from: :active, to: :cancelled
+      success do
+        BookingMailer.seller_booking_cancellation( self ).deliver
+        BookingMailer.buyer_booking_cancellation( self ).deliver
       end
     end
   end
