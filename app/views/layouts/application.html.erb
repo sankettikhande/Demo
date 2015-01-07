@@ -7,6 +7,25 @@
   background_color = current_user && current_user.seller? ? "#f8f8f8" : "#cae5ff"
 %>
 <body class="air-bg" style="background-color: <%= background_color%>">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1490486881227462',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+
+    // ADD ADDITIONAL FACEBOOK CODE HERE
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
   <%= render :partial => "layouts/header" %>
     <% if  user_signed_in? && current_user.seller?  %>
       <%= render :partial => "layouts/seller_side_bar" %>
