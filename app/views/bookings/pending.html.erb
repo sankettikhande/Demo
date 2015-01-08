@@ -62,8 +62,8 @@
                             <td> <%=booking.weight %></td>
                             <td> <%=booking.spot_rate %></td>
                             <td id="status_field_<%=booking.id%>"><%=booking.aasm_state %></td>
-                            <td> <%= button_tag ("Confirm"),:style=>"width:auto", :class=>"btn btn-warning btn-sm",:onclick=> "confirm_bookings(#{booking.id});" %>
-                                <%= button_tag ("Reject"),:style=>"width:auto", :class=>"btn btn-success btn-sm",:onclick=> "reject_booking(#{booking.id});" %>
+                            <td> <%= button_tag ("Confirm"),:style=>"width:auto", :class=>"btn btn-warning btn-sm confirm_btn",:disabled =>booking.aasm_state =='confirm',:onclick=> "confirm_bookings(#{booking.id});" %>
+                                <%= button_tag ("Reject"),:style=>"width:auto",:disabled =>booking.aasm_state =='hold', :class=>"btn btn-success btn-sm reject_btn",:onclick=> "reject_booking(#{booking.id});" %>
                             </td>
                             <td id="remark_field_<%=booking.id %>"> <%=booking.remark %> </td>
                           </tr>
@@ -107,6 +107,8 @@
 
     function confirm_bookings(id){
         update_booking_status(id,'confirmed','-')
+        $('.confirm_btn').attr("disabled", true);
+         $('.reject_btn').attr("disabled", false);
     }
 
     function reject_booking(id){
@@ -120,5 +122,7 @@
         var booking_id = $("#booking_hidden_field_id").val();
         update_booking_status(booking_id,'hold',reason_to_reject);
         $('#myModal').modal('hide');
+        $('.reject_btn').attr("disabled", true);
+        $('.confirm_btn').attr("disabled", false);
     }
 </script>

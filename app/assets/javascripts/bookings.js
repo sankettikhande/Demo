@@ -103,7 +103,7 @@
       })
   }
 
-  function update_booking_status(id,status, remark) {
+  function update_booking_status(id,status,remark) {
       $.ajax({
           type: "POST",
           url: "/bookings/update_booking_status/",
