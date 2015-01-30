@@ -16,49 +16,49 @@
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Name</label>
                     <div class="col-xs-8">
-                      <%= f.text_field :first_name, autofocus: true, placeholder: "Enter first name required", class: "form-control" %>
+                      <%= f.text_field :first_name,required: :required, autofocus: true, placeholder: "Enter first name required", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Last Name</label>
                     <div class="col-xs-8">
-                      <%= f.text_field :last_name, placeholder: "Enter last name", class: "form-control" %>
+                      <%= f.text_field :last_name,required: :required, placeholder: "Enter last name", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Email</label>
                     <div class="col-xs-8">
-                      <%= f.email_field :email, placeholder: "Enter valid email address", class: "form-control" %>
+                      <%= f.email_field :email,required: :required, placeholder: "Enter valid email address", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Password</label>
                     <div class="col-xs-8">
-                      <%= f.password_field :password, placeholder: "Choose strong password", class: "form-control" %>
+                      <%= f.password_field :password,required: :required, placeholder: "Choose strong password", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Confirm Password</label>
                     <div class="col-xs-8">
-                      <%= f.password_field :password_confirmation, placeholder: "Retype Password", class: "form-control" %>
+                      <%= f.password_field :password_confirmation,required: :required, placeholder: "Retype Password", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Company Name</label>
                     <div class="col-xs-8">
-                      <%= f.text_field :company_name, placeholder: "Enter Company Name", class: "form-control" %>
+                      <%= f.text_field :company_name,required: :required, placeholder: "Enter Company Name", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Company Registration No.</label>
                     <div class="col-xs-8">
-                        <%= f.text_field :company_registration_number, placeholder: "Enter Company Registration Number", class: "form-control" %>
+                        <%= f.text_field :company_registration_number,required: :required, placeholder: "Enter Company Registration Number", class: "form-control" %>
                       </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Address Line 1</label>
                     <div class="col-xs-8">
-                      <%= f.text_field :address_line_1, placeholder: "Address Line 1", class: "form-control" %>
+                      <%= f.text_field :address_line_1,required: :required, placeholder: "Address Line 1", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
@@ -76,19 +76,19 @@
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Postcode</label>
                     <div class="col-xs-4">
-                      <%= f.text_field :post_code, placeholder: "Valid Postal code", class: "form-control" %>
+                      <%= f.text_field :post_code,required: :required, placeholder: "Valid Postal code", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">City</label>
                     <div class="col-xs-6">
-                      <%= f.text_field :city, placeholder: "City name", class: "form-control" %>
+                      <%= f.text_field :city,required: :required, placeholder: "City name", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Region/State <span class="text-xs">(Optional)</span></label>
                     <div class="col-xs-6">
-                      <%= f.text_field :state, placeholder: "State name", class: "form-control" %>
+                      <%= f.text_field :state,required: :required, placeholder: "State name", class: "form-control" %>
                     </div>
                   </div>
                   <div class="form-group">
