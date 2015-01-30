@@ -40,6 +40,7 @@ gem 'quiet_assets', group: :development
 gem 'activerecord-import-rails4', '~> 0.5.0'
 gem 'exception_notification'
 gem 'smarter_csv'
+gem 'roo'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
