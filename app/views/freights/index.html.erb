@@ -8,16 +8,15 @@
               <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
               <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
             </ul>
-            <%= button_to "New freight", new_freight_path, :class => "button", :method => :get  %>
-            <div class="nav navbar-nav navbar-right"><%= button_to "Export", generate_csv_online_freights_path, :class => "button", :method => :post,format: "csv"  %></div>
             <div class="tab-content">
+            <div align="right"><%= button_to "Export", generate_csv_online_freights_path, :class => "btn btn-info", :method => :post,format: "csv"  %></div>
               <div class="tab-pane active" id="tab-p1">
                 <%= select_tag(:select_val, options_for_select([["Constant Value","constant_value"],["Change by %","change_by_percent"]])) %>
 
                 <%= select_tag(:manipulate_val, options_for_select([["Add","addition"],["Subtract","subtract"]]),:include_blank => 'Select') %>
 
                 <%= text_area_tag 'manipulate_value', nil, :size=> '5x1', :class=>'set_value' %><br>
-                <%= button_tag ("Apply"), :onclick=> "manipulate_the_price();" %>
+                <%= button_tag ("Apply"), :onclick=> "manipulate_the_price();" ,:class=>'btn btn-info'%>
                 <table class="table table-striped">
                   <thead>
                   <tr>
@@ -34,8 +33,6 @@
                     <th class="col-xs-2">Price</th>
                     <th class="col-xs-4">Freight Type</th>
                     <th class="col-xs-2">Transition Days</th>
-
-
                     <th class="col-xs-2">Action</th>
                     <th class="col-xs-2">All<br>
                       <%=check_box_tag "freight", '', false, class: 'select_all'%>
@@ -69,6 +66,9 @@
                   <% end %>
                   </tbody>
                 </table>
+                <div>
+                <%= button_to "New freight", new_freight_path, :class => "btn btn-info", :method => :get  %>
+                </div>
               </div>
             </div>
           </div>
