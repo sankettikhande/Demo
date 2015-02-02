@@ -3,8 +3,8 @@ class Freight < ActiveRecord::Base
 
 
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'
-  belongs_to :source, class_name: 'Location', foreign_key: 'source_id'
-  belongs_to :destination, class_name: 'Location', foreign_key: 'destination_id'
+  belongs_to :source, class_name: 'Port', foreign_key: 'source_id'
+  belongs_to :destination, class_name: 'Port', foreign_key: 'destination_id'
 
   validates :source_id, :destination_id, :length, :height, :width, :min_weight, :freight_type, :max_weight, :transition_days, :price, :start_date, :end_date, :remark, :presence => true
   class << self
