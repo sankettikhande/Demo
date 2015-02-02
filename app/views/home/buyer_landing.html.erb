@@ -40,8 +40,8 @@
                               <label for="hm-date">
                                 Date
                               </label>
-                              <div class="input-group date">
-                              <%= text_field_tag "search[][date]", search_parameter['date'], class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required', data: { provide: "datepicker"}, 'data-date-format'=> "yyyy/mm/dd" %>
+                              <div class="input-group date" data-provide="datepicker">
+                              <%= text_field_tag "search[][date]", search_parameter['date'], class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required','data-date-format'=> "yyyy/mm/dd" %>
                               <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                               </span>
