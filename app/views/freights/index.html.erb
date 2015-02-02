@@ -42,8 +42,8 @@
                   <tbody>
                   <% @freights.each do |freight| %>
                       <tr id="edit_freight_form_<%=freight.id%>">
-                        <td> <%=freight.source.full_address  %></td>
-                        <td> <%=freight.destination.full_address  %></td>
+                        <td> <%=freight.source.port_name  %></td>
+                        <td> <%=freight.destination.port_name  %></td>
                         <td> <%=freight.length  %></td>
                         <td> <%=freight.width  %></td>
                         <td> <%=freight.height  %></td>
