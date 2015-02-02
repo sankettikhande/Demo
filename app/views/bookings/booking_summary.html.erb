@@ -19,8 +19,8 @@
     <% freight = Freight.find(value) %>
     <% booking = Booking.find(key)%>  
     <tr>
-      <td><%= freight.source.full_address%></td>
-      <td><%= freight.destination.full_address%></td>    
+      <td><%= freight.source.port_name%></td>
+      <td><%= freight.destination.port_name%></td>
       <td><%= booking.length%></td>
       <td><%= booking.width%></td>
       <td><%= booking.height%></td>
