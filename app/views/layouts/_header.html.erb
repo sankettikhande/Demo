@@ -13,7 +13,7 @@
         <li><a href="#" data-toggle="tooltip" data-placement="left" title="Call Support"><i class="fa fa-phone"></i> +91-1234567890</a></li>
         <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Email Support"><i class="fa fa-envelope"></i> Support</a></li>
         <% if user_signed_in? %>
-          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to "Logout #{current_user.first_name}", destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><a href="#" id="login-link"><i class="fa fa-sign-in"></i> Login</a></li>
         <% end %>
@@ -21,7 +21,3 @@
     </div>
   </div>
 </header>
-
-<% unless user_signed_in?%>
-  <%= render template: "devise/sessions/new", locals: { resource: User.new, resource_name: "user" }%>
-<% end %>
