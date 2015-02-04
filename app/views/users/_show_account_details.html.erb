@@ -1,0 +1,183 @@
+<%user = current_user if current_user.seller?%>
+<%if user %>
+ <div class="row">
+ <%= form_for(user, url: update_user_information_users_path) do |f| %>
+				<!-- <%#= form_for user do |f|%> -->
+                <div class="col-xs-6 col-xs-offset-3">User Information<u class="edit_user_info", style="padding-left:20px">Edit</u></p>
+                  <div id="user_info">
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label">First Name</label>
+                      <div class="col-xs-4">
+                      <%= f.text_field "first_name", class: "form-control user_information", id: "first_name",
+                      :disabled => true %>                     
+                      </div>
+                    </div></br></br>
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label">Last Name</label>
+                      <div class="col-xs-4">
+                      <%= f.text_field "last_name", class: "form-control user_information", id: "last_name",
+                      :disabled => true %>                      
+                      </div>
+                    </div></br></br>
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label">Company Name</label>
+                      <div class="col-xs-4">
+                       <%= f.text_field "company_name", class: "form-control user_information", id: "company_name",
+                      :disabled => true %>                        
+                      </div>
+                    </div></br></br>
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label">Company Registration No.</label>
+                      <div class="col-xs-4">
+                       <%= f.text_field "company_registration_number", class: "form-control user_information", id: "company_registration_number",
+                      :disabled => true %>
+                        </div>
+                    </div></br></br></br>
+                    <div class="form-group">
+                      <label class="col-xs-4 control-label">Address Line 1</label>
+                      <div class="col-xs-4">                      
+                       <%= f.text_field "address_line_1", class: "form-control user_information", id: "address_line_1",
+                      :disabled => true %>
+                      </div>
+                    </div></br></br>
+                     <div class="form-group">
+                      <label class="col-xs-4 control-label">Address Line 2 <span class="text-xs">(Optional)</span></label>
+                      <div class="col-xs-4">
+                      <%= f.text_field "address_line_2", class: "form-control user_information", id: "address_line_2",
+                      :disabled => true %>
+                      </div>
+                    </div></br></br>
+                     <div class="form-group">
+                      <label class="col-xs-4 control-label">Address Line 3 <span class="text-xs">(Optional)</span></label>
+                      <div class="col-xs-4">
+                        <%= f.text_field "address_line_3", class: "form-control user_information", id: "address_line_3",
+                        :disabled => true %>
+                      </div>
+                    </div></br></br>
+                     <div class="form-group">
+                      <label class="col-xs-4 control-label">Postcode</label>
+                      <div class="col-xs-4">
+                       <%= f.text_field "post_code", class: "form-control user_information", id: "post_code",
+                      :disabled => true %>
+                      </div>
+                      </div></br></br>
+                       <div class="form-group">
+                      <label class="col-xs-4 control-label">Preferred Currency</label>
+                      <div class="col-xs-4">
+                      <%= f.text_field "preferred_currency", class: "form-control user_information", id: "preferred_currency",
+                      :disabled => true %>
+                      </div></p>
+                     <div style="display:none" id="user_info_action"><%= button_tag ("Save"),:style=>"width:auto", :class=>"btn btn-success btn-sm",:onclick=> "return update_user_informations();" %>
+                                <%= button_tag ("Cancel"),:style=>"width:auto", :class=>"btn btn-danger btn-sm",:onclick=> "return cancel_edit_user_info();" %></div> 
+                      </br></br></br></br>
+                    </div>
+
+                    Contact Information<span class="edit_user_contact", style="padding-left:20px" >Edit</span>
+                 <div id="contact_info">
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Email</label>
+                    <div class="col-xs-4">
+                     <%= f.text_field "email", class: "form-control user_contact_information", id: "email",
+                    :disabled => true %>
+                    </div>
+                  </div></br></br>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Contact By E-mail</label>
+                    <div class="col-xs-4">
+                      Please send me news and updates
+                    </div>
+                  </div></br></br>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Password</label>
+                    <div class="col-xs-4">
+                     <%= f.text_field "password", class: "form-control user_contact_information", id: "password",
+                    :disabled => true %>
+                    </div>
+                  </div></p>
+                   <div style="display:none ;" id="user_contact_action"><%= button_tag ("Save"),:style=>"width:auto", :class=>"btn btn-success btn-sm",:onclick=> "update_user_contact_informations();" %>
+                                <%= button_tag ("Cancel"),:style=>"width:auto", :class=>"btn btn-danger btn-sm",:onclick=> "return cancel_edit_user_contact_info();" %></div></br></br>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div align="center">
+
+              <%= link_to "Delete Account", destroy_user_session_path(user), {method: :delete,:class=>"btn btn-warning", data: {confirm: "Are you sure?"}, :remote=>true} %>                
+      </div>
+      <%end%>
+<%end%>
+
+<script> 
+  $(document).ready(function(){
+
+    $('.edit_user_info').click(function(){
+      $('.user_information').removeAttr('disabled');
+      $('#user_info_action').show()
+    })
+
+    $('.edit_user_contact').click(function(){
+      $('.user_contact_information').removeAttr('disabled');
+      $('#user_contact_action').show()
+    })
+  })
+
+  function cancel_edit_user_info(){
+     $('.user_information').attr( "disabled", "disabled" );
+     $('#user_info_action').hide()
+      return false;
+  }
+
+   function cancel_edit_user_contact_info(){
+     $('.user_contact_information').attr( "disabled", "disabled" );
+     $('#user_contact_action').hide()
+      return false;
+   } 
+
+   function delete_user_acc(){
+    $.ajax({
+          type: 'DELETE',
+          url: '/users/destroy_user/',
+          success: function(data){
+
+            location.reload();
+          }
+        })
+
+    return false;
+   }    
+
+    function update_user_informations(){
+        var first_name = $('#first_name').val();
+        var last_name = $('#last_name').val();
+        var comp_name = $('#company_name').val();
+        var comp_reg = $('#company_registration_number').val();
+        var add1 = $('#address_line_1').val();
+        var add2 = $('#address_line_2').val();
+        var add3 = $('#address_line_3').val();
+        var post_code = $('#post_code').val();
+        var currency = $('#preferred_currency').val();
+        $.ajax({
+          type: 'PUT',
+          url: '/users/update_user_information/',
+          data: {user_information:true,first_name: first_name,last_name: last_name, comp_name: comp_name,comp_reg :comp_reg, add1: add1,add2: add2,add3: add3,post_code: post_code,currency: currency}
+          success: function(data){
+            $('.user_information').attr( "disabled", "disabled" );
+          }
+        })        
+        return false;
+      }
+
+      function update_user_contact_informations(){
+        var email = $('#email').val();
+        $.ajax({        
+          type: 'PUT',
+          url: '/users/update_user_information/',
+          data: {email: email},
+          success: function(data){
+            $('.user_contact_information').attr( "disabled", "disabled" );
+          }
+        })
+        return false;
+      }
+
+  </script>
