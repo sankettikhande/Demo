@@ -10,7 +10,14 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require modernizr
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
-//= require_tree .
+//= require jquery-migrate-1.2.1.min
+//= require placeholder
+//= require bootstrap.min
+//= require bootstrap-datepicker
+//= require jquery.fs.selecter.min
+//= require custom
+//= require_tree ./secondaryJS

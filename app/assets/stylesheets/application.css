@@ -11,6 +11,10 @@
  * file per style scope.
  *
  *= require jquery-ui/autocomplete
- *= require_tree .
+ *= require bootstrap.min
+ *= require bootflat.min
+ *= require datepicker3
+ *= require font-awesome.min
+ *= require custom
  *= require_self
  */

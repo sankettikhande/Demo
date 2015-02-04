@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
     user = User.where(email: email).first
     user && user.valid_password?(password)
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

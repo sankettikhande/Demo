@@ -1,132 +1,109 @@
 <% search_parameter = session[:search].first || {}%>
-<div class="container-fluid">
-  <div class="right-body">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="tabbed-panel home-search-tabs">
-            <ul class="nav nav-tabs panel-tabs freight-type">
-              <li class="active"><a href="#tab-p1" data-toggle="tab">Sea</a></li>
-              <li><a href="#tab-p1" data-toggle="tab">Air</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-p1">
-                <%= form_tag search_freights_path, method: :post do%>
-                  <div class="row">
-                    <div class="col-xs-12 search-list">
-                      <div class="search-row">
-                        <div class="row search-item">
-                          <div class="col-xs-2">
-                            <div class="form-group">
-                              <%= hidden_field_tag 'search[][freight_type]', 'sea', id: 'landing_tab_freight_type' %>
-                              <label for="frm-search">
-                                From
-                              </label>
-                              <%= select_tag('search[][source_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['source_id']), include_blank: true, class: 'form-control source-auto-complete', placeholder: "Source", id: "source", required: 'required')%>
-                            </div>
-                          </div>
+<div class="tabbed-panel home-search-tabs">
+  <ul class="nav nav-tabs panel-tabs freight-type">
+    <li class="active"><a href="#tab-p1" data-toggle="tab">Sea</a></li>
+    <li><a href="#tab-p1" data-toggle="tab">Air</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab-p1">
+      <%= form_tag search_freights_path, method: :post do%>
+        <div class="row">
+          <div class="col-xs-12 search-list">
+            <div class="search-row">
+              <div class="row search-item">
+                <div class="col-xs-2">
+                  <div class="form-group">
+                    <%= hidden_field_tag 'search[][freight_type]', 'sea', id: 'landing_tab_freight_type' %>
+                    <label for="frm-search">
+                      From
+                    </label>
+                    <%= select_tag('search[][source_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['source_id']), include_blank: true, class: 'form-control source-auto-complete', placeholder: "Source", id: "source", required: 'required')%>
+                  </div>
+                </div>
 
-                          <div class="col-xs-2">
-                            <div class="form-group">
-                              <label for="to-search">
-                                To
-                              </label>
-                              <%= select_tag('search[][destination_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['destination_id']), include_blank: true, class: 'form-control destination-auto-complete', placeholder: "Source", id: "destination", required: 'required')%>
-                            </div>
-                          </div>
+                <div class="col-xs-2">
+                  <div class="form-group">
+                    <label for="to-search">
+                      To
+                    </label>
+                    <%= select_tag('search[][destination_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['destination_id']), include_blank: true, class: 'form-control destination-auto-complete', placeholder: "Source", id: "destination", required: 'required')%>
+                  </div>
+                </div>
 
-                          <div class="col-xs-2">
-                            <div class="form-group">
-                              <label for="hm-date">
-                                Date
-                              </label>
-                              <div class="input-group date" data-provide="datepicker">
-                              <%= text_field_tag "search[][date]", search_parameter['date'], class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required','data-date-format'=> "yyyy/mm/dd" %>
-                              <span class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                              </span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-xs-1">
-                            <div class="form-group">
-                              <label for="hm-length">
-                                Length
-                              </label>
-                              <%= text_field_tag "search[][length]", search_parameter['length'], class: "form-control", id: "hm-length", placeholder: "L", required: 'required' %>
-                            </div>
-                          </div>
-
-                          <div class="col-xs-1">
-                            <div class="form-group">
-                              <label for="hm-width">
-                                Width
-                              </label>
-                              <%= text_field_tag "search[][width]", search_parameter['width'], class: "form-control", id: "hm-width", placeholder: "W", required: 'required' %>
-                            </div>
-                          </div>
-                          <div class="col-xs-1">
-                            <div class="form-group">
-                              <label for="hm-height">
-                                Height
-                              </label>
-                              <%= text_field_tag "search[][height]", search_parameter['height'], class: "form-control", id: "hm-height", placeholder: "H", required: 'required' %>
-                            </div>
-                          </div>
-
-                          <div class="col-xs-1">
-                            <div class="form-group">
-                              <label for="hm-weight">
-                                Kg
-                              </label>
-                              <%= text_field_tag "search[][weight]", search_parameter['weight'], class: "form-control", id: "hm-weight", placeholder: "Weight", required: 'required' %>
-                            </div>                           
-                          </div>
-
-                          <div class="col-xs-1">
-                            <div class="form-group">
-                              <label for="hm-qty">
-                                QTY
-                              </label>
-                              <%= text_field_tag "search[][quantity]", search_parameter['quantity'], class: "form-control", id: "hm-qty", placeholder: "QTY", required: 'required' %>
-                            </div>
-
-                            <div class="flow-remove">
-                              <button type="button" class="btn btn-danger btn-remove">X</button>
-                            </div> 
-                          </div>
-
-                        </div>
-                      </div>
-                      <div class="form-group text-right">
-                        <button type="button" class="btn btn-info btn-sm" id="search-more-btn"><i class="fa fa-plus"></i> Add more</button>
-                      </div>  
-
+                <div class="col-xs-2">
+                  <div class="form-group">
+                    <label for="hm-date">
+                      Date
+                    </label>
+                    <div class="input-group date" data-provide="datepicker">
+                    <%= text_field_tag "search[][date]", search_parameter['date'], class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required','data-date-format'=> "yyyy/mm/dd" %>
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </span>
                     </div>
                   </div>
-                  <div class="form-group text-center">
-                    <%= submit_tag 'Search', id: "home-search", class: "btn btn-primary" %>
+                </div>
+
+                <div class="col-xs-1">
+                  <div class="form-group">
+                    <label for="hm-length">
+                      Length
+                    </label>
+                    <%= text_field_tag "search[][length]", search_parameter['length'], class: "form-control", id: "hm-length", placeholder: "L", required: 'required' %>
                   </div>
-                <%end%>
+                </div>
+
+                <div class="col-xs-1">
+                  <div class="form-group">
+                    <label for="hm-width">
+                      Width
+                    </label>
+                    <%= text_field_tag "search[][width]", search_parameter['width'], class: "form-control", id: "hm-width", placeholder: "W", required: 'required' %>
+                  </div>
+                </div>
+                <div class="col-xs-1">
+                  <div class="form-group">
+                    <label for="hm-height">
+                      Height
+                    </label>
+                    <%= text_field_tag "search[][height]", search_parameter['height'], class: "form-control", id: "hm-height", placeholder: "H", required: 'required' %>
+                  </div>
+                </div>
+
+                <div class="col-xs-1">
+                  <div class="form-group">
+                    <label for="hm-weight">
+                      Kg
+                    </label>
+                    <%= text_field_tag "search[][weight]", search_parameter['weight'], class: "form-control", id: "hm-weight", placeholder: "Weight", required: 'required' %>
+                  </div>                           
+                </div>
+
+                <div class="col-xs-1">
+                  <div class="form-group">
+                    <label for="hm-qty">
+                      QTY
+                    </label>
+                    <%= text_field_tag "search[][quantity]", search_parameter['quantity'], class: "form-control", id: "hm-qty", placeholder: "QTY", required: 'required' %>
+                  </div>
+
+                  <div class="flow-remove">
+                    <button type="button" class="btn btn-danger btn-remove">X</button>
+                  </div> 
+                </div>
+
               </div>
             </div>
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-info btn-sm" id="search-more-btn"><i class="fa fa-plus"></i> Add more</button>
+            </div>  
+
           </div>
         </div>
-      </div>
+        <div class="form-group text-center">
+          <%= submit_tag 'Search', id: "home-search", class: "btn btn-primary" %>
+        </div>
+      <%end%>
     </div>
   </div>
 </div>
-
-
-<script>
-  $('ul.freight-type li').click(function(e){
-    freight_type = e.target.innerHTML;
-    $('#landing_tab_freight_type').val(freight_type.toLowerCase());
-  });
-
-  $(function() {
-    $(".source-auto-complete" ).combobox();
-    $(".destination-auto-complete" ).combobox();
-  });
-</script>
