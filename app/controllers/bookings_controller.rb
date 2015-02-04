@@ -46,7 +46,7 @@ class BookingsController < ApplicationController
   end
 
   def negotiation_round_one
-    @bookings = current_user.seller_bookings.pending_negotiation
+    @bookings = current_user.seller_bookings.pending_negotiations
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @bookings }

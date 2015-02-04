@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     #get "/myaccount", to: 'registrations#edit' 
   end
   
-  resources :users do 
+  resources :users do
+    collection do
+      put :update_user_information
+    end
   end
   
 

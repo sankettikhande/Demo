@@ -1,7 +1,18 @@
-  <div class="row">
-        <div class="col-xs-12">                  
+<div class="container-fluid">
+  <div class="right-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tabbed-panel home-search-tabs">
+            <ul class="nav nav-tabs panel-tabs">
+              <li class="active" id="my_account"><a href="#tab-b-1" data-toggle="tab">My Accounts</a></li>
+              <li><a href="#tab-b-2" data-toggle="tab">Booking</a></li>
+            </ul>
+        <div class="col-xs-12 booking_pannel">
             <div class="tab-content">
-              <div class="tab-pane" id="tab-b-1"></div>
+              <div class="tab-pane" id="tab-b-1">
+                 <%= render partial:"users/show_account_details" %>
+              </div>
               <div class="tab-pane active" id="tab-b-2">
                 <div class="coll-b-header">
                   <div class="row">
@@ -88,8 +99,13 @@
               </div>
             </div>
         </div>
+     </div>
+    </div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
