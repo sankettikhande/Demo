@@ -10,6 +10,7 @@ $(document).ready(function(){
     html.find('.custom-combobox').remove();
 
 	  html.insertAfter(".search-row");
+    $(".date").datepicker({format: 'dd/mm/yyyy', startDate: new Date()});
 	  $(".source-auto-complete" ).combobox();
     $(".destination-auto-complete" ).combobox();
   });

@@ -18,6 +18,8 @@
 //= require placeholder
 //= require bootstrap.min
 //= require bootstrap-datepicker
+//= require jquery-validator
+//= require jquery-validate.bootstrap-tooltip.min
 //= require jquery.fs.selecter.min
 //= require custom
 //= require_tree ./secondaryJS
