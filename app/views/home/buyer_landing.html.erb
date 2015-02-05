@@ -6,7 +6,7 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab-p1">
-      <%= form_tag search_freights_path, method: :post do%>
+      <%= form_tag search_freights_path, method: :post, :id => "buyer_query_form" do%>
         <div class="row">
           <div class="col-xs-12 search-list">
             <div class="search-row">
@@ -14,19 +14,15 @@
                 <div class="col-xs-2">
                   <div class="form-group">
                     <%= hidden_field_tag 'search[][freight_type]', 'sea', id: 'landing_tab_freight_type' %>
-                    <label for="frm-search">
-                      From
-                    </label>
-                    <%= select_tag('search[][source_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['source_id']), include_blank: true, class: 'form-control source-auto-complete', placeholder: "Source", id: "source", required: 'required')%>
+                    <label for="frm-search">From</label>
+                    <%= select_tag('search[][source_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['source_id']), include_blank: true, class: 'form-control source-auto-complete', id: "source", required: 'required')%>
                   </div>
                 </div>
 
                 <div class="col-xs-2">
                   <div class="form-group">
-                    <label for="to-search">
-                      To
-                    </label>
-                    <%= select_tag('search[][destination_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['destination_id']), include_blank: true, class: 'form-control destination-auto-complete', placeholder: "Source", id: "destination", required: 'required')%>
+                    <label for="to-search">To</label>
+                    <%= select_tag('search[][destination_id]', options_from_collection_for_select(Port.all, "id", "port_name", search_parameter['destination_id']), include_blank: true, class: 'form-control destination-auto-complete', id: "destination", required: 'required')%>
                   </div>
                 </div>
 
@@ -36,7 +32,7 @@
                       Date
                     </label>
                     <div class="input-group date" data-provide="datepicker">
-                    <%= text_field_tag "search[][date]", search_parameter['date'], class: "form-control", id: "hm-date", placeholder: "yyyy/mm/dd", required: 'required','data-date-format'=> "yyyy/mm/dd" %>
+                    <%= text_field_tag "search[][date]", search_parameter['date'], class: "form-control", id: "hm-date", placeholder: "DD/MM/YYYY", required: 'required','data-date-format'=> "dd/mm/yyyy" %>
                     <span class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </span>
@@ -46,36 +42,28 @@
 
                 <div class="col-xs-1">
                   <div class="form-group">
-                    <label for="hm-length">
-                      Length
-                    </label>
-                    <%= text_field_tag "search[][length]", search_parameter['length'], class: "form-control", id: "hm-length", placeholder: "L", required: 'required' %>
+                    <label>Length</label>
+                    <%= text_field_tag "search[][length]", search_parameter['length'], class: "form-control", id: "hm-length", placeholder: "CM", required: 'required', 'pattern' => "\d*" %>
                   </div>
                 </div>
 
                 <div class="col-xs-1">
                   <div class="form-group">
-                    <label for="hm-width">
-                      Width
-                    </label>
-                    <%= text_field_tag "search[][width]", search_parameter['width'], class: "form-control", id: "hm-width", placeholder: "W", required: 'required' %>
+                    <label for="hm-width">Width</label>
+                    <%= text_field_tag "search[][width]", search_parameter['width'], class: "form-control", id: "hm-width", placeholder: "CM", required: 'required' %>
                   </div>
                 </div>
                 <div class="col-xs-1">
                   <div class="form-group">
-                    <label for="hm-height">
-                      Height
-                    </label>
-                    <%= text_field_tag "search[][height]", search_parameter['height'], class: "form-control", id: "hm-height", placeholder: "H", required: 'required' %>
+                    <label for="hm-height">Height</label>
+                    <%= text_field_tag "search[][height]", search_parameter['height'], class: "form-control", id: "hm-height", placeholder: "CM", required: 'required' %>
                   </div>
                 </div>
 
                 <div class="col-xs-1">
                   <div class="form-group">
-                    <label for="hm-weight">
-                      Kg
-                    </label>
-                    <%= text_field_tag "search[][weight]", search_parameter['weight'], class: "form-control", id: "hm-weight", placeholder: "Weight", required: 'required' %>
+                    <label for="hm-weight">Weight</label>
+                    <%= text_field_tag "search[][weight]", search_parameter['weight'], class: "form-control", id: "hm-weight", placeholder: "KG", required: 'required' %>
                   </div>                           
                 </div>
 
