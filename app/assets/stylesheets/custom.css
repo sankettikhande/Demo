@@ -155,7 +155,7 @@ body {padding-top: 50px;font-size: 14px;margin-bottom: 180px;font-family: 'open_
 
 
 .result-content {margin-bottom: 30px;margin-top: 25px;}
-.rlist-headings>li:nth-child(1),.result-item>.rb-name {width:18%;}
+.rlist-headings>li:nth-child(1),.result-item>.rb-name {width:12%;}
 .rlist-headings>li:nth-child(2),.result-item>.rb-rating {width:16%}
 .rlist-headings>li:nth-child(3),.result-item>.rb-coff {width:14%}
 .rlist-headings>li:nth-child(4),.result-item>.rb-del {width:14%}
