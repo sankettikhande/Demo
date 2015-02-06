@@ -1,7 +1,7 @@
 class FreightsController < ApplicationController
 
   before_action :authenticate_user!, except: :search
-  before_action :access_denied!, except: :search , unless: proc { current_user.seller?}
+  before_action :access_denied!, except: [:search, :filter_freights], unless: proc { current_user.seller?}
 
   def index
     @freights = current_user.freights
@@ -92,6 +92,10 @@ class FreightsController < ApplicationController
         format.html { render :template => "freights/guest_user_sign_up"}
       end
     end
+  end
+
+  def filter_freights
+    redirect_to get_quote_booking_path(id: session[:booking_ids].first, shipper_ids: params[:shipper_ids], max_price: params[:max_price], transit_time: params[:transit_time])
   end
 
   def import

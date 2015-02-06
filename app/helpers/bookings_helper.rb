@@ -36,7 +36,11 @@ module BookingsHelper
             start_date: beginning..booking.pick_up_date,
             end_date: booking.pick_up_date..ending
           }  
-    with.merge!(seller_id: params[:filter][:seller_ids]) if params[:filter] && params[:filter][:seller_ids]     
+    # with.merge!(seller_id: params[:filter][:seller_ids]) if params[:filter] && params[:filter][:seller_ids]
+    with.merge!(seller_id: params[:shipper_ids]) if params[:shipper_ids]
+    with.merge!(price: 0..params[:max_price].to_f) if params[:max_price]
+    with.merge!(transition_days: 0..params[:transit_time].to_i) if params[:transit_time]
+
     @freight_rates = Freight.search(conditions: conditions,
                                     with: with,
                                     order: 'price asc'  

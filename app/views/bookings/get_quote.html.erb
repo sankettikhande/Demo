@@ -1,3 +1,4 @@
+
 <div class="result-page">
   <div class="panel result-heading">
       <div class="row">
@@ -109,6 +110,26 @@
   
   <div class="result-content">
     <div class="row">
+      <div class="col-xs-2">
+        <%= form_tag filter_freights_freights_path, method: "GET" do %>
+          <ul class="list-group">
+            <li class="list-group-item"><b>Filter Data</b></li>
+            <li class="list-group-item">
+              <small>Price </small><%= text_field_tag :max_price, params[:max_price], id: "price-range-txt", size: 10, placeholder: "Max Price" %><br />
+              <input type=range min=100 max=10000 value=100 id="price-range">
+            </li>
+            <li class="list-group-item">
+              <small>Time </small><%= text_field_tag :transit_time, params[:transit_time], id: "transit-time-txt", size: 10, placeholder: "Transit Time" %><br />
+              <input type=range min=2 max=30 value=2 id="transit-time">
+            </li>
+            <li class="list-group-item">
+              <%= select_tag "shipper_ids", options_from_collection_for_select(@sellers, "id", "company_name"), prompt: "Select Shipper", multiple: true %>
+              <%= hidden_field_tag "booking_id", @draft_booking.id, id: "booking_id_fltr" %>
+            </li>
+            <li class="list-group-item"><%=submit_tag 'Apply Filter', class: "btn btn-sm btn-block btn-warning" %></li>
+          </ul>
+        <% end %>
+      </div>
       <div class='searched-freight'>
         <% if @freight_rates.any? %>
           <%= render 'result_content'%>
@@ -116,27 +137,6 @@
           <%= render 'no_freights' %>
         <%end%>
       </div>
-      <div class="col-xs-2">
-        <div class="slctd-sr-list cart_detail">
-          <%= render :partial => 'bookings/cart_details'%> 
-        </div>           
-      
-        <div class="ssdd-btn btn-group">
-          <a href="#" class="btn btn-default dropdown" data-toggle="dropdown">
-           Selected Shippers <span class="caret"></span>
-          </a>
-          <%= hidden_field_tag "booking_id", @draft_booking.id, id: "booking_id"%>
-          <ul class="dropdown-menu ss-dd-list" role="menu">
-            <% @sellers.each do |seller| %>
-              <li class="dd-li seller-filter">
-                <label for="checkbox_1"><%= seller.company_name %></label>
-                <input type="checkbox" id="<%= seller.id%>" class='seller-chk' name="filter[seller_ids][]" value="<%= seller.id%>" />
-              </li>
-            <% end %>
-          </ul>       
-        </div>
-      </div>
-    </div>  
-  
-  </div>  
+    </div>
+  </div>
 </div>

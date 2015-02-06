@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post :import
       post :update_freights_price
       post :generate_csv_online
+      get :filter_freights
     end
   end
 
