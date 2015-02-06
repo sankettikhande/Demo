@@ -6,13 +6,13 @@ class RegistrationsController < Devise::RegistrationsController
       render :template => "freights/guest_user_sign_up", locals: { notice: "All fields are required" }
     else
       email = params[:user][:email]
-      return render :template => "freights/guest_user_sign_up", locals: { notice: "Email allready taken!" } if User.exists?(email: email)
+      return render :template => "freights/guest_user_sign_up", locals: { notice: "Email Allready Exist Please login !" } if User.exists?(email: email)
       user = User.new(guest_user_params.merge({role: :guest, password: email, password_confirmation: email}))
       user.skip_confirmation!
       create_user = user.save(validate: false)
       sign_in( user )
       if create_user
-        lash[:notice] = "Account successfully created passward sent to your email"
+        flash[:notice] = "Account successfully created passward sent to your email"
         UserMailer.send_password_to_guest_user(email).deliver
         redirect_to root_path
       end

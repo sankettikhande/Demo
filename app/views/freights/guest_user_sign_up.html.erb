@@ -13,7 +13,7 @@
 <div class="col-xs-4 col-xs-offset-4">
   <div class="panel seperator-25">
     <div class="panel-body">
-      <p class="notice"><%= notice %></p>
+      <p class="notice" style="color: #ff0000"><%= notice %></p>
       <%= form_for User.new, url: register_guest_user_path do |f| %>
           <div class="form-group">
             <%= f.text_field :company_name,{class: 'form-control', placeholder: "Company Name", required: :required} %>
