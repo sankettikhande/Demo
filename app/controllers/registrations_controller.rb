@@ -9,9 +9,14 @@ class RegistrationsController < Devise::RegistrationsController
       return render :template => "freights/guest_user_sign_up", locals: { notice: "Email allready taken!" } if User.exists?(email: email)
       user = User.new(guest_user_params.merge({role: :guest, password: email, password_confirmation: email}))
       user.skip_confirmation!
-      user.save(validate: false)
+      create_user = user.save(validate: false)
       sign_in( user )
-      redirect_to search_freights_path
+      if create_user
+        lash[:notice] = "Account successfully created passward sent to your email"
+        UserMailer.send_password_to_guest_user(email).deliver
+        redirect_to root_path
+      end
+      #redirect_to search_freights_path
     end
 
   end
