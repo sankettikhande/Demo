@@ -163,6 +163,8 @@ body {padding-top: 50px;font-size: 14px;margin-bottom: 180px;font-family: 'open_
 .rlist-headings>li:nth-child(6),.result-item>.rb-aip {width:14%}
 .rlist-headings>li:nth-child(7),.result-item>.rb-buk {width:14%}
 
+
+
 .r-collapsed-info {background: #f7f7f7;border-radius: 3px;overflow: hidden;border:1px solid #eee;}
 .r-collapsed-inner {padding:15px 15px 20px;display: inline-block;width: 100%;}
 
@@ -204,7 +206,7 @@ body {padding-top: 50px;font-size: 14px;margin-bottom: 180px;font-family: 'open_
 .gtotal {display:table;overflow: hidden;margin: 50px 0 10px;padding: 0;list-style-type: none;width: 100%;}
 .gtotal>li {display: table-cell;width: auto;vertical-align: middle;padding: 6px 0;text-align: center;border:1px solid #AAB2BD;}
 .gtotal>.gtotal-l {background: #4FC1E9;color: #fff;}
-.gtotal>.gtotal-v {background: #fff;border-left:0}
+.gtotal>.gtotal-v {background: #fff;border-left:0;min-width: 30px;}
 
 
 .ssdd-btn {width: 165px;}
