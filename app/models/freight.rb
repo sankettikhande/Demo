@@ -34,11 +34,11 @@ class Freight < ActiveRecord::Base
 
     def export(freights)
       CSV.generate do |csv|
-        cols = ["From", "To", "Wt.From","Wt.To","Date From","Date To","Price","Freight Type","Cutt Of Date","Transaction Days"]
+        cols = ["From", "To", "L(Max)","W(Max)","H(Max)","Wt.From","Wt.To","Date From","Date To","Price","Freight Type","Transition Days"]
         csv << cols
         csv << []
         freights.each do |freight|
-          csv <<[freight.source, freight.destination, freight.cbm, freight.min_weight, freight.max_weight, freight.start_date, freight.end_date,freight.price,freight.freight_type,freight.cut_off_date,freight.transition_days]
+          csv <<[freight.source.port_name,freight.destination.port_name,freight.length, freight.width,freight.height,freight.min_weight,freight.max_weight,freight.start_date, freight.end_date,freight.price,freight.freight_type,freight.transition_days]
         end
       end
     end
@@ -49,11 +49,10 @@ class Freight < ActiveRecord::Base
         csv << cols
         csv << []
         freights.each do |freight|
-          csv << [freight.seller.company_name, freight.source.full_address, freight.destination.full_address, freight.price, freight.freight_type, freight.transition_days]
+          csv << [freight.seller.company_name,freight.source.port_name, freight.destination.port_name, freight.price, freight.freight_type, freight.transition_days]
         end
       end      
     end
-
   end
 
 end
