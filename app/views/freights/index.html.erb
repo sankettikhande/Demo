@@ -9,7 +9,7 @@
               <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
             </ul>
             <div class="tab-content">
-            <div align="right"><%= button_to "Export", generate_csv_online_freights_path, :class => "btn btn-info", :method => :post,format: "csv"  %></div>
+            <div align="right"><%= button_to "Import", generate_csv_online_freights_path, :class => "btn btn-info", :method => :post,format: "csv"  %></div>
               <div class="tab-pane active" id="tab-p1">
                 <%= select_tag(:select_val, options_for_select([["Constant Value","constant_value"],["Change by %","change_by_percent"]])) %>
 
