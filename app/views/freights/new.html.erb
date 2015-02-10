@@ -107,6 +107,13 @@
                             <div class="col-md-6"> <%= f.text_area :remark, class: "form-control", id: "hm-remark", placeholder: "Remark", required: 'required'%></div>
                           </div>
                         </div>
+
+                      <div class="row form-group">
+                        <div class="col-xs-6" style="padding-left:25px">
+                          <div class="col-md-3">Ready For Negotiation</div>
+                          <div class="col-md-6"><%= f.check_box :is_negotiable, id: "is_negotiable"%></div>
+                        </div>
+                      </div>
                         <div class="control-group">
                       <%= submit_tag 'Create', :class => 'btn btn-primary' %>
                       <%= link_to t('.cancel', :default => t("helpers.links.cancel")), :class => 'btn btn-danger' %>
@@ -125,10 +132,10 @@
     </div>
   </div>
 </div>
-
+</div>
 <script>
   $(function() {
     $(".source-auto-complete" ).combobox();
-    $(".destination-auto-complete" ).combobox();
-  });
+    $(".destination-auto-complete" ).combobox()
+  })
 </script>

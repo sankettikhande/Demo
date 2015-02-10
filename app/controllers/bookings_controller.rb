@@ -98,6 +98,15 @@ class BookingsController < ApplicationController
     set_search_result_page_variables
     get_freight_forwarders
   end
+
+  def booking_with_discount
+    @draft_booking = Booking.find params[:booking_id]
+    @freight_rates = get_freight_quote(@draft_booking).select(&:is_negotiable)
+    set_search_result_page_variables
+    respond_to do |format|
+       format.js
+    end
+  end
   
   def add_to_cart
     booking = Booking.find(params[:id])

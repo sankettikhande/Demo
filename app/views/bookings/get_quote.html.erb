@@ -97,7 +97,7 @@
 
             <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Download" data-toggle="tooltip" data-placement="top" onclick="download_csv(<%= @draft_booking.id%>)">Download</button></li>
  
-            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Eligible for Discount" data-toggle="tooltip" data-placement="top">With Discount</button></li>
+            <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning add_discount" title="Eligible for Discount" data-toggle="tooltip" data-placement="top" onclick="filter_booking_with_discount(<%=@draft_booking.id%>)">With Discount</button></li>
 
             <li class="col-xs-6"><button type="button" class="btn btn-sm btn-block btn-warning" title="Total Minutes" data-toggle="tooltip" data-placement="top" onclick="triggerClickEvent(<%= @draft_booking.id%>, <%= @min_price_freight%>)">Total Minimum</button></li>
 
@@ -140,3 +140,11 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="disccountModal" tabindex="-1" role="dialog" aria-labelledby="disccountModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content disccount-content">
+    </div>
+  </div>
+</div>
+
