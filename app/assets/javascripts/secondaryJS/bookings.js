@@ -143,3 +143,15 @@ function download_csv(booking_id){
       }
   });
 }
+
+function filter_booking_with_discount(booking_id){
+    $.ajax({
+        type: "GET",
+        url: "/bookings/booking_with_discount/",
+        data: {booking_id :booking_id},
+        success: function (data) {
+
+        }
+    });
+}
+

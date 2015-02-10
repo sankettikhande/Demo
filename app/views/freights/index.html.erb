@@ -6,7 +6,7 @@
           <div class="tabbed-panel home-search-tabs">
             <ul class="nav nav-tabs panel-tabs">
               <li class="active"><a href="#tab-p1" data-toggle="tab">Mt Accounts</a></li>
-              <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>
+              <li><a href="#tab-p1" data-toggle="tab">Booking</a></li>`
             </ul>
             <div class="tab-content">
             <div align="right"><%= button_to "Import", generate_csv_online_freights_path, :class => "btn btn-info", :method => :post,format: "csv"  %></div>
@@ -33,6 +33,7 @@
                     <th class="col-xs-2">Price</th>
                     <th class="col-xs-4">Freight Type</th>
                     <th class="col-xs-2">Transition Days</th>
+                    <th class="col-xs-2">Is Negotiable</th>
                     <th class="col-xs-2">Action</th>
                     <th class="col-xs-2">All<br>
                       <%=check_box_tag "freight", '', false, class: 'select_all'%>
@@ -55,6 +56,7 @@
                         <td> <%=freight.price  %></td>
                         <td> <%=freight.freight_type  %></td>
                         <td> <%=freight.transition_days  %></td>
+                        <td> <%= check_box_tag :is_negotiable, 1, freight.is_negotiable%> </td>
                         <td>
                           <%= link_to 'edit',edit_freight_path(freight.id),{:remote=>true} %>
                           <%= link_to "delete", freight_path(freight), {method: :delete, data: {confirm: "Are you sure?"}, :remote=>true} %>

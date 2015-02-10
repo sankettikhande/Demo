@@ -49,7 +49,8 @@ Rails.application.routes.draw do
       get :remove_from_search
       get :search_result_download_to_csv
     end
-    collection do 
+    collection do
+      get :booking_with_discount
       get :active_bookings
       get :bookings_on_hold
       get :negotiation_round_one

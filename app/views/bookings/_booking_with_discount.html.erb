@@ -1,0 +1,43 @@
+  <div class="disccount-content">
+    <div class="modal-body">
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th class="col-xs-2">Image</th>
+          <th class="col-xs-2">Name</th>
+          <th class="col-xs-2">Action</th>
+
+
+
+            <%=check_box_tag "freight", '', false, class: 'select_all'%>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @freight_rates.each do |freight_rate| %>
+            <%user = User.find(freight_rate.seller_id)%>
+            <tr id="edit_freight_form_<%=freight_rate.id%>">
+
+              <td> <%= image_tag(freight_rate.seller.avatar_url, height: 40, width: 40) if freight_rate.seller && freight_rate.seller.avatar? %></td>
+              <td> <%=user.company_name  %></td>
+             <td> <%= button_to "Select", new_freight_path, :class => "btn btn-info", :method => :get  %></td>
+
+
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+
+
+
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+
+</div>

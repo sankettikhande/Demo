@@ -96,6 +96,12 @@
               <div class="col-md-6"> <%= f.select "freight_type", ['sea', 'air'],{}, {class: "form-control selecter", id: "hm-weight", required: 'required'} %></div>
             </div>
           </div>
+          <div class="row form-group">
+            <div class="col-xs-6" style="padding-left:25px">
+              <div class="col-md-3">Ready For Negotiable</div>
+              <div class="col-md-6"><%= f.check_box :is_negotiable, id: "is_negotiable"%></div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="control-group">
