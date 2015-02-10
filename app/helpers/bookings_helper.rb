@@ -47,4 +47,21 @@ module BookingsHelper
                                     ).map #I've opted for very large windows of number, but essentially this ensures the given integer is equal to or larger than the min_weight and less than or equal to the max_weight.    
   end
 
+  def create_draft_bookings
+    (session[:search] || []).each do |search_freight|
+      session[:booking_ids] << Booking.create(
+        buyer_id: current_user.id, 
+        source_id: search_freight['source_id'], 
+        destination_id: search_freight['destination_id'], 
+        aasm_state: 'draft',
+        length: search_freight['length'],
+        height: search_freight['height'],
+        width: search_freight['width'],
+        weight: search_freight['weight'],
+        quantity: search_freight['quantity'],
+        pick_up_date: search_freight['date'],
+        freight_type: search_freight['freight_type']).id
+    end if session[:booking_ids].blank?
+  end
+
 end

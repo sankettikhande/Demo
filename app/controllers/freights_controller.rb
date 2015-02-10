@@ -1,5 +1,7 @@
 class FreightsController < ApplicationController
 
+  include BookingsHelper
+
   before_action :authenticate_user!, except: :search
   before_action :access_denied!, except: [:search, :filter_freights], unless: proc { current_user.seller?}
 
@@ -73,23 +75,10 @@ class FreightsController < ApplicationController
     search_parameter = session[:search].first
     respond_to do |format |
       if current_user
-        (session[:search] || []).each do |search_freight|
-          session[:booking_ids] << Booking.create(
-            buyer_id: current_user.id, 
-            source_id: search_freight['source_id'], 
-            destination_id: search_freight['destination_id'], 
-            aasm_state: 'draft',
-            length: search_freight['length'],
-            height: search_freight['height'],
-            width: search_freight['width'],
-            weight: search_freight['weight'],
-            quantity: search_freight['quantity'],
-            pick_up_date: search_freight['date'],
-            freight_type: search_freight['freight_type']).id
-        end
+        create_draft_bookings
         format.html { redirect_to get_quote_booking_path(id:session[:booking_ids].first)}
       else
-        session[:user_return_to] = "/freights/search"
+        session[:user_return_to] = get_quote_bookings_path
         format.html { render :template => "freights/guest_user_sign_up"}
       end
     end
