@@ -14,7 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
       if create_user
         flash[:notice] = "Account successfully created passward sent to your email"
         UserMailer.send_password_to_guest_user(email).deliver
-        redirect_to root_path
+        redirect_to session[:user_return_to]
       end
       #redirect_to search_freights_path
     end
