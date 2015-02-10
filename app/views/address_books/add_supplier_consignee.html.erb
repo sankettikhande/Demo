@@ -40,16 +40,18 @@
   $(document).ready(function() {
 
     $('body').on('change', '.booking_address_for', function(){
-      booking_id = $("select option:selected" ).val();
+      booking_id = $("select#address_booking_id option:selected" ).val();
+      supplier_address_book_id = $("select#supplier_address_book option:selected" ).val();
+      consignee_address_book_id = $("select#consignee_address_book option:selected" ).val();
       if (booking_id != ''){
-        render_address_form(booking_id);
+        render_address_form(booking_id, supplier_address_book_id, consignee_address_book_id);
       }
     }); 
 
-    function render_address_form(booking_id){
+    function render_address_form(booking_id, supplier_address_book_id, consignee_address_book_id){
       $.ajax({
         type: "GET",
-        data: {booking_id: booking_id},
+        data: {booking_id: booking_id, supplier_address_book_id: supplier_address_book_id,consignee_address_book_id: consignee_address_book_id},
         url:"/address_books/add_supplier_consignee",
         success: function(data){
           $('.address_form').html(data);

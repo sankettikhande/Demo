@@ -9,4 +9,9 @@ class AddressBook < ActiveRecord::Base
 
   scope :supplier_address, -> { where(address_type: 'supplier')}
   scope :consignee_address, -> { where(address_type: 'consignee')}
+
+  def name
+    first_name + " #{last_name}" + "(#{company_name})"
+  end
+
 end
