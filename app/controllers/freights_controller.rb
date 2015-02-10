@@ -89,6 +89,7 @@ class FreightsController < ApplicationController
         end
         format.html { redirect_to get_quote_booking_path(id:session[:booking_ids].first)}
       else
+        session[:user_return_to] = "/freights/search"
         format.html { render :template => "freights/guest_user_sign_up"}
       end
     end
