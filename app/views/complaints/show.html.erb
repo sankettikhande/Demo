@@ -1,0 +1,8 @@
+<div>
+   <div style="color: #B00100" ><%= @complaint.note%></div>
+  <% @complaint.replies.each do |rep| %>
+    <div style="padding-left: 27px;"><%= rep.note %></div>
+  <%end%>
+  <%=link_to "Reply", new_complaint_reply_path(@complaint),:class=> 'btn btn-success' %>
+
+</div>
