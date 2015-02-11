@@ -14,43 +14,45 @@
   <div class="panel seperator-25">
     <div class="panel-body">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { remote: :true}) do |f| %>
-          <div class="form-group">
-            <%= f.hidden_field :login_from_guest, :value => true %>
-            <%= f.label :email, {class: "col-xs-3 control-label"} %>
-            <div class="col-xs-9">
-              <%= f.email_field :email, {placeholder: "Registered Email Address",class: "form-control"} %>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+              <%= f.hidden_field :login_from_guest, :value => true %>
+              <%= f.label :email %>
+                <%= f.email_field :email, {placeholder: "Registered Email Address",class: "form-control"} %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                <%= f.label :password %>
+                  <%= f.password_field :password, {placeholder: "Password",class: "form-control"} %>
+                  
+                </div>
             </div>
           </div>
 
-          <div class="form-group lf-row">
-            <%= f.label :password, {class: "col-xs-3 control-label"} %>
-            <div class="col-xs-9">
-              <%= f.password_field :password, {placeholder: "Password",class: "form-control"} %>
-            </div>
-          </div>
-
-          <div class="form-group lf-row">
-
-            <div class="col-xs-5 col-xs-offset-3">
-              <%= f.label :remember_me %>
+          <div class="row">
+            <div class="col-xs-12">
               <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
             </div>
 
-            <div class="col-xs-4 text-right">
+            <div class="col-xs-6 text-right hidden">
               <a href="#" class="forgot-link" id="forgot-link">Forgot Password?</a>
             </div>
           </div>
 
           <div class="form-group text-center">
-            <div class="col-xs-12">
-              <% unless @show_popup%>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-              <% end %>
               <%= f.submit "Submit", {class: "btn btn-primary"} %>
-            </div>
+          </div>
+          <div class="text-center">
+              <a href="#do--register" data-toggle="collapse">Do not have account? Register Now</a>
+
           </div>
       <% end %></div></p>
-    <div class="panel-body">
+    <div class="panel-body collapse" id="do--register">
       <p class="notice" style="color: #ff0000"><%= notice %></p>
       <%= form_for User.new, url: register_guest_user_path do |f| %>
           <div class="form-group">
