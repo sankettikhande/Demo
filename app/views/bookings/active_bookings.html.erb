@@ -1,7 +1,7 @@
 <div class="right-body">
   <div class="container">
     <% @active_bookings.each do |booking| %>
-        <div class="col-xs-10 panel panel-default" id="booking_<%=booking.id%>">
+        <div class="col-xs-10 panel panel-default">
           <div class="col-xs-3">
             <% if booking.seller_id  %>
                 <%= image_tag(booking.seller.avatar_url, height: 100, width: 100) if booking.seller.avatar? %>
@@ -23,9 +23,12 @@
           </div>
           <div class="col-xs-3">
             <div style="margin: 10px 0px">
-              <%= button_tag ("RATE FORWARDER"),:class=> 'btn btn-success'%>
+              <% if !Rate.exists?(booking_id: booking.id, rater_id: current_user.id)%>
+                <%= link_to "RATE FORWARDER", new_booking_rate_path(booking),{remote: true, class: "btn btn-success rate-booking-#{booking.id}"}%>
+              <% end %>
             </div>
           </div>
+          <div id="booking_<%= booking.id %>" class="col-xs-12"></div>
         </div>
     <% end  %>
   </div>
