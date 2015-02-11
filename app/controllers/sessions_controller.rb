@@ -24,7 +24,7 @@ class SessionsController < Devise::SessionsController
 
     else
       respond_to do |format|
-        format.js { render :js => "$('.login-form .alert-danger').html('This email is not found in Blue Compass please register.').show();" }
+        format.js { render :js => "$('.#{params[:user][:login_from_guest] ? "users-login-form" : "login-form"} .alert-danger').html('This email is not found in Blue Compass please register.').show();" }
       end
     end
   end

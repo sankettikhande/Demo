@@ -9,6 +9,7 @@
 %>
 <% body_class = request.url == root_url ? "air-bg" : "" %>
 <body class="<%= body_class %>">
+<p class="notice" style="color: #ff0000"><%= notice %></p>
   <%= render :partial => "layouts/header" %>
   <% if  user_signed_in? && current_user.seller?  %>
     <%= render :partial => "layouts/seller_side_bar" %>
