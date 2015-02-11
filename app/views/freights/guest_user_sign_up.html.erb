@@ -13,7 +13,7 @@
 <div class="col-xs-4 col-xs-offset-4">
   <div class="panel seperator-25">
     <div class="panel-body">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { remote: :true}) do |f| %>
+      <%= form_for(User.new, as: :user, url: session_path(:user), html: { remote: :true}) do |f| %>
           <div class="row">
             <div class="col-xs-12">
               <div class="users-login-form">
@@ -52,13 +52,13 @@
               <%= f.submit "Submit", {class: "btn btn-primary"} %>
           </div>
           <div class="text-center">
-              <a href="#do--register" data-toggle="collapse">Do not have account? Register Now</a>
+              <a href="#do--register">Do not have account? Register Now</a>
 
           </div>
       <% end %></div></p>
-    <div class="panel-body collapse" id="do--register">
-      <p class="notice" style="color: #ff0000"><%= notice %></p>
-      <%= form_for User.new, url: register_guest_user_path do |f| %>
+    <div class="panel-body" id="do--register">
+      <div class="alert alert-danger text-center alert-dismissable failure-messages signup_form" style="display:none"></div>
+      <%= form_for User.new, url: register_guest_user_path, html: { remote: :true} do |f| %>
           <div class="form-group">
             <%= f.text_field :company_name,{class: 'form-control', placeholder: "Company Name", required: :required} %>
           </div>
