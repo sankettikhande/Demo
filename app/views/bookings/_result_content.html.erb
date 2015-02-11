@@ -25,7 +25,7 @@
             </div>              
             <div class="rb-item rb-coff"><%= delivery_date.strftime("%-d, %b")%></div>
             <div class="rb-item rb-del"><%=cut_of_date.strftime("%-d, %b")%></div>
-            <div class="rb-item rb-day"><%= (cut_of_date - delivery_date).to_i%></div>
+            <div class="rb-item rb-day"><%= (delivery_date - cut_of_date).to_i%></div>
             <div class="rb-item rb-aip">US $<%= freight_rate.price %></div>
             <div class="rb-item rb-buk">
               <button style="display: <%= is_in_cart?(@draft_booking, freight_rate) ? 'block' : 'none' %>" class="btn selected" id = "selected_freight_<%=  freight_rate.id%>" freight_id = "<%= freight_rate.id %>" booking_id="<%= @draft_booking.id%>" type="button" onclick="remove_from_cart(<%= @draft_booking.id%>, <%= freight_rate.id%>);">Selected</button>
