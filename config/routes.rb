@@ -11,7 +11,10 @@ Rails.application.routes.draw do
       put :update_user_information
     end
   end
-  
+
+  resources :complaints do
+    resources :replies
+  end
 
   resources :user_information
   # The priority is based upon order of creation: first created -> highest priority.

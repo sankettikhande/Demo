@@ -1,0 +1,38 @@
+<div class="col-md-4 mega-footer" id="content" style="height:270px">
+<% @complaints.each do |comp| %>
+      <%= link_to comp.note, comp ,:style=>"color: #B00100" %></br>
+ <%end %>
+</div>
+      <div class="col-md-4 open mega-footer" id="sidebar"  style="height:270px;border:2px solid blue">Add Complaints Here
+        <%= form_for(@complaint) do |f| %>
+            <div id="error_messages">
+              <%if @complaint.errors.any?%>
+                  <% @complaint.errors.each do |attr, msg|%>
+                      <li> <%= attr%> : <%=msg%></li>
+                  <% end %>
+              <%end%>
+            </div>
+            <div class="field">
+              <%= f.label :payment_id %><br />
+              <%#= f.text_field :payment_id %>
+            </div>
+            <div class="field">
+              <%= f.label :note %><br />
+              <%= f.text_area :note %>
+            </div>
+
+            <%#= f.hidden_field :creator_id, :value => current_user.id %>
+            <%#= f.hidden_field :creator_type, :value => current_user.class.name%>
+            <%#= f.hidden_field :recipient_id, :value => current_user.id %>
+            <%#= f.hidden_field :recipient_type, :value => current_user.class.name %>
+            <%#= f.hidden_field :status, :value => "OPEN" %>
+            <div class="actions">
+              <%= f.submit "Create" %>
+            </div>
+        <% end %>
+
+      </div>
+    </div>
+
+
+

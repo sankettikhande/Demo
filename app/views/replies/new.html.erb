@@ -1,0 +1,11 @@
+<%= form_for [@complaint,@reply],{remote: true} do |f| %>
+    <div class="field">
+    <%= f.hidden_field :replier_id, :value => current_user.id %>
+      <%= f.hidden_field :replier_type, :value => current_user.role %>
+      <%= f.label :note %><br />
+      <%= f.text_area :note %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<%end%>
