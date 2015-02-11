@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     end
     collection do
       get :booking_with_discount
+      get :get_quote
       get :active_bookings
       get :bookings_on_hold
       get :negotiation_round_one

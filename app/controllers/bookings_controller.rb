@@ -92,7 +92,8 @@ class BookingsController < ApplicationController
   end
 
   def get_quote
-    @draft_booking = Booking.find params[:id]
+    create_draft_bookings
+    @draft_booking = session[:booking_ids] ? Booking.find(session[:booking_ids].first) : Booking.find(params[:id])
     session[:booking_ids] = session[:booking_ids] || [@draft_booking.id]
     @freight_rates = get_freight_quote(@draft_booking)
     set_search_result_page_variables
