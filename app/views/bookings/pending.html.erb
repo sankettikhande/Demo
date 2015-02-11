@@ -44,7 +44,6 @@
                               <th>From</th>
                               <th>To</th>
                               <th>Date</th>
-                              <th>Cbm</th>
                               <th>Kg</th>
                               <th>Buyer Price</th>
                               <th>Status</th>
@@ -58,7 +57,6 @@
                             <td> <%=booking.source.full_address  %></td>
                             <td> <%=booking.destination.full_address  %></td>
                             <td> <%=booking.pick_up_date %></td>
-                            <td> <%=booking.cbm %></td>
                             <td> <%=booking.weight %></td>
                             <td> <%=booking.spot_rate %></td>
                             <td id="status_field_<%=booking.id%>"><%=booking.aasm_state %></td>

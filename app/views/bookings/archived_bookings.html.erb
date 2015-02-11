@@ -19,7 +19,7 @@
             <p><b>Service:</b></p>
             <p><b>From:</b><%= booking.source.full_address %><span><b>Cut off:</b> <%= booking.cut_off_date.strftime("%d/%m/%Y")%></span></p>
             <p><b>To:</b><%= booking.destination.full_address %> <span><b>Delivery:</b><%= (booking.cut_off_date + booking.transition_days).strftime("%d/%m/%Y") %> </span></p>
-            <p><b>Cargo:</b><%= booking.cbm %> cmb,<%= booking.weight %> kg, Delicte or any note from client end</p>
+            <p><b>Cargo:</b><%= booking.weight %> kg, Delicte or any note from client end</p>
             <p><b style="color: red;">Status:</b> <%= booking.aasm_state.capitalize %></p>
           </div>
           <div class="col-xs-3">
