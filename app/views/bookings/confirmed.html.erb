@@ -57,8 +57,8 @@
                               <th>To</th>
                               <th>Date</th>
                               <th>L</th>
-                              <th>B</th>
                               <th>W</th>
+                              <th>H</th>
                               <th>Kg</th>
                               <th>Invoice No.</th>
                               <th>&nbsp;</th>
@@ -71,9 +71,9 @@
                               <td> <%=booking.source.full_address  %></td>
                               <td> <%=booking.destination.full_address  %></td>
                               <td> <%=booking.pick_up_date %></td>
-                              <td> <%=booking.cbm %></td>
-                              <td>B</td>
-                              <td>W</td>
+                              <td> <%=booking.length %></td>
+                              <td> <%=booking.width %></td>
+                              <td> <%=booking.height %></td>
                               <td> <%=booking.weight %></td>
                               <td class="invoice_booking_<%=booking.id%>">
                               <%=booking.invoice_number %> &nbsp;&nbsp;&nbsp;                             

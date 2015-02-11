@@ -109,7 +109,7 @@ class FreightsController < ApplicationController
   private
 
   def freight_params
-    params.require(:freight).permit(:source_id, :destination_id, :cbm,:height, :width, :length, :seller_id,:cut_off_date, :freight_type, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date, :remark,:is_negotiable)
+    params.require(:freight).permit(:source_id, :destination_id,:height, :width, :length, :seller_id,:cut_off_date, :freight_type, :transition_days, :min_weight, :max_weight, :price, :start_date, :end_date, :remark,:is_negotiable)
   end
 
 
