@@ -6,10 +6,11 @@ $(document).ready(function(){
 	});
 
 	$('body').on('click', '#search-more-btn', function(){
-    var html = $($('.search-list .search-row').first().html()).clone();
+    $('.search-row').append($('.search-item:first').clone());
+    var html = $('.search-item:last');
+    html.find('input:not([type=hidden]), select').val('');
     html.find('.custom-combobox').remove();
-
-	  html.insertAfter(".search-row");
+    $('.selecter').selecter();
     $(".date").datepicker({format: 'dd/mm/yyyy', startDate: new Date()});
 	  $(".source-auto-complete" ).combobox();
     $(".destination-auto-complete" ).combobox();
