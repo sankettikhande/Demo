@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       post :remove_from_cart
       get :remove_from_search
       get :search_result_download_to_csv
+      put :update_search_filters
     end
     collection do
       get :booking_with_discount

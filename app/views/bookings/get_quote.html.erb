@@ -22,49 +22,43 @@
           </div>  
         </div>
         <div class="col-xs-7">
-          <ul class="list-inline order-label-heading">
+          <ul class="list-inline order-label-heading" id="searched_booking" search_booking_id="<%=@draft_booking.id%>">
             <li class="col-xs-1">
-              <span class="ol-lab">
-                L
-              </span>
-              <span class="ol-val">
-                <%= @draft_booking.length%>
-              </span>
+              <div class="form-group">
+                <label>L</label>
+                <%=text_field_tag "search_length", @draft_booking.length, {class: "form-control"}%>
+              </div>
             </li>
 
             <li class="col-xs-1">
-              <span class="ol-lab">
-                W
-              </span>
-              <span class="ol-val">
-                <%= @draft_booking.width%>
-              </span>
+              <div class="form-group">
+                <label>W</label>
+                <%=text_field_tag "search_width", @draft_booking.width, {class: "form-control"}%>
+              </div>
             </li>
 
             <li class="col-xs-1">
-              <span class="ol-lab">
-                H
-              </span>
-              <span class="ol-val">
-                <%= @draft_booking.height%>
-              </span>
+              <div class="form-group">
+                <label>H</label>
+                <%=text_field_tag "search_height", @draft_booking.height, {class: "form-control"}%>
+              </div>
             </li>
 
             <li class="col-xs-1">
-              <span class="ol-lab">
-                Wt(kg)
-              </span>
-              <span class="ol-val">
-                <%= @draft_booking.weight%>
-              </span>
+              <div class="form-group">
+                <label>Wt(kg)</label>
+                <%=text_field_tag "search_weight", @draft_booking.weight, {class: "form-control"}%>
+              </div>
             </li>
             <li class="col-xs-2">
-              <span class="ol-lab">
-                Date
-              </span>
-              <span class="ol-val">
-                <%= @draft_booking.pick_up_date %>
-              </span>
+              <div class="form-group">
+                <label>Date</label>
+                <div class="input-group date" data-provide="datepicker">
+                <%= text_field_tag "search_date", @draft_booking.pick_up_date, class: "form-control",placeholder: "DD/MM/YYYY",'data-date-format'=> "dd/mm/yyyy" %>
+                <span class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </span>
+              </div>
             </li>
             <li class="col-xs-2">
               <span class="ol-lab">
@@ -111,7 +105,7 @@
   <div class="result-content">
     <div class="row">
       <div class="col-xs-2">
-        <%= form_tag filter_freights_freights_path, method: "GET" do %>
+        <%= form_tag filter_freights_freights_path, id: "freights-filters" ,method: "GET" do %>
           <ul class="list-group">
             <li class="list-group-item"><b>Filter Data</b></li>
             <li class="list-group-item">
@@ -123,7 +117,7 @@
               <input type=range min=2 max=60 value=2 id="transit-time">
             </li>
             <li class="list-group-item">
-              <%= select_tag "shipper_ids", options_from_collection_for_select(@sellers, "id", "company_name"), prompt: "Select Shipper", multiple: true %>
+              <%= select_tag "shipper_ids", options_from_collection_for_select(@sellers, "id", "company_name",params[:shipper_ids]), prompt: "Select Shipper", multiple: true %>
               <%= hidden_field_tag "booking_id", @draft_booking.id, id: "booking_id_fltr" %>
             </li>
             <li class="list-group-item"><%=submit_tag 'Apply Filter', class: "btn btn-sm btn-block btn-warning" %></li>
