@@ -13,10 +13,11 @@
           <li>&nbsp;</li>
         </ul>
 
+
         <% @freight_rates.each do |freight_rate|%>
           <div class="result-item">
             <div class="rb-item rb-name closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>"><%= image_tag(freight_rate.seller.avatar_url, height: 100, width: 100) if freight_rate.seller && freight_rate.seller.avatar? %></div>
-            <div class="rb-item rb-name closed-review" data-toggle="collapse"><%=user.first_name%></div>
+            <div class="rb-item rb-name closed-review" data-toggle="collapse"><%=freight_rate.seller.first_name%></div>
             <div class="rb-item rb-rating closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>">
               <span class="rview-rating" rate_count="<%= @ratings[freight_rate.seller_id] || 0%>"></span> <span class="rview-rating-c">(<%= @ratings[freight_rate.seller_id] || 0%>)</span>
             </div>
