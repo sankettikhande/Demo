@@ -31,9 +31,41 @@ $(document).ready(function() {
       error: function(data){
         alert("something went wrong");
       }
-    })
+    });
   });
-});  
+
+  $('#search_length,#search_height,#search_width,#search_weight').change(function(){
+    update_filters();
+  });
+
+}); 
+
+function update_filters(){
+   var booking_id = $('#searched_booking').attr('search_booking_id'),
+      booking_params = {booking: {length: $('#search_length').val(),
+                                  width: $('#search_width').val(),
+                                  height: $('#search_height').val(),
+                                  weight: $('#search_weight').val()
+                                }},
+      filter_params = {};
+    $('#freights-filters [name]').each(function(){
+      filter_params[this.name] = this.value;
+    });
+
+  $.ajax({
+    type: "PUT",
+    data: $.extend(booking_params, filter_params),
+    url:"/bookings/"+booking_id+"/update_search_filters",
+    success: function(data){
+      $('.searched-freight').html(data);
+      bind_raty();
+    },
+    error: function(data){
+      alert("something went wrong");
+    }
+  });
+}
+
 
 function add_to_cart(booking_id, freight_id){
   $.ajax({
@@ -50,7 +82,7 @@ function add_to_cart(booking_id, freight_id){
     error: function(data){
       alert("something went wrong");
     }
-  })
+  });
 }
 
 function remove_from_cart(booking_id, freight_id){
@@ -66,7 +98,7 @@ function remove_from_cart(booking_id, freight_id){
     error: function(data){
       alert("something went wrong");
     }
-  })
+  });
 
 }
 
@@ -80,7 +112,7 @@ function update_cart_detail_section(){
     error: function(data){
       alert("something went wrong");
     }
-  })    
+  });   
 }
 
 function remove_booking(booking_id, del_el){
@@ -96,7 +128,7 @@ function remove_booking(booking_id, del_el){
     error: function(data){
       alert("something went wrong");
     }
-  })  
+  });  
 }
 
 function triggerClickEvent(booking_id, freight_id){
@@ -119,7 +151,7 @@ function check_cart(redirect_url) {
     error: function (data) {
         alert("something went wrong");
     }
-  })
+  });
 }
 
 function update_booking_status(id,status,remark) {
@@ -139,7 +171,7 @@ function download_csv(booking_id){
       type: "GET",
       url: "/bookings/"+booking_id+"/search_result_download_to_csv.csv",
       success: function (data) {
-        window.open( "data:text/csv;charset=utf-8," + escape(data)) 
+        window.open( "data:text/csv;charset=utf-8," + escape(data)); 
       }
   });
 }

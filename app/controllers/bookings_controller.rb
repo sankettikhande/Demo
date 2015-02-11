@@ -175,6 +175,14 @@ class BookingsController < ApplicationController
     end
   end
 
+  def update_search_filters
+    @draft_booking = Booking.find(params[:id])
+    @draft_booking.update(booking_params)
+    get_freight_quote(@draft_booking)
+    set_search_result_page_variables
+    render partial: @freight_rates.any? ? "bookings/result_content" : "no_freights"
+  end
+
   protected
 
   def set_search_result_page_variables
@@ -187,4 +195,9 @@ class BookingsController < ApplicationController
     @average_price = (@freight_rates.map(&:price).inject(:+))/@freight_rates.count if @freight_rates.any?
     @draft_booking.update(min_rate: @minimum_freight_price, avg_rate: @average_price, min_transition_days: @fastest_delivery )
   end
+
+  private
+    def booking_params
+      params.require(:booking).permit(:length,:width,:height,:weight)
+    end
 end
