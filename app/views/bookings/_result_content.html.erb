@@ -14,18 +14,15 @@
         </ul>
 
         <% @freight_rates.each do |freight_rate|%>
-            <%user = User.find(freight_rate.seller_id)%>
-            <%delivery_date = @draft_booking.pick_up_date%>
-            <%cut_of_date = delivery_date(@draft_booking, freight_rate)%>
           <div class="result-item">
             <div class="rb-item rb-name closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>"><%= image_tag(freight_rate.seller.avatar_url, height: 100, width: 100) if freight_rate.seller && freight_rate.seller.avatar? %></div>
             <div class="rb-item rb-name closed-review" data-toggle="collapse"><%=user.first_name%></div>
             <div class="rb-item rb-rating closed-review" data-toggle="collapse" data-target="#ri-<%=freight_rate.id%>" seller_id="<%=freight_rate.seller_id%>" freight_id="<%=freight_rate.id%>">
               <span class="rview-rating" rate_count="<%= @ratings[freight_rate.seller_id] || 0%>"></span> <span class="rview-rating-c">(<%= @ratings[freight_rate.seller_id] || 0%>)</span>
-            </div>              
-            <div class="rb-item rb-coff"><%= delivery_date.strftime("%-d, %b")%></div>
-            <div class="rb-item rb-del"><%=cut_of_date.strftime("%-d, %b")%></div>
-            <div class="rb-item rb-day"><%= (delivery_date - cut_of_date).to_i%></div>
+            </div>
+            <div class="rb-item rb-coff"><%= @draft_booking.pick_up_date.strftime("%-d, %b")%></div>
+            <div class="rb-item rb-del"><%= delivery_date(@draft_booking, freight_rate).strftime("%-d, %b")%></div>
+            <div class="rb-item rb-day"><%= freight_rate.transition_days%></div>
             <div class="rb-item rb-aip">US $<%= freight_rate.price %></div>
             <div class="rb-item rb-buk">
               <button style="display: <%= is_in_cart?(@draft_booking, freight_rate) ? 'block' : 'none' %>" class="btn selected" id = "selected_freight_<%=  freight_rate.id%>" freight_id = "<%= freight_rate.id %>" booking_id="<%= @draft_booking.id%>" type="button" onclick="remove_from_cart(<%= @draft_booking.id%>, <%= freight_rate.id%>);">Selected</button>
