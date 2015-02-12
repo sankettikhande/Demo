@@ -36,7 +36,7 @@
                       <%= f.file_field :scan_registration_copy, class: "form-control" %>  
                     </div>
                     <div class="col-xs-4 show_registration_copy_div"> Change
-                    <%= image_tag(f.object.scan_registration_copy_url, height: 40, width: 50) if f.object.scan_registration_copy? %>
+                      <span><%= f.object.scan_registration_copy.file.filename%></span>
                     </div>
                     
                   </div>
@@ -53,7 +53,7 @@
                       <%= f.file_field :scan_pan_copy, class: "form-control" %>                     
                     </div>
                     <div class="col-xs-4 show_scan_copy_div" style="padding-left:15px"> Change
-                    <%= image_tag(f.object.scan_pan_copy, height: 40, width: 50) if f.object.scan_pan_copy? %>
+                      <span><%= f.object.scan_pan_copy.file.filename%></span>
                     </div>
                      
                   </div>

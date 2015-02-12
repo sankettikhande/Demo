@@ -14,7 +14,7 @@ class Booking < ActiveRecord::Base
   has_many :payments, through: :booking_payments
   has_many :booking_payments
   
-  validates_inclusion_of :aasm_state, :in => ['draft', 'active', 'hold', 'confirmed', 'negotiation']
+  validates_inclusion_of :aasm_state, :in => ['draft', 'active', 'hold', 'confirmed', 'negotiation', 'document_pending']
   validates :buyer_id, :aasm_state, :source_id, :destination_id, :freight_type, :length, :height, :width, :weight, :pick_up_date, presence: true
   
   scope :active, -> {where(aasm_state: 'active')}
@@ -40,7 +40,7 @@ class Booking < ActiveRecord::Base
     state :hold
     state :confirmed
     state :cancelled
-
+    state :document_pending
 
     event :draft_to_active do
       transitions from: :draft, to: :active
@@ -93,6 +93,14 @@ class Booking < ActiveRecord::Base
         BookingMailer.buyer_booking_cancellation( self ).deliver
       end
     end
+
+    event :move_to_document_pending do
+      transitions from: :draft, to: :document_pending
+      success do
+
+      end
+    end
+
   end
 
 end

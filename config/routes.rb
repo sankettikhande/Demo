@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       get :confirmed
       get :draft_bookings
       get :archived_bookings
+      get :pending_bookings
       get :payment
       get :booking_summary
       get :update_cart_details_section

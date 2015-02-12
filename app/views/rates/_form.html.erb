@@ -7,7 +7,7 @@
 
     <h3>How did <%= @booking.seller.first_name %> do?</h3>
     <p>
-       * Was your shipment available before <%= (@booking.cut_off_date + @booking.transition_days).strftime("%d/%m/%Y") %> &nbsp;&nbsp;
+       * Was your shipment available before <%= (@booking.pick_up_date + @booking.transition_days).strftime("%d/%m/%Y") %> &nbsp;&nbsp;
         <%= f.radio_button :on_time_delivery, true %> Yes &nbsp;&nbsp;
         <%= f.radio_button :on_time_delivery, false %> No
     </p>
