@@ -8,8 +8,8 @@ class Booking < ActiveRecord::Base
   belongs_to :seller, class_name: "User", foreign_key: "seller_id"
   belongs_to :buyer, class_name: "User", foreign_key: "buyer_id"
 
-  belongs_to :source, class_name: 'Location', foreign_key: 'source_id'
-  belongs_to :destination, class_name: 'Location', foreign_key: 'destination_id'
+  belongs_to :source, class_name: 'Port', foreign_key: 'source_id'
+  belongs_to :destination, class_name: 'Port', foreign_key: 'destination_id'
 
   has_many :payments, through: :booking_payments
   has_many :booking_payments

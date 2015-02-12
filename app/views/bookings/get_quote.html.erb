@@ -11,8 +11,8 @@
                 <li class="loc-item" id='booking_<%= booking_id%>'>
                   <div class="loc-item-in">
                     <%= link_to get_quote_booking_path(id: booking.id), class: 'loc-item-link' do %>
-                      <span class="loc-pos"><%= booking.source.port%></span>
-                      <span class="loc-pos"><%= booking.destination.port%></span>
+                      <span class="loc-pos"><%= booking.source.port_name%></span>
+                      <span class="loc-pos"><%= booking.destination.port_name%></span>
                     <%end%>
                     <button class="btn btn-danger btn-del" type="button" onclick="remove_booking(<%= booking_id%>, this)">&times;</button>
                   </div>    
