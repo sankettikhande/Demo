@@ -8,11 +8,16 @@ class PaymentsController < ApplicationController
   end
 
   def processing_payment
-    cart = session['cart']
+    cart = session['cart'] || []
+    price_list = []
+    cart.each {|key, value| price_list << Freight.find(value).price}
+    payment = Payment.create(buyer_id: current_user.id,  payment_mode: 'bank_transfer', amount_paid: price_list.inject(:+), currency: "rupees", payment_gateway_response: "success")
     cart.each do |key, value|
       booking = Booking.find(key)
       freight = Freight.find(value)
-      #booking.update(aasm_state: 'active', price: freight.price)
+      if booking.booking_payments.create(payment_id: payment.id)
+        booking.update(aasm_state: 'active', price: freight.price)
+      end  
     end  
     #session.delete('cart')
   end
@@ -24,7 +29,15 @@ class PaymentsController < ApplicationController
   end
 
   def should_be_verified_user
-    redirect_to "/verify_company_information" if !current_user.user_information || !current_user.user_information.is_verified?
+    cart = session['cart'] || []
+    if !current_user.user_information || !current_user.user_information.is_verified?
+      (cart || []).each do |key, value|
+        booking = Booking.find(key)
+        freight = Freight.find(value)
+        booking.move_to_document_pending!
+      end
+      redirect_to "/verify_company_information"
+    end
   end
 
 end

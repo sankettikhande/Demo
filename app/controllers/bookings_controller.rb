@@ -45,6 +45,10 @@ class BookingsController < ApplicationController
     @draft_bookings = current_user.buyer_bookings.draft
   end
 
+  def pending_bookings
+    @pending_bookings = current_user.buyer_bookings.where(aasm_state: "document_pending")
+  end
+
   def negotiation_round_one
     @bookings = current_user.seller_bookings.pending_negotiations
     respond_to do |format|

@@ -19,11 +19,12 @@
          <a href="/deleteUserAccount">Delete Account</a>
        </li>
       </ul>
-      <a class="list-group-item active" href="#">New Booking</a>
+      <%= link_to "New Booking", root_path, {class: "list-group-item active"} %>
       <%= link_to "Active Booking", active_bookings_bookings_path, {class: "list-group-item"} %>
       <%= link_to "Booking On Hold", bookings_on_hold_bookings_path, {class: "list-group-item"} %>
       <%= link_to "Draft Booking", draft_bookings_bookings_path, {class: "list-group-item"} %>
       <%= link_to "Archived Bookings", archived_bookings_bookings_path, {class: "list-group-item"} %>
+      <%= link_to "Pending Bookings", pending_bookings_bookings_path, {class: "list-group-item"} %>
     </div>
   </aside>
 </div>

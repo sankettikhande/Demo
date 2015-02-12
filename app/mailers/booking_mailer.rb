@@ -41,4 +41,11 @@ class BookingMailer < ActionMailer::Base
     mail(to: @booking.buyer.email, subject: "Booking Cancelled")
   end
 
+  def document_pending_booking(bookings)
+    if bookings.present? 
+      @bookings = bookings
+      mail(to: @bookings.first.buyer.email, subject: "bookings in pending")
+    end  
+  end
+
  end
