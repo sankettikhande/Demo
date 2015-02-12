@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
         booking.update(aasm_state: 'active', price: freight.price)
       end  
     end  
-    #session.delete('cart')
+    session.delete('cart')
   end
 
   protected
