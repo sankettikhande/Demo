@@ -95,7 +95,7 @@ Rails.application.configure do
     :email => {
       :email_prefix => "[BK] ",
       :sender_address => %{"Blue Compress Notifier" <noreply@bluecompass.com>},
-      :exception_recipients => %w{ranjeet.maurya@sodelsolutions.com, kiran.kumara@sodelsolutions.com, sanket.tikhande@sodelsolutions.com}
+      :exception_recipients => %w{ranjeet.maurya@sodelsolutions.com, kiran.kumara@sodelsolutions.com, sanket.tikhande@sodelsolutions.com, rahula@sodelsolutions.com}
     }
 
 end
