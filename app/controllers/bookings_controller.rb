@@ -202,6 +202,6 @@ class BookingsController < ApplicationController
 
   private
     def booking_params
-      params.require(:booking).permit(:length,:width,:height,:weight)
+      params.require(:booking).permit(:length,:width,:height,:weight,:pick_up_date)
     end
 end

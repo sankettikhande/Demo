@@ -34,22 +34,42 @@ $(document).ready(function() {
     });
   });
 
-  $('#search_length,#search_height,#search_width,#search_weight').change(function(){
+  $('#filter_length,#filter_height,#filter_width,#filter_weight').change(function(){
     update_filters();
   });
-
-}); 
+  
+  $('#filter_date').datepicker({
+      format: 'dd/mm/yyyy',
+      multidate: false,
+      toggleActive: false,
+      autoclose: true,
+      startDate: '1d'
+    }).on('changeDate', function(e){
+      update_filters();
+    });
+});
 
 function update_filters(){
    var booking_id = $('#searched_booking').attr('search_booking_id'),
-      booking_params = {booking: {length: $('#search_length').val(),
-                                  width: $('#search_width').val(),
-                                  height: $('#search_height').val(),
-                                  weight: $('#search_weight').val()
-                                }},
+      filterFields = ["length","width", "height", "weight"],
+      booking = {},
+      booking_params = {},
       filter_params = {};
+
+    $.each(filterFields,function(index,field){
+      var value = $("#filter_"+field).val();
+      if(!isNaN(value)){
+        booking[field] = value;
+      }
+    });
+
+    booking.pick_up_date = $('#filter_date').val();
+    booking_params = {booking: booking};
+
     $('#freights-filters [name]').each(function(){
-      filter_params[this.name] = this.value;
+      if (this.value !==""){
+        filter_params[this.name] = this.value;  
+      }
     });
 
   $.ajax({
