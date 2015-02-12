@@ -10,11 +10,11 @@
                   <% booking = Booking.find(key) %>
                   <% if params[:booking_id] == booking.id.to_s %>
                     <option value="<%= key%>" selected>
-                      <%= booking.source.port + '-' + booking.destination.port %>
+                      <%= booking.source.port_name + '-' + booking.destination.port_name %>
                     </option> 
                   <%else%>
                     <option value="<%= key%>" >
-                      <%= booking.source.port + '-' + booking.destination.port %>
+                      <%= booking.source.port_name + '-' + booking.destination.port_name %>
                     </option>                 
                   <%end%>  
                 <%end%>              
