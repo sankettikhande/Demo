@@ -36,6 +36,7 @@ class PaymentsController < ApplicationController
         freight = Freight.find(value)
         booking.move_to_document_pending!
       end
+      session.delete('cart')
       redirect_to "/verify_company_information"
     end
   end

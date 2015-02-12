@@ -42,19 +42,19 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">Company Name</label>
           <div class="col-xs-8">
-            <%= f.text_field :company_name,required: :required, placeholder: "Enter Company Name", class: "form-control" %>
+            <%= f.text_field :company_name, placeholder: "Enter Company Name", class: "form-control" %>
           </div>
         </div>
         <div class="form-group">
           <label class="col-xs-4 control-label">Company Registration No.</label>
           <div class="col-xs-8">
-              <%= f.text_field :company_registration_number,required: :required, placeholder: "Enter Company Registration Number", class: "form-control" %>
+              <%= f.text_field :company_registration_number, placeholder: "Enter Company Registration Number", class: "form-control" %>
             </div>
         </div>
         <div class="form-group">
           <label class="col-xs-4 control-label">Address Line 1</label>
           <div class="col-xs-8">
-            <%= f.text_field :address_line_1,required: :required, placeholder: "Address Line 1", class: "form-control" %>
+            <%= f.text_field :address_line_1, placeholder: "Address Line 1", class: "form-control" %>
           </div>
         </div>
         <div class="form-group">
@@ -72,19 +72,19 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">Postcode</label>
           <div class="col-xs-4">
-            <%= f.text_field :post_code,required: :required, placeholder: "Valid Postal code", class: "form-control" %>
+            <%= f.text_field :post_code, placeholder: "Valid Postal code", class: "form-control" %>
           </div>
         </div>
         <div class="form-group">
           <label class="col-xs-4 control-label">City</label>
           <div class="col-xs-6">
-            <%= f.text_field :city,required: :required, placeholder: "City name", class: "form-control" %>
+            <%= f.text_field :city, placeholder: "City name", class: "form-control" %>
           </div>
         </div>
         <div class="form-group">
           <label class="col-xs-4 control-label">Region/State <span class="text-xs">(Optional)</span></label>
           <div class="col-xs-6">
-            <%= f.text_field :state,required: :required, placeholder: "State name", class: "form-control" %>
+            <%= f.text_field :state, placeholder: "State name", class: "form-control" %>
           </div>
         </div>
         <div class="form-group">
@@ -94,7 +94,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-xs-4 control-label">Phone Number <span class="text-xs">(Optional)</span></label>
+          <label class="col-xs-4 control-label">Phone Number <span class="text-xs"></span></label>
           <div class="col-xs-8">
             <div class="col-xs-4">
                 <%=f.select :calling_code, GlobalConstants::CALLING_CODES.map { |c| [ '+'+c.to_s, c ] },{},{class: 'form-control selecter'} %>
