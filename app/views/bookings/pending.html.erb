@@ -54,8 +54,8 @@
                          <tbody>
                       <% bookings.each  do |booking| %>
                           <tr>
-                            <td> <%=booking.source.full_address  %></td>
-                            <td> <%=booking.destination.full_address  %></td>
+                            <td> <%=booking.source.port_name  %></td>
+                            <td> <%=booking.destination.port_name  %></td>
                             <td> <%=booking.pick_up_date %></td>
                             <td> <%=booking.weight %></td>
                             <td> <%=booking.spot_rate %></td>
