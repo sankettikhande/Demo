@@ -17,8 +17,8 @@
           <div class="col-xs-6">
             <p><b>Booking last modified on:</b><%= booking.updated_at.strftime("%d/%m/%Y") %></p>
             <p><b>Service:</b></p>
-            <p><b>From:</b><%= booking.source.full_address %><span><b>Cut off:</b> <%= booking.cut_off_date.strftime("%d/%m/%Y")%></span></p>
-            <p><b>To:</b><%= booking.destination.full_address %> <span><b>Delivery:</b><%= (booking.cut_off_date + booking.transition_days).strftime("%d/%m/%Y") %> </span></p>
+            <p><b>From:</b><%= booking.source.port_name %><span><b>Cut off:</b> <%= booking.cut_off_date.strftime("%d/%m/%Y")%></span></p>
+            <p><b>To:</b><%= booking.destination.port_name %> <span><b>Delivery:</b><%= (booking.cut_off_date + booking.transition_days).strftime("%d/%m/%Y") %> </span></p>
             <p><b>Cargo:</b><%= booking.weight %> kg, Delicte or any note from client end</p>
             <p><b style="color: red;">Status:</b> <%= booking.aasm_state.capitalize %></p>
           </div>
